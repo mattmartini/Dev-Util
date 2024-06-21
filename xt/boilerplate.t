@@ -10,7 +10,7 @@ plan tests => 5;
 sub not_in_file_ok {
     my ( $filename, %regex ) = @_;
     open( my $fh, '<', $filename )
-        or die "couldn't open $filename for reading: $!";
+        or die "couldn't open $filename for reading: $!\n";
 
     my %violated;
 

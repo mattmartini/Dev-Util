@@ -58,8 +58,7 @@ BEGIN {
     }
 }
 
-my $module_version
-    = version->parse(qq($MERM::Base::VERSION))->stringify;
+my $module_version = version->parse(qq($MERM::Base::VERSION))->stringify;
 diag("Testing MERM::Base $module_version");
 diag("Perl $PERL_VERSION, $EXECUTABLE_NAME");
 
