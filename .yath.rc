@@ -1,0 +1,6 @@
+;[test]
+;-L
+
+[start]
+-PMERM::Base::Syntax
+-PMERM::Base::Utils
