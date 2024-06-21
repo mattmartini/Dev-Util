@@ -62,11 +62,11 @@ Version v.1.0.2
 
 MERM::Base provides a loader for sub-modules where a leading :: denotes a package to load.
 
-    use MERM::Base qw( ::Disk ::Utils );
+    use MERM::Base qw( ::OS ::Utils );
 
 This is equivalent to:
 
-    user MERM::Base::Disk  qw(:all);
+    user MERM::Base::OS    qw(:all);
     user MERM::Base::Utils qw(:all);
 
 
@@ -76,6 +76,7 @@ This is equivalent to:
 L<MERM::Base::Disks>,
 L<MERM::Base::Syntax>,
 L<MERM::Base::Utils>
+L<MERM::Base::OS>
 
 =head1 DESCRIPTION
 

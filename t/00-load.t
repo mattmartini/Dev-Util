@@ -5,13 +5,14 @@ use warnings;
 use version;
 use Test::More;
 
-plan tests => 28;
+plan tests => 26;
 
 BEGIN {
     my @modules = qw(
         MERM::Base
         MERM::Base::Syntax
         MERM::Base::Utils
+        MERM::Base::OS
     );
 
     foreach my $module (@modules) {
