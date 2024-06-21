@@ -6,7 +6,7 @@ use warnings;
 use Carp;
 use lib 'lib';
 
-use version; our $VERSION = version->declare("v1.0.2");
+use version; our $VERSION = version->declare("v1.0.6");
 
 use Exporter   qw( );
 use List::Util qw( uniq );
