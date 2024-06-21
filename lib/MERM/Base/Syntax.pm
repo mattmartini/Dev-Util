@@ -1,168 +1,144 @@
 package MERM::Base::Syntax;
 
-use warnings;
+use 5.018;
+
+use utf8;
 use strict;
-use Carp;
+use warnings;
+use autodie;
+use open qw(:std :utf8);
 
-use version; $VERSION = qv('0.0.3');
+use Import::Into;
+use Module::Runtime;
 
-# Other recommended modules (uncomment to use):
-#  use IO::Prompt;
-#  use Perl6::Export;
-#  use Perl6::Slurp;
-#  use Perl6::Say;
+use version; our $VERSION = version->declare("v1.0.2");
 
+sub importables {
+    my ($class) = @_;
+    return (
+             [ 'feature', ':5.18' ], 'utf8',
+             'strict',               'warnings',
+             'autodie',              [ 'open', ':std', ':utf8' ],
+             'Readonly',             'Carp',
+             [ 'English', '-no_match_vars' ]
+           );
+}
 
-# Module implementation here
+sub import {
+    my (@args) = @_;
+    my $class  = shift @args;
+    my $caller = caller;
 
+    foreach my $import_proto ( $class->importables ) {
+        my $module;
+        ( $module, @args )
+            = ( ref($import_proto) || '' ) eq 'ARRAY'
+            ? @$import_proto
+            : ( $import_proto, () );
+        Module::Runtime::use_module($module)->import::into( $caller, @args );
+    }
+    return;
+}
 
-1; # Magic true value required at end of module
-__END__
+1;    # End of MERM::Base::Syntax
+
+=pod
+
+=encoding utf-8
 
 =head1 NAME
 
-MERM::Base::Syntax - [One line description of module's purpose here]
-
+MERM::Base::Syntax - Provide consistent feature setup.
 
 =head1 VERSION
 
-This document describes MERM::Base::Syntax version 0.0.1
-
+Version v.1.0.2
 
 =head1 SYNOPSIS
 
+Provide consistent feature setup.  Put all of the "use" setup cmds in one place.
+Then import them into other modules.
+
+Use this in other modules:
+
+    package MERM::Base::Example;
+
     use MERM::Base::Syntax;
 
-=for author to fill in:
-    Brief code example(s) here showing commonest usage(s).
-    This section will be as far as many users bother reading
-    so make it as educational and exeplary as possible.
-  
-  
-=head1 DESCRIPTION
+    # Rest of Code...
 
-=for author to fill in:
-    Write a full description of the module and its features here.
-    Use subsections (=head2, =head3) as appropriate.
+This is equivalent to:
 
+    package MERM::Base::Example;
 
-=head1 INTERFACE 
+    use feature :5.18;
+    use utf8;
+    use strict;
+    use warnings;
+    use autodie;
+    use open qw(:std :utf8);
+    use Readonly;
+    use Carp;
+    use English qw( -no_match_vars );
 
-=for author to fill in:
-    Write a separate section listing the public components of the modules
-    interface. These normally consist of either subroutines that may be
-    exported, or methods that may be called on objects belonging to the
-    classes provided by the module.
+    # Rest of Code...
 
+=head1 SUBROUTINES/METHODS
 
-=head1 DIAGNOSTICS
+=head2 importables
 
-=for author to fill in:
-    List every single error and warning message that the module can
-    generate (even the ones that will "never happen"), with a full
-    explanation of each problem, one or more likely causes, and any
-    suggested remedies.
+Define the items to be imported.
 
-=over
+=head2 import
 
-=item C<< Error message here, perhaps with %s placeholders >>
-
-[Description of error here]
-
-=item C<< Another error message here >>
-
-[Description of error here]
-
-[Et cetera, et cetera]
-
-=back
-
-
-=head1 CONFIGURATION AND ENVIRONMENT
-
-=for author to fill in:
-    A full explanation of any configuration system(s) used by the
-    module, including the names and locations of any configuration
-    files, and the meaning of any environment variables or properties
-    that can be set. These descriptions must also include details of any
-    configuration language used.
-  
-MERM::Base::Syntax requires no configuration files or environment variables.
-
-
-=head1 DEPENDENCIES
-
-=for author to fill in:
-    A list of all the other modules that this module relies upon,
-    including any restrictions on versions, and an indication whether
-    the module is part of the standard Perl distribution, part of the
-    module's distribution, or must be installed separately. ]
-
-None.
-
-
-=head1 INCOMPATIBILITIES
-
-=for author to fill in:
-    A list of any modules that this module cannot be used in conjunction
-    with. This may be due to name conflicts in the interface, or
-    competition for system or program resources, or due to internal
-    limitations of Perl (for example, many modules that use source code
-    filters are mutually incompatible).
-
-None reported.
-
-
-=head1 BUGS AND LIMITATIONS
-
-=for author to fill in:
-    A list of known problems with the module, together with some
-    indication Whether they are likely to be fixed in an upcoming
-    release. Also a list of restrictions on the features the module
-    does provide: data types that cannot be handled, performance issues
-    and the circumstances in which they may arise, practical
-    limitations on the size of data sets, special cases that are not
-    (yet) handled, etc.
-
-No bugs have been reported.
-
-Please report any bugs or feature requests to
-C<bug-merm-base-syntax@rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org>.
-
+Do the import.
 
 =head1 AUTHOR
 
-Matt Martini  C<< <matt@imaginarywave.com> >>
+Matt Martini, C<< <matt at imaginarywave.com> >>
+
+=head1 BUGS
+
+Please report any bugs or feature requests to C<bug-merm-base at rt.cpan.org>, or through
+the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MERM-Base>.  I will be notified, and then you'll
+automatically be notified of progress on your bug as I make changes.
+
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc MERM::Base::Syntax
 
 
-=head1 LICENCE AND COPYRIGHT
+You can also look for information at:
 
-Copyright (c) 2024, Matt Martini C<< <matt@imaginarywave.com> >>. All rights reserved.
+=over 4
 
-This module is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself. See L<perlartistic>.
+=item * RT: CPAN's request tracker (report bugs here)
 
+L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=MERM-Base>
 
-=head1 DISCLAIMER OF WARRANTY
+=item * CPAN Ratings
 
-BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
-FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN
-OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
-PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
-EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE
-ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH
-YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
-NECESSARY SERVICING, REPAIR, OR CORRECTION.
+L<https://cpanratings.perl.org/d/MERM-Base>
 
-IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
-WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
-REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENCE, BE
-LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL,
-OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE
-THE SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
-RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
-FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
-SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
-SUCH DAMAGES.
+=item * Search CPAN
+
+L<https://metacpan.org/release/MERM-Base>
+
+=back
+
+=head1 ACKNOWLEDGEMENTS
+
+=head1 LICENSE AND COPYRIGHT
+
+This software is Copyright ©️  2024 by Matt Martini.
+
+This is free software, licensed under:
+
+  The GNU General Public License, Version 3, June 2007
+
+=cut
+
+__END__
+
