@@ -18,7 +18,6 @@ WriteMakefile(
                               'File::Temp'      => 0,
                               'IO::Interactive' => 0,
                               'IPC::Cmd'        => 0,
-                              'IPC::Cmd'        => 0,
                               'Import::Into'    => 0,
                               'List::Util'      => 0,
                               'Module::Runtime' => 0,
