@@ -10,15 +10,12 @@ MANIFEST			This list of files
 README
 run_yath.sh
 t/00-load.t
-t/00.load.t
 t/01-syntax.t
 t/02-utils.t
 t/03-os.t
 t/perlcritic.t
 t/perlcriticrc
 t/perltidy.t
-t/pod-coverage.t
-t/pod.t
 test.pl
 xt/boilerplate.t
 xt/kwalitee.t
