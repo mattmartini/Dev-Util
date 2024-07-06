@@ -11,7 +11,7 @@ use open qw(:std :utf8);
 use Import::Into;
 use Module::Runtime;
 
-use version; our $VERSION = version->declare("v1.0.8");
+use version; our $VERSION = version->declare("v1.0.9");
 
 sub importables {
     my ($class) = @_;
