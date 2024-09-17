@@ -174,7 +174,7 @@ sub prompt {
 
 sub yes_no_prompt {
     my ( $msg, $default ) = @_;
-    my $str='';
+    my $str = '';
 
     if ( defined $default ) {
         $msg .= ($default) ? ' ([Y]/N)? ' : ' (Y/[N])? ';
