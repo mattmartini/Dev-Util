@@ -10,7 +10,7 @@ use Term::ANSIColor;
 use IO::Interactive qw(is_interactive);
 use IPC::Cmd        qw[can_run run];
 
-use version; our $VERSION = version->declare("v1.0.10");
+use version; our $VERSION = version->declare("v1.0.11");
 
 our %EXPORT_TAGS = (
 
@@ -174,7 +174,7 @@ sub prompt {
 
 sub yes_no_prompt {
     my ( $msg, $default ) = @_;
-    my $str;
+    my $str='';
 
     if ( defined $default ) {
         $msg .= ($default) ? ' ([Y]/N)? ' : ' (Y/[N])? ';
@@ -629,7 +629,7 @@ MERM::Base::Utils - functions to assist in the testing of MERM::Base
 
 =head1 VERSION
 
-Version v.1.0.10
+Version v.1.0.11
 
 =head1 SYNOPSIS
 
