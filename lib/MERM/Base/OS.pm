@@ -4,7 +4,7 @@ use lib 'lib';
 use MERM::Base::Syntax;
 use Exporter qw(import);
 
-use version; our $VERSION = version->declare("v1.0.9");
+use version; our $VERSION = version->declare("v1.0.10");
 
 our @EXPORT_OK = qw(
     get_os
@@ -69,7 +69,7 @@ MERM::Base::OS - OS discovery and functions
 
 =head1 VERSION
 
-Version v.1.0.2
+Version v.1.0.10
 
 =head1 SYNOPSIS
 

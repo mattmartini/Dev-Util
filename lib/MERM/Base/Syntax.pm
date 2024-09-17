@@ -11,7 +11,7 @@ use open qw(:std :utf8);
 use Import::Into;
 use Module::Runtime;
 
-use version; our $VERSION = version->declare("v1.0.9");
+use version; our $VERSION = version->declare("v1.0.10");
 
 sub importables {
     my ($class) = @_;
@@ -19,8 +19,8 @@ sub importables {
              [ 'feature', ':5.18' ], 'utf8',
              'strict',               'warnings',
              'autodie',              [ 'open', ':std', ':utf8' ],
-             'Readonly',             'Carp',
-             [ 'English', '-no_match_vars' ]
+             'version',              'Readonly',
+             'Carp',                 [ 'English', '-no_match_vars' ]
            );
 }
 
@@ -52,7 +52,7 @@ MERM::Base::Syntax - Provide consistent feature setup.
 
 =head1 VERSION
 
-Version v.1.0.2
+Version v.1.0.10
 
 =head1 SYNOPSIS
 
@@ -77,6 +77,7 @@ This is equivalent to:
     use warnings;
     use autodie;
     use open qw(:std :utf8);
+    use version;
     use Readonly;
     use Carp;
     use English qw( -no_match_vars );

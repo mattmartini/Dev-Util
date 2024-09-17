@@ -10,7 +10,7 @@ use Term::ANSIColor;
 use IO::Interactive qw(is_interactive);
 use IPC::Cmd        qw[can_run run];
 
-use version; our $VERSION = version->declare("v1.0.9");
+use version; our $VERSION = version->declare("v1.0.10");
 
 our %EXPORT_TAGS = (
 
@@ -629,7 +629,7 @@ MERM::Base::Utils - functions to assist in the testing of MERM::Base
 
 =head1 VERSION
 
-Version v.1.0.2
+Version v.1.0.10
 
 =head1 SYNOPSIS
 
