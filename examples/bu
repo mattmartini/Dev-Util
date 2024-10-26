@@ -1,0 +1,87 @@
+#!/usr/bin/env perl
+
+################################################################
+################################################################
+##   - bu -- backup files                                     ##
+##                                                            ##
+##  Authors: Matt Martini     (matt@invision.net)             ##
+##           Eugene Miretskiy (eugene@invision.net)           ##
+##                                                            ##
+##  Modifications:                                            ##
+##     EM: removed requirement for BUDIR to be rel path       ##
+##                                                            ##
+##  Copyright: (c) 2000, InVision.com, INC                    ##
+##                                                            ##
+################################################################
+################################################################
+
+########################################
+#      Requirements and Packages       #
+########################################
+use MERM::Base::Syntax;
+use MERM::Base qw(::Backup);
+
+#use Backup qw(backup);
+use File::Basename;
+
+my $wantColor = 1;
+
+if ( $ARGV[0] eq '-n' ) {
+    shift;
+    $wantColor = 0;
+}
+
+eval q/use Term::ANSIColor; $Term::ANSIColor::AUTORESET = 1/ if ($wantColor);
+
+if ( $@ || !$wantColor ) {
+    warn "Warning: Term::ANSIColor is not installed.\n\n" if ($wantColor);
+
+    #since we don't have ANSIColor define color and colored
+    #subs (see Term::ANSIColor documentation for more detail)
+    #Constants interface from ANSIColor IS NOT supported
+    eval q(
+    sub colored { 
+      my $arg = shift;
+      return (ref($arg) eq 'ARRAY') ? @_ : $arg
+    }
+
+    sub color {undef}
+  );
+}
+
+########################################
+#            Main Program              #
+########################################
+
+#check BUDIR env var for sanity
+$Backup::BACKUPDIR = $ENV{ BUDIR } if ( $ENV{ BUDIR } );
+
+my $newfile;
+
+foreach (@ARGV) {
+    print "Backing up ", colored( $_, 'blue' ), " ...\t";
+    eval { $newfile = backup($_) };
+
+    if ($@) {
+        pmc( [ " backup failed, ", "red" ], [ $@, "bold red" ], ["\n"] );
+    }
+    else {
+        print " file saved as    ", colored( $newfile, "bold blue" ), "\n";
+    }
+}
+
+#
+# print strings in different colors
+# each argument is ref array which will be passed
+# AS IS to colored sub
+# Ex: multicolor(["1234", "blue"], ["5678", "black"], ["90", "bold blue"].....)
+#
+sub multicolor {
+    return map { colored(@$_) } @_;
+}
+
+#print multicolor string
+sub pmc {
+    print multicolor(@_);
+    return;
+}
