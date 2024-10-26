@@ -1,11 +1,12 @@
 #!/usr/bin/env perl
+
 use 5.018;
 use strict;
 use warnings;
 use version;
 use Test::More;
 
-plan tests => 26;
+plan tests => 32;
 
 BEGIN {
     my @modules = qw(
@@ -14,6 +15,8 @@ BEGIN {
         MERM::Base::Utils
         MERM::Base::OS
     );
+
+    # MERM::Base::Backup
 
     foreach my $module (@modules) {
         use_ok($module) || print "Bail out!\n";
@@ -37,6 +40,12 @@ BEGIN {
         Readonly
         English
         IPC::Cmd
+        File::Copy
+        File::Spec
+        File::Basename
+        File::Find
+        IO::File
+        Archive::Tar
     );
 
     foreach my $module (@needed_modules) {
