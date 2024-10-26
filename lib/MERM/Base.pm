@@ -75,8 +75,9 @@ This is equivalent to:
 
 L<MERM::Base::Disks>,
 L<MERM::Base::Syntax>,
-L<MERM::Base::Utils>
-L<MERM::Base::OS>
+L<MERM::Base::Utils>,
+L<MERM::Base::OS>,
+L<MERM::Base::Backup>
 
 =head1 DESCRIPTION
 
