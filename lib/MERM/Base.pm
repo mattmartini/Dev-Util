@@ -79,15 +79,7 @@ L<MERM::Base::Utils>,
 L<MERM::Base::OS>,
 L<MERM::Base::Backup>
 
-=head1 DESCRIPTION
-
-=for author to fill in:
-    Write a full description of the module and its features here.
-    Use subsections (=head2, =head3) as appropriate.
-
-
-
-=back
+=for DESCRIPTION
 
 
 =head1 CONFIGURATION AND ENVIRONMENT
@@ -121,7 +113,7 @@ Matt Martini  C<< <matt@imaginarywave.com> >>
 
 =head1 LICENCE AND COPYRIGHT
 
-This software is Copyright ©️  2024 by Matt Martini.
+This software is Copyright © 2024 by Matt Martini.
 
 This is free software, licensed under:
 

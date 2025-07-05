@@ -673,7 +673,7 @@ MERM::Base::Utils - provides functions to assist in the testing of MERM::Base.
 
 =over 4
 
-=item :ftypes
+=item B<:ftypes>
 
 =over 8
 
@@ -691,7 +691,7 @@ MERM::Base::Utils - provides functions to assist in the testing of MERM::Base.
 
 =back
 
-=item :fattr
+=item B<:fattr>
 
 =over 8
 
@@ -723,7 +723,7 @@ MERM::Base::Utils - provides functions to assist in the testing of MERM::Base.
 
 =back
 
-=item :dirs
+=item B<:dirs>
 
 =over 8
 
@@ -739,7 +739,7 @@ MERM::Base::Utils - provides functions to assist in the testing of MERM::Base.
 
 =back
 
-=item :misc
+=item B<:misc>
 
 =over 8
 
@@ -769,7 +769,7 @@ MERM::Base::Utils - provides functions to assist in the testing of MERM::Base.
 
 =back
 
-=item :named_constants
+=item B<:named_constants>
 
 =over 8
 
@@ -782,6 +782,8 @@ MERM::Base::Utils - provides functions to assist in the testing of MERM::Base.
 =item $DOUBLE_QUOTE
 
 =item $COMMA
+
+=back
 
 =back
 
@@ -1043,11 +1045,11 @@ L<https://metacpan.org/release/MERM-Base>
 
 =back
 
-=head1 ACKNOWLEDGEMENTS
+=for ACKNOWLEDGEMENTS
 
 =head1 LICENSE AND COPYRIGHT
 
-This software is Copyright ©️  2024 by Matt Martini.
+This software is Copyright © 2024 by Matt Martini.
 
 This is free software, licensed under:
 
