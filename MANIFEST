@@ -1,6 +1,8 @@
 Changes
 coverage_report.sh
+examples/bu
 lib/MERM/Base.pm
+lib/MERM/Base/Backup.pm
 lib/MERM/Base/OS.pm
 lib/MERM/Base/Syntax.pm
 lib/MERM/Base/Utils.pm
@@ -13,6 +15,7 @@ t/00-load.t
 t/01-syntax.t
 t/02-utils.t
 t/03-os.t
+t/04-backup.t
 t/perlcritic.t
 t/perlcriticrc
 t/perltidy.t
