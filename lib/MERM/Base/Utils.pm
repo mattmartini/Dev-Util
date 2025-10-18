@@ -10,7 +10,7 @@ use Term::ANSIColor;
 use IO::Interactive qw(is_interactive);
 use IPC::Cmd        qw[can_run run];
 
-use version; our $VERSION = version->declare("v1.0.11");
+use version; our $VERSION = version->declare("v1.0.12");
 
 our %EXPORT_TAGS = (
 
@@ -284,6 +284,8 @@ sub status_for {
 }
 
 sub dir_suffix_slash {
+
+    # add a trailing slash to dir name if none exists
     my $dir = shift;
 
     $dir .= ( substr( $dir, -1, 1 ) eq '/' ) ? '' : '/';
@@ -629,7 +631,7 @@ MERM::Base::Utils - functions to assist in the testing of MERM::Base
 
 =head1 VERSION
 
-Version v.1.0.11
+Version v1.0.12
 
 =head1 SYNOPSIS
 
