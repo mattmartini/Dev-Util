@@ -1,0 +1,63 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.93.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+SHA256 6f0ae5b8eee5d4ad946220bd147fdda073b4f0d9fdcc2d7d81bf7b2e09b8d422 CHANGELOG.md
+SHA256 8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903 LICENSE
+SHA256 a75955d065b659a38b9ae307a011fec1823127f5dc8ca0bd2ea363cee7f47281 MANIFEST
+SHA256 fea4968efbe75bd6265833fada7f880ff187ede06896e4bf3e7298f17528af85 Makefile.PL
+SHA256 00b0856df782c1fe8daf7e91c76be6aab8d7c87f8a319e52c48641bbad7c7bf3 README
+SHA256 1917150bcf9d54c2e4a8ff29433dc89ddc63ea754992d6b7a89c976afa4b8d59 VERSION
+SHA256 cc4e365ccc92ba615a556ea72f90e9c03206e576300bec20459e9ea22ae3d9fb cliff.toml
+SHA256 57dbc60837e87376b4e5ae50da37885fa6f4e5cd121c384be70560776bc0b4db coverage_report.sh
+SHA256 79704299f02890909c9989f974b5754ddca232339f03b33adb551919d8b78601 examples/bu
+SHA256 af3eacaeeb2146b0f798690b95d74d45d012b9fb3fc1da15206a56ed70f3e637 lib/MERM/Base.pm
+SHA256 1547268cf3099f6c9479d954b1c8fbfb5af84ba38047f7b62ee83b3ca9c8ab84 lib/MERM/Base/Backup.pm
+SHA256 21b4ac11bbe71ee8ff1b1675c29a92faea89ba18712370e87d9f5091b5c84059 lib/MERM/Base/OS.pm
+SHA256 689c544d1d6ff410e61c5fe6aeebea5f81e14ff4a6aea527728f1bbe3ee0184c lib/MERM/Base/Syntax.pm
+SHA256 b34e97cb85b8e739f6db13538c2a4c6b14bd28d8bbc4c6dcaeaf205c44f6e18c lib/MERM/Base/Utils.pm
+SHA256 5d809cf58b00fd984169fd75a39501294c753203c0121ccc77a39f1b5727272d run_yath.sh
+SHA256 5f8fb10c377026b0133c3d0854fedd67d8fc3f59ef59b173f6a2fc0d694e0fba t/00-load.t
+SHA256 555266158df26223a729dc5249e7162c24fe80a0203b721f0e1e077e82dbde7b t/01-syntax.t
+SHA256 bb4a0877d379f8ffc161600d3c800eca271cc4034c9f42a803154feb091e8663 t/02-utils.t
+SHA256 b1359cac0a5cb43a2bf3165e388742dbc4eff225b5ffe7aee7e422973ed9c623 t/03-os.t
+SHA256 1836f08cd72cbda049944d8d35bb1d5f241b6c6c833dcff707160293864d5075 t/04-backup.t
+SHA256 5feabde8a14d40aea61623a1d1d6a0a4f08e86b8c7c6d954dcbe71df048f440b t/perlcritic.t
+SHA256 265c277f2a02baad2b4f6fb106de4db978dcd90f54b2b43e7a9d0908ca1fb873 t/perlcriticrc
+SHA256 2f4b157fb51427025ec647901aaf0ef851351ce9e246367bc7c3e5061f79f695 t/perltidy.t
+SHA256 e8c5129b40e4f20bf69f099070da1a043216c9a565e20dfa0c00d58297b816b9 test.pl
+SHA256 1a5a3854b6bca0238bf6c3b3b418e277a696dcf515738f7e09464f32974fe784 xt/00-report-prereqs.t
+SHA256 830020597c8df3f9f66daf4b6c2aa5dc80b7860d7350657d0bab633a5849e578 xt/boilerplate.t
+SHA256 091c094e5474a5c870ab38a071261a4d4fdbad531475b4cef779524ea65d44b6 xt/kwalitee.t
+SHA256 4bfbe82a822db14bf477a3063385d7e0155bd0308aefc3b5b4aad0c3d4f0335c xt/manifest.t
+SHA256 2c8ba9ca75fd10c027df862f99321bc82f37ba73b66ae5c7a15a6c6230d3c3f7 xt/manifest_check.t
+SHA256 b43f27a99dced31851810f738d7340898253ed9a7c50a02344c66424dd3c91fe xt/pod-coverage.t
+SHA256 2cc91e35a8a455ab73b44a2b48cdbf2ae16b722598c7d106a89fb6bd20595438 xt/pod.t
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBAwAdFiEEWC1dOmjlImM4JN/FWsm5kpm8uUUFAmjxtMYACgkQWsm5kpm8
+uUUvHhAAgp11K5lfj+j2nrPlSm3TZ9+QdShmwB4MmIbDK7VEGM6f09LHMaXdDr46
+bJnBcce6tcE/SEm/XkQ9sLOl2pf1y9zhd0d6CvUsFBw0b/lE3KRTbl5ETyst0kN5
+153JTrhLFXhPUdWNpOQXzNmj6tHDgDQA6NLLVKmBfaqEAf0adVAnGhFus3C+/Bxs
+wLBcq7+Fdk05yGUeYigJGMwOXV1H4AhmiNWGDm6c/lN7i/mvcbGYJLou5j5TOosU
+xtUVZVmVhZ/gE4ANbsyxebLzOaSnR50UjQqYU+peRv51Fa4n8ta4E66LroQyMh+j
+ABrcu4fL6PEOqSr0EWKk1yFeK94YVV9V2sTaKBdhmjqjc6BnSrs2PVXmSdzg8stX
+ekinDzz7z/Gy+wWF/nMvyIgNvwhySFagO8ca4bw1+o/zxjQh0hBaffrhiLDw90ks
+k53vt8POdK1Da/CuY0fvRmP+2eGnatPqG0DOT/Cl/ukrgvG/yEZOiKhmq7Ge6Lot
+Xq2VAHkditCt8FAozybCTWz7dWXLseacD18jRKMhpwbrTefI/rvAexp1zzLw1HdP
+xx0pfDAnbalMSWsIixTt4Z4fkmNqHKdcDxO3Gc8/tAx/KFSBU2rLXoOC1qqL8xJB
+JneS9p1PgCVAT138uMUp9Om+v2Snh71k1wBedpwOA3naLA1pwXQ=
+=99r5
+-----END PGP SIGNATURE-----

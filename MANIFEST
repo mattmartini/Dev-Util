@@ -1,4 +1,5 @@
-Changes
+CHANGELOG.md
+cliff.toml
 coverage_report.sh
 examples/bu
 lib/MERM/Base.pm
@@ -11,6 +12,7 @@ Makefile.PL
 MANIFEST			This list of files
 README
 run_yath.sh
+SIGNATURE
 t/00-load.t
 t/01-syntax.t
 t/02-utils.t
@@ -20,6 +22,7 @@ t/perlcritic.t
 t/perlcriticrc
 t/perltidy.t
 test.pl
+VERSION
 xt/00-report-prereqs.t
 xt/boilerplate.t
 xt/kwalitee.t
