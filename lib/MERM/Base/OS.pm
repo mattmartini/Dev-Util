@@ -75,38 +75,53 @@ Version v1.0.12
 
 OS discovery and functions
 
-    use MERM::Base::OS;
+    use Disk::SmartTools::OS;
+    
+    my $OS = get_os();
+    my $hostname = get_hostname();
+    my $system_is_linux = is_linux();
     ...
 
 =head1 EXPORT
 
-get_os
-get_hostname
-is_linux
-is_mac
-is_sunos
+    get_os
+    get_hostname
+    is_linux
+    is_mac
+    is_sunos
 
 =head1 SUBROUTINES
 
-=head2 get_os
+=head2 B<get_os>
 
 Return the OS of the current system.
 
-=head2 get_hostname
+    my $OS = get_os();
+
+=head2 B<get_hostname>
 
 Return the hostname of the current system.
 
-=head2 is_linux
+    my $hostname = get_hostname();
+
+=head2 B<is_linux>
 
 Return true if the current system is Linux.
 
-=head2 is_mac
+    my $system_is_linux = is_linux();
+
+=head2 B<is_mac>
 
 Return true if the current system is MacOS (Darwin).
 
-=head2 is_sunos
+    my $system_is_macOS = is_mac();
+
+=head2 B<is_sunos>
 
 Return true if the current system is SunOS.
+
+    my $system_is_sunOS = is_sunos();
+
 
 =head1 AUTHOR
 
@@ -142,11 +157,11 @@ L<https://metacpan.org/release/MERM-Base>
 
 =back
 
-=for ACKNOWLEDGEMENTS
+=head1 ACKNOWLEDGEMENTS
 
 =head1 LICENSE AND COPYRIGHT
 
-This software is Copyright © 2024 by Matt Martini.
+This software is Copyright © 2024-2025 by Matt Martini.
 
 This is free software, licensed under:
 

@@ -627,7 +627,7 @@ sub ipc_run_s {
 
 =head1 NAME
 
-MERM::Base::Utils - functions to assist in the testing of MERM::Base
+MERM::Base::Utils - General utility functions for programming
 
 =head1 VERSION
 
@@ -635,8 +635,7 @@ Version v1.0.12
 
 =head1 SYNOPSIS
 
-MERM::Base::Utils - provides functions to assist in the testing of MERM::Base.
-
+MERM::Base::Utils - provides functions to assist working with files and dirs, menus and prompts, and running external programs.
 
     use MERM::Base::Utils;
 
@@ -795,7 +794,6 @@ MERM::Base::Utils - provides functions to assist in the testing of MERM::Base.
 
 Create a temporary directory in tmp for use in testing
 
-
 =head2 mk_temp_file
 
 Create a temporary file in tmp or supplied dir for use in testing
@@ -900,10 +898,11 @@ print a banner
 
 =head2 stat_date
 
-return the state date of a file
-format YYYYMMDD, or YYYY/MM/DD if dir_format is true
-or if date_type is monthly
-format YYYYMM or YYYY/MM
+return the stat date of a file
+
+   format: YYYYMMDD,
+or format: YYYY/MM/DD if dir_format is true
+or format: YYYYMM or YYYY/MM if date_type is monthly
 
 =head2 status_for
 
@@ -911,7 +910,6 @@ return hash_ref of file stat info.
 print status_for($file)->{mtime}
 available keys:
 dev ino mode nlink uid gid rdev size atime mtime ctime blksize blocks 
-
 
 =head2 dir_suffix_slash
 
@@ -1037,6 +1035,10 @@ You can also look for information at:
 
 L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=MERM-Base>
 
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/MERM-Base>
+
 =item * CPAN Ratings
 
 L<https://cpanratings.perl.org/d/MERM-Base>
@@ -1047,11 +1049,11 @@ L<https://metacpan.org/release/MERM-Base>
 
 =back
 
-=for ACKNOWLEDGEMENTS
+=head1 ACKNOWLEDGEMENTS
 
 =head1 LICENSE AND COPYRIGHT
 
-This software is Copyright © 2024 by Matt Martini.
+This software is Copyright © 2019-2025 by Matt Martini.
 
 This is free software, licensed under:
 

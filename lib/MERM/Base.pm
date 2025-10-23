@@ -69,7 +69,20 @@ This is equivalent to:
     user MERM::Base::OS    qw(:all);
     user MERM::Base::Utils qw(:all);
 
+=head1 SUBROUTINES/METHODS
 
+Modules do specific functions.  Load as neccessary.
+
+=cut
+
+# =head2 How it works
+
+# The MERM::Base module simply imports functions from MERM::Base::*
+# modules.  Each module defines a self-contained functions, and puts
+# those function names into @EXPORT.  MERM::Base defines its own
+# import function, but that does not matter to the plug-in modules.
+
+# This function is taken from brian d foy's Test::Data module. Thanks brian!
 
 =head1 SEE ALSO
 
@@ -79,69 +92,52 @@ L<MERM::Base::Utils>,
 L<MERM::Base::OS>,
 L<MERM::Base::Backup>
 
-=for DESCRIPTION
-
-
-=head1 CONFIGURATION AND ENVIRONMENT
-
-MERM::Base requires no configuration files or environment variables.
-
-
-=head1 DEPENDENCIES
-
-None.
-
-
-=head1 INCOMPATIBILITIES
-
-None reported.
-
-=head1 BUGS AND LIMITATIONS
-
-
-No bugs have been reported.
-
-Please report any bugs or feature requests to
-C<bug-merm-base@rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org>.
-
 
 =head1 AUTHOR
 
-Matt Martini  C<< <matt@imaginarywave.com> >>
+Matt Martini,  C<< <matt at imaginarywave.com> >>
 
+=head1 BUGS
 
-=head1 LICENCE AND COPYRIGHT
+Please report any bugs or feature requests to C<bug-merm-base at rt.cpan.org>, or through
+the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MERM-Base>.  I will be notified, and then you'll
+automatically be notified of progress on your bug as I make changes.
 
-This software is Copyright © 2024 by Matt Martini.
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc MERM::Base
+
+You can also look for information at:
+
+=over 4
+
+=item * RT: CPAN's request tracker (report bugs here)
+
+L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=MERM-Base>
+
+=item * CPAN Ratings
+
+L<https://cpanratings.perl.org/d/MERM-Base>
+
+=item * Search CPAN
+
+L<https://metacpan.org/release/MERM-Base>
+
+=back
+
+=head1 ACKNOWLEDGEMENTS
+
+=head1 LICENSE AND COPYRIGHT
+
+This software is Copyright © 2024-2025 by Matt Martini.
 
 This is free software, licensed under:
 
   The GNU General Public License, Version 3, June 2007
 
-=head1 DISCLAIMER OF WARRANTY
-
-BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
-FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN
-OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
-PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
-EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE
-ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH
-YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
-NECESSARY SERVICING, REPAIR, OR CORRECTION.
-
-IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
-WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
-REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENCE, BE
-LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL,
-OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE
-THE SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
-RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
-FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
-SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
-SUCH DAMAGES.
-
 =cut
 
 __END__
+
