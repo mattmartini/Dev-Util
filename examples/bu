@@ -1,19 +1,14 @@
 #!/usr/bin/env perl
 
-################################################################
-################################################################
-##   - bu -- backup files                                     ##
-##                                                            ##
-##  Authors: Matt Martini     (matt@invision.net)             ##
-##           Eugene Miretskiy (eugene@invision.net)           ##
-##                                                            ##
-##  Modifications:                                            ##
-##     EM: removed requirement for BUDIR to be rel path       ##
-##                                                            ##
-##  Copyright: (c) 2000, InVision.com, INC                    ##
-##                                                            ##
-################################################################
-################################################################
+################################################################################
+##  bu -- backup files into a .tar.gz archive                                 ##
+##                                                                            ##
+##  Authors: Matt Martini                                                     ##
+##           Eugene Miretskiy                                                 ##
+##                                                                            ##
+##  Copyright © 2000-2025  Matt Martini <matt.martini@imaginarywave.com>      ##
+##                                                                            ##
+################################################################################
 
 ########################################
 #      Requirements and Packages       #
@@ -21,61 +16,40 @@
 use MERM::Base::Syntax;
 use MERM::Base qw(::Backup);
 
-#use Backup qw(backup);
 use File::Basename;
+use Term::ANSIColor;
 
-my $wantColor = 1;
+Readonly my $VERSION => version->declare("v1.1.3");
 
-if ( $ARGV[0] eq '-n' ) {
-    shift;
-    $wantColor = 0;
-}
-
-eval q/use Term::ANSIColor; $Term::ANSIColor::AUTORESET = 1/ if ($wantColor);
-
-if ( $@ || !$wantColor ) {
-    warn "Warning: Term::ANSIColor is not installed.\n\n" if ($wantColor);
-
-    #since we don't have ANSIColor define color and colored
-    #subs (see Term::ANSIColor documentation for more detail)
-    #Constants interface from ANSIColor IS NOT supported
-    eval q(
-    sub colored { 
-      my $arg = shift;
-      return (ref($arg) eq 'ARRAY') ? @_ : $arg
-    }
-
-    sub color {undef}
-  );
-}
+$Term::ANSIColor::AUTORESET = 1;
 
 ########################################
 #            Main Program              #
 ########################################
 
 #check BUDIR env var for sanity
-$Backup::BACKUPDIR = $ENV{ BUDIR } if ( $ENV{ BUDIR } );
+$MERM::Base::Backup::BACKUPDIR = $ENV{ BUDIR } if ( $ENV{ BUDIR } );
+
+# $Backup::BACKUPDIR = $ENV{BUDIR} if($ENV{BUDIR});
 
 my $newfile;
 
 foreach (@ARGV) {
     print "Backing up ", colored( $_, 'blue' ), " ...\t";
-    eval { $newfile = backup($_) };
 
-    if ($@) {
-        pmc( [ " backup failed, ", "red" ], [ $@, "bold red" ], ["\n"] );
-    }
-    else {
+    if ( eval { $newfile = backup($_); 1 } ) {
         print " file saved as    ", colored( $newfile, "bold blue" ), "\n";
     }
+    else {
+        pmc( [ " backup failed, ", "red" ], [ $@, "bold red" ], [ "\n", "black" ] );
+    }
+
 }
 
-#
 # print strings in different colors
 # each argument is ref array which will be passed
 # AS IS to colored sub
 # Ex: multicolor(["1234", "blue"], ["5678", "black"], ["90", "bold blue"].....)
-#
 sub multicolor {
     return map { colored(@$_) } @_;
 }
