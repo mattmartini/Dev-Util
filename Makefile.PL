@@ -3,10 +3,10 @@ use warnings;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-               NAME               => 'MERM::Base',
+               NAME               => 'Dev::Util',
                AUTHOR             => 'Matt Martini <matt@imaginarywave.com>',
-               VERSION_FROM       => 'lib/MERM/Base.pm',
-               ABSTRACT_FROM      => 'lib/MERM/Base.pm',
+               VERSION_FROM       => 'lib/Dev/Util.pm',
+               ABSTRACT_FROM      => 'lib/Dev/Util.pm',
                LICENSE            => 'gpl_3',
                MIN_PERL_VERSION   => '5.018',
                PL_FILES           => {},
@@ -47,6 +47,6 @@ WriteMakefile(
                                   'Test::More'         => 0,
                                 },
                dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-               clean => { FILES    => 'MERM-Base-*' },
+               clean => { FILES    => 'Dev-Util-*' },
              );
 
