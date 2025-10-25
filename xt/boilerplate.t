@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Test::More;
 
-plan tests => 5;
+plan tests => 7;
 
 sub not_in_file_ok {
     my ( $filename, %regex ) = @_;
@@ -52,6 +52,8 @@ TODO: {
     module_boilerplate_ok('lib/MERM/Base.pm');
     module_boilerplate_ok('lib/MERM/Base/Syntax.pm');
     module_boilerplate_ok('lib/MERM/Base/Utils.pm');
+    module_boilerplate_ok('lib/MERM/Base/OS.pm');
+    module_boilerplate_ok('lib/MERM/Base/Backup.pm');
 
 }
 

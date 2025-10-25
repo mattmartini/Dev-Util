@@ -6,7 +6,7 @@ use warnings;
 use version;
 use Test::More;
 
-plan tests => 34;
+plan tests => 36;
 
 BEGIN {
     my @modules = qw(
@@ -28,23 +28,24 @@ BEGIN {
 
     # Modules used by above
     my @needed_modules = qw(
+        Archive::Tar
         Carp
+        English
         Exporter
+        File::Basename
+        File::Copy
+        File::Find
+        File::Spec
         File::Temp
+        IO::File
         IO::Interactive
+        IPC::Cmd
         Import::Into
+        List::Util
         Module::Runtime
+        Readonly
         Term::ANSIColor
         Term::ReadKey
-        Readonly
-        English
-        IPC::Cmd
-        File::Copy
-        File::Spec
-        File::Basename
-        File::Find
-        IO::File
-        Archive::Tar
     );
 
     foreach my $module (@needed_modules) {
@@ -58,6 +59,7 @@ BEGIN {
         File::Path
         FindBin
         Socket
+        Test2
         Test2::Tools::Ref
         Test::More
     );
