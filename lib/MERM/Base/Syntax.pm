@@ -11,7 +11,7 @@ use open qw(:std :utf8);
 use Import::Into;
 use Module::Runtime;
 
-use version; our $VERSION = version->declare("v1.0.11");
+use version; our $VERSION = version->declare("v1.1.6");
 
 sub importables {
     my ($class) = @_;
@@ -52,7 +52,7 @@ MERM::Base::Syntax - Provide consistent feature setup.
 
 =head1 VERSION
 
-Version v.1.0.11
+Version v1.1.6
 
 =head1 SYNOPSIS
 
@@ -133,7 +133,7 @@ L<https://metacpan.org/release/MERM-Base>
 
 =head1 LICENSE AND COPYRIGHT
 
-This software is Copyright ©️  2024 by Matt Martini.
+This software is Copyright © 2024-2025 by Matt Martini.
 
 This is free software, licensed under:
 

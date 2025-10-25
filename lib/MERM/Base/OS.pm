@@ -4,7 +4,7 @@ use lib 'lib';
 use MERM::Base::Syntax;
 use Exporter qw(import);
 
-use version; our $VERSION = version->declare("v1.0.11");
+our $VERSION = version->declare("v1.1.6");
 
 our @EXPORT_OK = qw(
     get_os
@@ -69,44 +69,59 @@ MERM::Base::OS - OS discovery and functions
 
 =head1 VERSION
 
-Version v.1.0.11
+Version v1.1.6
 
 =head1 SYNOPSIS
 
 OS discovery and functions
 
-    use MERM::Base::OS;
+    use Disk::SmartTools::OS;
+
+    my $OS = get_os();
+    my $hostname = get_hostname();
+    my $system_is_linux = is_linux();
     ...
 
 =head1 EXPORT
 
-get_os
-get_hostname
-is_linux
-is_mac
-is_sunos
+    get_os
+    get_hostname
+    is_linux
+    is_mac
+    is_sunos
 
 =head1 SUBROUTINES
 
-=head2 get_os
+=head2 B<get_os>
 
 Return the OS of the current system.
 
-=head2 get_hostname
+    my $OS = get_os();
+
+=head2 B<get_hostname>
 
 Return the hostname of the current system.
 
-=head2 is_linux
+    my $hostname = get_hostname();
+
+=head2 B<is_linux>
 
 Return true if the current system is Linux.
 
-=head2 is_mac
+    my $system_is_linux = is_linux();
+
+=head2 B<is_mac>
 
 Return true if the current system is MacOS (Darwin).
 
-=head2 is_sunos
+    my $system_is_macOS = is_mac();
+
+=head2 B<is_sunos>
 
 Return true if the current system is SunOS.
+
+    my $system_is_sunOS = is_sunos();
+
 
 =head1 AUTHOR
 
@@ -146,7 +161,7 @@ L<https://metacpan.org/release/MERM-Base>
 
 =head1 LICENSE AND COPYRIGHT
 
-This software is Copyright ©️  2024 by Matt Martini.
+This software is Copyright © 2024-2025 by Matt Martini.
 
 This is free software, licensed under:
 

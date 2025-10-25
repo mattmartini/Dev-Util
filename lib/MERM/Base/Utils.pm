@@ -10,7 +10,7 @@ use Term::ANSIColor;
 use IO::Interactive qw(is_interactive);
 use IPC::Cmd        qw[can_run run];
 
-use version; our $VERSION = version->declare("v1.0.11");
+our $VERSION = version->declare("v1.1.6");
 
 our %EXPORT_TAGS = (
 
@@ -284,6 +284,8 @@ sub status_for {
 }
 
 sub dir_suffix_slash {
+
+    # add a trailing slash to dir name if none exists
     my $dir = shift;
 
     $dir .= ( substr( $dir, -1, 1 ) eq '/' ) ? '' : '/';
@@ -625,16 +627,15 @@ sub ipc_run_s {
 
 =head1 NAME
 
-MERM::Base::Utils - functions to assist in the testing of MERM::Base
+MERM::Base::Utils - General utility functions for programming
 
 =head1 VERSION
 
-Version v.1.0.11
+Version v1.1.6
 
 =head1 SYNOPSIS
 
-MERM::Base::Utils - provides functions to assist in the testing of MERM::Base.
-
+MERM::Base::Utils - provides functions to assist working with files and dirs, menus and prompts, and running external programs.
 
     use MERM::Base::Utils;
 
@@ -673,7 +674,7 @@ MERM::Base::Utils - provides functions to assist in the testing of MERM::Base.
 
 =over 4
 
-=item :ftypes
+=item B<:ftypes>
 
 =over 8
 
@@ -691,7 +692,7 @@ MERM::Base::Utils - provides functions to assist in the testing of MERM::Base.
 
 =back
 
-=item :fattr
+=item B<:fattr>
 
 =over 8
 
@@ -723,7 +724,7 @@ MERM::Base::Utils - provides functions to assist in the testing of MERM::Base.
 
 =back
 
-=item :dirs
+=item B<:dirs>
 
 =over 8
 
@@ -739,7 +740,7 @@ MERM::Base::Utils - provides functions to assist in the testing of MERM::Base.
 
 =back
 
-=item :misc
+=item B<:misc>
 
 =over 8
 
@@ -769,7 +770,7 @@ MERM::Base::Utils - provides functions to assist in the testing of MERM::Base.
 
 =back
 
-=item :named_constants
+=item B<:named_constants>
 
 =over 8
 
@@ -785,12 +786,13 @@ MERM::Base::Utils - provides functions to assist in the testing of MERM::Base.
 
 =back
 
+=back
+
 =head1 SUBROUTINES
 
 =head2 mk_temp_dir
 
 Create a temporary directory in tmp for use in testing
-
 
 =head2 mk_temp_file
 
@@ -896,10 +898,11 @@ print a banner
 
 =head2 stat_date
 
-return the state date of a file
-format YYYYMMDD, or YYYY/MM/DD if dir_format is true
-or if date_type is monthly
-format YYYYMM or YYYY/MM
+return the stat date of a file
+
+   format: YYYYMMDD,
+or format: YYYY/MM/DD if dir_format is true
+or format: YYYYMM or YYYY/MM if date_type is monthly
 
 =head2 status_for
 
@@ -907,7 +910,6 @@ return hash_ref of file stat info.
 print status_for($file)->{mtime}
 available keys:
 dev ino mode nlink uid gid rdev size atime mtime ctime blksize blocks 
-
 
 =head2 dir_suffix_slash
 
@@ -1033,6 +1035,10 @@ You can also look for information at:
 
 L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=MERM-Base>
 
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/MERM-Base>
+
 =item * CPAN Ratings
 
 L<https://cpanratings.perl.org/d/MERM-Base>
@@ -1047,7 +1053,7 @@ L<https://metacpan.org/release/MERM-Base>
 
 =head1 LICENSE AND COPYRIGHT
 
-This software is Copyright ©️  2024 by Matt Martini.
+This software is Copyright © 2019-2025 by Matt Martini.
 
 This is free software, licensed under:
 

@@ -1,11 +1,12 @@
 #!/usr/bin/env perl
+
 use 5.018;
 use strict;
 use warnings;
 use version;
 use Test::More;
 
-plan tests => 26;
+plan tests => 34;
 
 BEGIN {
     my @modules = qw(
@@ -13,6 +14,7 @@ BEGIN {
         MERM::Base::Syntax
         MERM::Base::Utils
         MERM::Base::OS
+        MERM::Base::Backup
     );
 
     foreach my $module (@modules) {
@@ -37,6 +39,12 @@ BEGIN {
         Readonly
         English
         IPC::Cmd
+        File::Copy
+        File::Spec
+        File::Basename
+        File::Find
+        IO::File
+        Archive::Tar
     );
 
     foreach my $module (@needed_modules) {
