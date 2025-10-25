@@ -76,7 +76,7 @@ Version v1.1.3
 OS discovery and functions
 
     use Disk::SmartTools::OS;
-    
+
     my $OS = get_os();
     my $hostname = get_hostname();
     my $system_is_linux = is_linux();
