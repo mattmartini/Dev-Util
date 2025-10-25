@@ -5,8 +5,9 @@ use lib 'lib';
 
 use MERM::Base::Syntax;
 use MERM::Base qw(::Utils ::Backup);
+use File::Copy;
 
-# plan tests => 6;
+plan tests => 6;
 
 #======================================#
 #           Make test files            #
@@ -24,21 +25,54 @@ close($tff_h);
 #                backup                #
 #======================================#
 
-my $mtime = ( stat $filename )[9];
+my $mtime = ( stat $tff )[9];
 my ( $mday, $mon, $year ) = ( localtime($mtime) )[ 3 .. 5 ];
 
-$newfile = $basefile
-    = sprintf( "%s_%d%02d%02d", $filename, $year + 1900, $mon + 1, $mday );
+my $backup_file
+    = sprintf( "%s_%d%02d%02d", $tff, $year + 1900, $mon + 1, $mday );
 
-# my $expected_host = qx(hostname);
-# chomp($expected_host);
-# my $host = get_hostname();
-# is( $host, $expected_host, "get_hostname - matches hostname" );
+my $test_file_exists = file_exists($tff);
+is( $test_file_exists, 1, 'test file created' );
 
-# $expected_host = qx(uname -n);
-# chomp($expected_host);
-# is( $host, $expected_host, "get_hostname - matches uname -n" );
+# create a backup file
+backup($tff);
+my $backup_file_exists = file_exists($backup_file);
+is( $backup_file_exists, 1, 'backup file created with name: file_YYYYMMDD' );
 
-is( 1, 1 );
+# should not create a new backup as base file has not changed
+my $second_backup_file = $backup_file . '_1';
+backup($tff);
+my $second_backup_file_exists = file_exists($second_backup_file);
+is( $second_backup_file_exists, 0, 'second backup file should not exist' );
+
+# change test file
+open( $tff_h, '>>', $tff ) or croak "Can't open file for appending\n";
+print $tff_h "universe March";
+close($tff_h);
+
+# now new backup should be created with name: file_YYYYMMDD_1
+backup($tff);
+$second_backup_file_exists = file_exists($second_backup_file);
+is( $second_backup_file_exists, 1, 'second backup file should exist' );
+
+# prepare dir for backup test
+my $testdir = $td->dirname . '/testdir';
+mkdir $testdir, oct(777);
+my $testdir_exists = dir_exists($testdir);
+is( $testdir_exists, 1, 'testdir created' );
+
+move( $tff,         $testdir ) or croak "Can't move file to testdir.\n";
+move( $backup_file, $testdir ) or croak "Can't move file to testdir.\n";
+move( $second_backup_file, $testdir )
+    or croak "Can't move file to testdir.\n";
+
+my $backupdir_file
+    = sprintf( "%s_%d%02d%02d.tar.gz",
+               $testdir, $year + 1900,
+               $mon + 1, $mday );
+
+backup($testdir);
+my $backupdir_file_exists = file_exists($backupdir_file);
+is( $backupdir_file_exists, 1, 'backup of dir should exist' );
 
 done_testing;
