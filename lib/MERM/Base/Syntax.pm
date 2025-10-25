@@ -11,7 +11,7 @@ use open qw(:std :utf8);
 use Import::Into;
 use Module::Runtime;
 
-use version; our $VERSION = version->declare("v1.1.3");
+use version; our $VERSION = version->declare("v1.1.6");
 
 sub importables {
     my ($class) = @_;
@@ -52,7 +52,7 @@ MERM::Base::Syntax - Provide consistent feature setup.
 
 =head1 VERSION
 
-Version v1.1.3
+Version v1.1.6
 
 =head1 SYNOPSIS
 

@@ -19,7 +19,7 @@ use MERM::Base qw(::Backup);
 use File::Basename;
 use Term::ANSIColor;
 
-Readonly my $VERSION => version->declare("v1.1.3");
+Readonly my $VERSION => version->declare("v1.1.6");
 
 $Term::ANSIColor::AUTORESET = 1;
 

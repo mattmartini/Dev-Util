@@ -12,7 +12,7 @@ use File::Find;
 use IO::File;
 use Archive::Tar;
 
-our $VERSION = version->declare("v1.1.3");
+our $VERSION = version->declare("v1.1.6");
 
 our @EXPORT_OK = qw(
     backup
@@ -222,7 +222,7 @@ MERM::Base::Backup - backup functions
 
 =head1 VERSION
 
-Version v1.1.3
+Version v1.1.6
 
 =head1 SYNOPSIS
 
