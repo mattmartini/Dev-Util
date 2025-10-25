@@ -1,6 +1,7 @@
 package MERM::Base::Backup;
 
 use lib 'lib';
+
 use MERM::Base::Syntax;
 use Exporter qw(import);
 
@@ -28,12 +29,12 @@ our $PRESERVE_FILE_ATTRS = 1;
 
 # Backup file or directory
 sub backup {
-    return -f $_[0] ? backupfile(@_) : backupdir(@_);
+    return -f $_[0] ? _backupfile(@_) : _backupdir(@_);
 }
 
 # Backup file -- takes file name and returns new file name
 # This sub can DIE -- so use eval
-sub backupfile {
+sub _backupfile {
     my $filename = shift;
 
     croak "$filename is not a file\n" unless ( -e $filename );
@@ -59,7 +60,7 @@ sub backupfile {
 # Backup directory -- takes file name, optional compression level (2-9) and
 #                     returns new archive file name
 # This sub can DIE -- so use eval
-sub backupdir {
+sub _backupdir {
     my ( $dir, $level ) = @_;
 
     $level = 5 if ( !defined($level) || $level < 2 || $level > 9 );
@@ -69,7 +70,7 @@ sub backupdir {
     my @files;
     my $tar = Archive::Tar->new();
 
-    #"promote" warnings from File::Find to errors
+    # "promote" warnings from File::Find to errors
     local $SIG{ __WARN__ } = sub { croak $_[0] };
 
     #recursivelly add files to tar
@@ -81,7 +82,10 @@ sub backupdir {
         );
 
     #save archive
+
     my $tmpout = IO::File->new_tmpfile() || croak "Failed to create tmpfile\n";
+    binmode($tmpout);
+
     $tar->add_files(@files);
     $tar->write( $tmpout, $level );
 
@@ -120,8 +124,10 @@ sub _backup {
         $filename = File::Spec->catfile( $budir, $name );
     }
 
-    my ( $newfile, $basefile, $lastbackup );
-    my $count = 0;
+    my $newfile    = q{};    # EMPTY_STR
+    my $basefile   = q{};
+    my $lastbackup = q{};
+    my $count      = 0;
 
     $newfile = $basefile
         = sprintf( "%s_%d%02d%02d", $filename, $year + 1900, $mon + 1, $mday );
@@ -137,17 +143,17 @@ sub _backup {
 
     if ($count) {
 
-        #more then 1 backup exists -- last backup has
-        #count-1 extention (if count-1 == 0 -> exception: lastbackup=$basefile)
+        # more then 1 backup exists -- last backup has
+        # count-1 extention (if count-1 == 0 -> exception: lastbackup=$basefile)
         $lastbackup = $count - 1 > 0 ? "${basefile}_" . ( $count - 1 ) : $basefile;
         $newfile .= "_$count";
     }
 
-    if ( $lastbackup ne "" ) {
+    if ( $lastbackup ne '' ) {
 
-        #last backup exists -- check if current file
-        #is different from backup
-        diff( $input, "$lastbackup$ext" ) || return "$lastbackup$ext";
+        # last backup exists -- check if current file
+        # is different from backup
+        _file_diff( $input, "$lastbackup$ext" ) || return "$lastbackup$ext";
     }
 
     #backup file
@@ -159,7 +165,7 @@ sub _backup {
 # return true if files are different
 # f1, f2 can either be file names or open file handles (by ref)
 # NOTE: modifies filehandle position to 0
-sub diff {
+sub _file_diff {
     my ( $f1, $f2 ) = @_;
 
     my ( @files, $fh, $ref, $n1, $n2 );
@@ -220,10 +226,32 @@ Version v1.1.3
 
 =head1 SYNOPSIS
 
-Backup function
+The backup function will make a copy of a file or dir with the date of the file appended.
+It returns the name of the new file.  Directories are backed up by C<tar> and C<gz>.
 
     use MERM::Base::Backup qw(backup);
-    ...
+
+    my $backup_file = backup('myfile');
+    say $backup_file;
+
+    my $backup_dir = backup('mydir/');
+    say $backup_dir;
+
+Will produce:
+
+    myfile_20251025
+    mydir_20251025.tar.gz
+
+If the file has changed, calling C<backup('myfile')> again will create C<myfile_20251025_1>.
+Each time C<backup> is called the appended counter will increase by 1 if C<myfile> has
+changed since the last time it was called.
+
+If the file has not changed, no new backup will be created.
+
+=head2 Examples
+
+The C<bu> program in the examples dir will take a list of files and dirs as args and make
+backups of them using C<backup>.
 
 =head1 EXPORT
 
@@ -231,9 +259,12 @@ backup
 
 =head1 SUBROUTINES
 
-=head2 get_os
+=head2 B<backup(FILE|DIR)>
 
-Return the OS of the current system.
+Return the name of the backup file.
+
+    my $backup_file = backup('myfile');
+    my $backup_dir = backup('mydir/');
 
 
 =head1 AUTHOR
