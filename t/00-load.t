@@ -6,7 +6,7 @@ use warnings;
 use version;
 use Test::More;
 
-plan tests => 32;
+plan tests => 34;
 
 BEGIN {
     my @modules = qw(
@@ -14,9 +14,8 @@ BEGIN {
         MERM::Base::Syntax
         MERM::Base::Utils
         MERM::Base::OS
+        MERM::Base::Backup
     );
-
-    # MERM::Base::Backup
 
     foreach my $module (@modules) {
         use_ok($module) || print "Bail out!\n";
