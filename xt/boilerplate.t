@@ -49,11 +49,11 @@ TODO: {
 
     not_in_file_ok( 'CHANGELOG.md' => "placeholder date/time" => qr(Date/time) );
 
-    module_boilerplate_ok('lib/MERM/Base.pm');
-    module_boilerplate_ok('lib/MERM/Base/Syntax.pm');
-    module_boilerplate_ok('lib/MERM/Base/Utils.pm');
-    module_boilerplate_ok('lib/MERM/Base/OS.pm');
-    module_boilerplate_ok('lib/MERM/Base/Backup.pm');
+    module_boilerplate_ok('lib/Dev/Util.pm');
+    module_boilerplate_ok('lib/Dev/Util/Syntax.pm');
+    module_boilerplate_ok('lib/Dev/Util/Utils.pm');
+    module_boilerplate_ok('lib/Dev/Util/OS.pm');
+    module_boilerplate_ok('lib/Dev/Util/Backup.pm');
 
 }
 

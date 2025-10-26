@@ -3,8 +3,8 @@
 use Test2::V0;
 use lib 'lib';
 
-use MERM::Base::Syntax;
-use MERM::Base qw(::OS ::Utils);
+use Dev::Util::Syntax;
+use Dev::Util qw(::OS ::Utils);
 
 use Socket;
 

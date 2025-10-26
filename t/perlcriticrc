@@ -212,10 +212,10 @@ allow = subs refs
 allow = uninitialized once numeric
 
 [TestingAndDebugging::RequireUseStrict]
-equivalent_modules = MERM::Base::Syntax
+equivalent_modules = Dev::Util::Syntax
 
 [TestingAndDebugging::RequireUseWarnings]
-equivalent_modules = MERM::Base::Syntax
+equivalent_modules = Dev::Util::Syntax
 
 [Variables::ProhibitPackageVars]
 add_packages = Exporter Exporter::Verbose Getopt::Long Getopt::Long::error
