@@ -1,8 +1,8 @@
-package MERM::Base::Backup;
+package Dev::Util::Backup;
 
 use lib 'lib';
 
-use MERM::Base::Syntax;
+use Dev::Util::Syntax;
 use Exporter qw(import);
 
 use File::Copy;
@@ -210,7 +210,7 @@ sub _file_diff {
     return $diff;
 }
 
-1;    # End of MERM::Base::OS
+1;    # End of Dev::Util::OS
 
 =pod
 
@@ -218,7 +218,7 @@ sub _file_diff {
 
 =head1 NAME
 
-MERM::Base::Backup - backup functions
+Dev::Util::Backup - backup functions
 
 =head1 VERSION
 
@@ -229,7 +229,7 @@ Version v1.1.6
 The backup function will make a copy of a file or dir with the date of the file appended.
 It returns the name of the new file.  Directories are backed up by C<tar> and C<gz>.
 
-    use MERM::Base::Backup qw(backup);
+    use Dev::Util::Backup qw(backup);
 
     my $backup_file = backup('myfile');
     say $backup_file;
@@ -273,15 +273,15 @@ Matt Martini, C<< <matt at imaginarywave.com> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-merm-base at rt.cpan.org>, or through
-the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MERM-Base>.  I will be notified, and then you'll
+Please report any bugs or feature requests to C<bug-dev-util at rt.cpan.org>, or through
+the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc MERM::Base::Backup
+    perldoc Dev::Util::Backup
 
 You can also look for information at:
 
@@ -289,15 +289,15 @@ You can also look for information at:
 
 =item * RT: CPAN's request tracker (report bugs here)
 
-L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=MERM-Base>
+L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=Dev-Util>
 
 =item * CPAN Ratings
 
-L<https://cpanratings.perl.org/d/MERM-Base>
+L<https://cpanratings.perl.org/d/Dev-Util>
 
 =item * Search CPAN
 
-L<https://metacpan.org/release/MERM-Base>
+L<https://metacpan.org/release/Dev-Util>
 
 =back
 

@@ -1,4 +1,4 @@
-package MERM::Base;
+package Dev::Util;
 
 use 5.018;
 use strict;
@@ -43,7 +43,7 @@ sub import {
     goto &Exporter::import;
 }
 
-1;    # End of MERM::Base
+1;    # End of Dev::Util
 
 =pod
 
@@ -51,7 +51,7 @@ sub import {
 
 =head1 NAME
 
-MERM::Base - Base modules for Perl Development
+Dev::Util - Base modules for Perl Development
 
 
 =head1 VERSION
@@ -60,14 +60,14 @@ Version v1.1.6
 
 =head1 SYNOPSIS
 
-MERM::Base provides a loader for sub-modules where a leading :: denotes a package to load.
+Dev::Util provides a loader for sub-modules where a leading :: denotes a package to load.
 
-    use MERM::Base qw( ::OS ::Utils );
+    use Dev::Util qw( ::OS ::Utils );
 
 This is equivalent to:
 
-    user MERM::Base::OS    qw(:all);
-    user MERM::Base::Utils qw(:all);
+    user Dev::Util::OS    qw(:all);
+    user Dev::Util::Utils qw(:all);
 
 =head1 SUBROUTINES/METHODS
 
@@ -77,20 +77,20 @@ Modules do specific functions.  Load as neccessary.
 
 # =head2 How it works
 
-# The MERM::Base module simply imports functions from MERM::Base::*
+# The Dev::Util module simply imports functions from Dev::Util::*
 # modules.  Each module defines a self-contained functions, and puts
-# those function names into @EXPORT.  MERM::Base defines its own
+# those function names into @EXPORT.  Dev::Util defines its own
 # import function, but that does not matter to the plug-in modules.
 
 # This function is taken from brian d foy's Test::Data module. Thanks brian!
 
 =head1 SEE ALSO
 
-L<MERM::Base::Disks>,
-L<MERM::Base::Syntax>,
-L<MERM::Base::Utils>,
-L<MERM::Base::OS>,
-L<MERM::Base::Backup>
+L<Dev::Util::Disks>,
+L<Dev::Util::Syntax>,
+L<Dev::Util::Utils>,
+L<Dev::Util::OS>,
+L<Dev::Util::Backup>
 
 
 =head1 AUTHOR
@@ -99,15 +99,15 @@ Matt Martini,  C<< <matt at imaginarywave.com> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-merm-base at rt.cpan.org>, or through
-the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MERM-Base>.  I will be notified, and then you'll
+Please report any bugs or feature requests to C<bug-dev-util at rt.cpan.org>, or through
+the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc MERM::Base
+    perldoc Dev::Util
 
 You can also look for information at:
 
@@ -115,15 +115,15 @@ You can also look for information at:
 
 =item * RT: CPAN's request tracker (report bugs here)
 
-L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=MERM-Base>
+L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=Dev-Util>
 
 =item * CPAN Ratings
 
-L<https://cpanratings.perl.org/d/MERM-Base>
+L<https://cpanratings.perl.org/d/Dev-Util>
 
 =item * Search CPAN
 
-L<https://metacpan.org/release/MERM-Base>
+L<https://metacpan.org/release/Dev-Util>
 
 =back
 

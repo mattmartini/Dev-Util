@@ -1,4 +1,4 @@
-package MERM::Base::Syntax;
+package Dev::Util::Syntax;
 
 use 5.018;
 
@@ -40,7 +40,7 @@ sub import {
     return;
 }
 
-1;    # End of MERM::Base::Syntax
+1;    # End of Dev::Util::Syntax
 
 =pod
 
@@ -48,7 +48,7 @@ sub import {
 
 =head1 NAME
 
-MERM::Base::Syntax - Provide consistent feature setup.
+Dev::Util::Syntax - Provide consistent feature setup.
 
 =head1 VERSION
 
@@ -61,15 +61,15 @@ Then import them into other modules.
 
 Use this in other modules:
 
-    package MERM::Base::Example;
+    package Dev::Util::Example;
 
-    use MERM::Base::Syntax;
+    use Dev::Util::Syntax;
 
     # Rest of Code...
 
 This is equivalent to:
 
-    package MERM::Base::Example;
+    package Dev::Util::Example;
 
     use feature :5.18;
     use utf8;
@@ -100,15 +100,15 @@ Matt Martini, C<< <matt at imaginarywave.com> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-merm-base at rt.cpan.org>, or through
-the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MERM-Base>.  I will be notified, and then you'll
+Please report any bugs or feature requests to C<bug-dev-util at rt.cpan.org>, or through
+the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc MERM::Base::Syntax
+    perldoc Dev::Util::Syntax
 
 
 You can also look for information at:
@@ -117,15 +117,15 @@ You can also look for information at:
 
 =item * RT: CPAN's request tracker (report bugs here)
 
-L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=MERM-Base>
+L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=Dev-Util>
 
 =item * CPAN Ratings
 
-L<https://cpanratings.perl.org/d/MERM-Base>
+L<https://cpanratings.perl.org/d/Dev-Util>
 
 =item * Search CPAN
 
-L<https://metacpan.org/release/MERM-Base>
+L<https://metacpan.org/release/Dev-Util>
 
 =back
 
