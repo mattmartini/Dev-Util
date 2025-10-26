@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [version/v1.1.6] - 2025-10-25
+## [version/v2.0.7] - 2025-10-25
 
 ### ⚙️ Miscellaneous Tasks
 

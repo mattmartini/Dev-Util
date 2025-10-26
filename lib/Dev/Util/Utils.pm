@@ -1,7 +1,7 @@
-package MERM::Base::Utils;
+package Dev::Util::Utils;
 
 use lib 'lib';
-use MERM::Base::Syntax;
+use Dev::Util::Syntax;
 use Exporter qw(import);
 
 use File::Temp;
@@ -10,7 +10,7 @@ use Term::ANSIColor;
 use IO::Interactive qw(is_interactive);
 use IPC::Cmd        qw[can_run run];
 
-our $VERSION = version->declare("v1.1.6");
+our $VERSION = version->declare("v2.0.7");
 
 our %EXPORT_TAGS = (
 
@@ -619,7 +619,7 @@ sub ipc_run_s {
     return 0;
 }
 
-1;    # End of MERM::Base::Utils
+1;    # End of Dev::Util::Utils
 
 =pod
 
@@ -627,17 +627,17 @@ sub ipc_run_s {
 
 =head1 NAME
 
-MERM::Base::Utils - General utility functions for programming
+Dev::Util::Utils - General utility functions for programming
 
 =head1 VERSION
 
-Version v1.1.6
+Version v2.0.7
 
 =head1 SYNOPSIS
 
-MERM::Base::Utils - provides functions to assist working with files and dirs, menus and prompts, and running external programs.
+Dev::Util::Utils - provides functions to assist working with files and dirs, menus and prompts, and running external programs.
 
-    use MERM::Base::Utils;
+    use Dev::Util::Utils;
 
     my $fexists  = file_exists('/bla/somefile');
     my $canreadf  = file_readable('/bla/somefile');
@@ -790,15 +790,15 @@ MERM::Base::Utils - provides functions to assist working with files and dirs, me
 
 =head1 SUBROUTINES
 
-=head2 mk_temp_dir
+=head2 B<mk_temp_dir>
 
 Create a temporary directory in tmp for use in testing
 
-=head2 mk_temp_file
+=head2 B<mk_temp_file>
 
 Create a temporary file in tmp or supplied dir for use in testing
 
-=head2 display_menu
+=head2 B<display_menu>
 
 Display a menu of options
 
@@ -812,7 +812,7 @@ array of menu items
 
 =back
 
-=head2 get_keypress
+=head2 B<get_keypress>
 
 Return a single keypress
 
@@ -830,7 +830,7 @@ default value, if any
 
 =back
 
-=head2 prompt
+=head2 B<prompt>
 
 Prompt user for input
 
@@ -848,7 +848,7 @@ default value, if any
 
 =back
 
-=head2 yes_no_prompt
+=head2 B<yes_no_prompt>
 
 boolean prompt
 
@@ -868,7 +868,7 @@ text to display
 
 Returns: 1 -- yes, 0 -- no
 
-=head2 valid
+=head2 B<valid>
 
 helper function for the prompt
 
@@ -892,11 +892,11 @@ is empty string ok
 
 =back
 
-=head2 banner
+=head2 B<banner>
 
 print a banner
 
-=head2 stat_date
+=head2 B<stat_date>
 
 return the stat date of a file
 
@@ -904,110 +904,110 @@ return the stat date of a file
 or format: YYYY/MM/DD if dir_format is true
 or format: YYYYMM or YYYY/MM if date_type is monthly
 
-=head2 status_for
+=head2 B<status_for>
 
 return hash_ref of file stat info.
 print status_for($file)->{mtime}
 available keys:
-dev ino mode nlink uid gid rdev size atime mtime ctime blksize blocks 
+dev ino mode nlink uid gid rdev size atime mtime ctime blksize blocks
 
-=head2 dir_suffix_slash
+=head2 B<dir_suffix_slash>
 
 ensures a dir ends in a slash by adding one if neccessary
 
-=head2 file_exists
+=head2 B<file_exists>
 
 Tests for file existance.
 
-=head2 file_readable
+=head2 B<file_readable>
 
 Tests for file existence and is readable.
 
-=head2 file_writeable
+=head2 B<file_writeable>
 
 Tests for file existance and is writeable.
 
-=head2 file_executable
+=head2 B<file_executable>
 
 Tests for file existance and is executable.
 
-=head2 file_is_plain
+=head2 B<file_is_plain>
 
 Tests that file is a regular file.
 
-=head2 file_is_symbolic_link
+=head2 B<file_is_symbolic_link>
 
 Tests that file is a symbolic link.
 
-=head2 file_is_pipe
+=head2 B<file_is_pipe>
 
 Tests that file is a named pipe.
 
-=head2 file_is_socket
+=head2 B<file_is_socket>
 
 Tests that file is a socket.
 
-=head2 file_is_block
+=head2 B<file_is_block>
 
 Tests that file is a block special file.
 
-=head2 file_is_character
+=head2 B<file_is_character>
 
 Tests that file is a block character file.
 
-=head2 file_is_empty
+=head2 B<file_is_empty>
 
 Check if the file is zero sized.
 
-=head2 file_size_equals
+=head2 B<file_size_equals>
 
 Check if the file size equals given size.
 
-=head2 file_owner_effective
+=head2 B<file_owner_effective>
 
 Check if the file is owned by the effective uid.
 
-=head2 file_owner_real
+=head2 B<file_owner_real>
 
 Check if the file is owned by the real uid.
 
-=head2 file_is_setuid
+=head2 B<file_is_setuid>
 
 Check if the file has setuid bit set.
 
-=head2 file_is_setgid
+=head2 B<file_is_setgid>
 
 Check if the file has setgid bit set.
 
-=head2 file_is_sticky
+=head2 B<file_is_sticky>
 
 Check if the file has sticky bit set.
 
-=head2 file_is_ascii
+=head2 B<file_is_ascii>
 
 Check if the file is an ASCII or UTF-8 text file (heuristic guess).
 
-=head2 file_is_binary
+=head2 B<file_is_binary>
 
 Check if the file is a "binary" file (opposite of file_is_ascii).
 
-=head2 dir_exists
+=head2 B<dir_exists>
 
 Tests for dir existance.
 
-=head2 dir_readable
+=head2 B<dir_readable>
 
 Tests for dir existance and is readable.
 
-=head2 dir_writeable
+=head2 B<dir_writeable>
 
 Tests for dir existance and is writeable.
 
-=head2 dir_executable
+=head2 B<dir_executable>
 
 Tests for dir existance and is exacutable.
 
-=head2 _define_named_constants
+=head2 B<_define_named_constants>
 
 Define named constants as Readonly.
 
@@ -1017,15 +1017,15 @@ Matt Martini, C<< <matt at imaginarywave.com> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-merm-base at rt.cpan.org>, or through
-the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MERM-Base>.  I will be notified, and then you'll
+Please report any bugs or feature requests to C<bug-dev-util at rt.cpan.org>, or through
+the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc MERM::Base::Utils
+    perldoc Dev::Util::Utils
 
 You can also look for information at:
 
@@ -1033,19 +1033,19 @@ You can also look for information at:
 
 =item * RT: CPAN's request tracker (report bugs here)
 
-L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=MERM-Base>
+L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=Dev-Util>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
-L<http://annocpan.org/dist/MERM-Base>
+L<http://annocpan.org/dist/Dev-Util>
 
 =item * CPAN Ratings
 
-L<https://cpanratings.perl.org/d/MERM-Base>
+L<https://cpanratings.perl.org/d/Dev-Util>
 
 =item * Search CPAN
 
-L<https://metacpan.org/release/MERM-Base>
+L<https://metacpan.org/release/Dev-Util>
 
 =back
 

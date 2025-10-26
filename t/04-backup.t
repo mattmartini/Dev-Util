@@ -3,8 +3,8 @@
 use Test2::V0;
 use lib 'lib';
 
-use MERM::Base::Syntax;
-use MERM::Base qw(::Utils ::Backup);
+use Dev::Util::Syntax;
+use Dev::Util qw(::Utils ::Backup);
 use File::Copy;
 
 plan tests => 6;

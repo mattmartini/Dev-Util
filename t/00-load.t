@@ -10,11 +10,11 @@ plan tests => 36;
 
 BEGIN {
     my @modules = qw(
-        MERM::Base
-        MERM::Base::Syntax
-        MERM::Base::Utils
-        MERM::Base::OS
-        MERM::Base::Backup
+        Dev::Util
+        Dev::Util::Syntax
+        Dev::Util::Utils
+        Dev::Util::OS
+        Dev::Util::Backup
     );
 
     foreach my $module (@modules) {
@@ -69,7 +69,7 @@ BEGIN {
     }
 }
 
-my $module_version = version->parse(qq($MERM::Base::VERSION))->stringify;
-diag("Testing MERM::Base $module_version");
+my $module_version = version->parse(qq($Dev::Util::VERSION))->stringify;
+diag("Testing Dev::Util $module_version");
 diag("Perl $PERL_VERSION, $EXECUTABLE_NAME");
 
