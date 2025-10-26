@@ -11,7 +11,7 @@ use open qw(:std :utf8);
 use Import::Into;
 use Module::Runtime;
 
-use version; our $VERSION = version->declare("v1.1.6");
+use version; our $VERSION = version->declare("v2.0.7");
 
 sub importables {
     my ($class) = @_;
@@ -52,7 +52,7 @@ Dev::Util::Syntax - Provide consistent feature setup.
 
 =head1 VERSION
 
-Version v1.1.6
+Version v2.0.7
 
 =head1 SYNOPSIS
 

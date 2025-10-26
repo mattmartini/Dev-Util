@@ -6,7 +6,7 @@ use warnings;
 use Carp;
 use lib 'lib';
 
-use version; our $VERSION = version->declare("v1.1.6");
+use version; our $VERSION = version->declare("v2.0.7");
 
 use Exporter   qw( );
 use List::Util qw( uniq );
@@ -56,7 +56,7 @@ Dev::Util - Base modules for Perl Development
 
 =head1 VERSION
 
-Version v1.1.6
+Version v2.0.7
 
 =head1 SYNOPSIS
 
