@@ -13,8 +13,8 @@
 ########################################
 #      Requirements and Packages       #
 ########################################
-use MERM::Base::Syntax;
-use MERM::Base qw(::Backup);
+use Dev::Util::Syntax;
+use Dev::Util qw(::Backup);
 
 use File::Basename;
 use Term::ANSIColor;
@@ -28,7 +28,7 @@ $Term::ANSIColor::AUTORESET = 1;
 ########################################
 
 #check BUDIR env var for sanity
-$MERM::Base::Backup::BACKUPDIR = $ENV{ BUDIR } if ( $ENV{ BUDIR } );
+$Dev::Util::Backup::BACKUPDIR = $ENV{ BUDIR } if ( $ENV{ BUDIR } );
 
 # $Backup::BACKUPDIR = $ENV{BUDIR} if($ENV{BUDIR});
 
