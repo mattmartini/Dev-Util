@@ -65,16 +65,6 @@ our %EXPORT_TAGS = (
                                   ipc_run_s
                               )
                             ],
-
-                    named_constants => [ qw(
-                                             $EMPTY_STR
-                                             $SPACE
-                                             $SINGLE_QUOTE
-                                             $DOUBLE_QUOTE
-                                             $COMMA
-                                         )
-                                       ]
-
                    );
 
 # add all the other ":class" tags to the ":all" class, deleting duplicates
@@ -84,16 +74,6 @@ our %EXPORT_TAGS = (
         foreach keys %EXPORT_TAGS;
 }
 Exporter::export_ok_tags('all');
-
-sub _define_named_constants {
-    Readonly our $EMPTY_STR    => q{};
-    Readonly our $SPACE        => q{ };
-    Readonly our $SINGLE_QUOTE => q{'};
-    Readonly our $DOUBLE_QUOTE => q{"};
-    Readonly our $COMMA        => q{,};
-    return;
-}
-_define_named_constants();
 
 sub mk_temp_dir {
 
@@ -770,22 +750,6 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 
 =back
 
-=item B<:named_constants>
-
-=over 8
-
-=item $EMPTY_STR
-
-=item $SPACE
-
-=item $SINGLE_QUOTE
-
-=item $DOUBLE_QUOTE
-
-=item $COMMA
-
-=back
-
 =back
 
 =head1 SUBROUTINES
@@ -1006,10 +970,6 @@ Tests for dir existance and is writeable.
 =head2 B<dir_executable>
 
 Tests for dir existance and is exacutable.
-
-=head2 B<_define_named_constants>
-
-Define named constants as Readonly.
 
 =head1 AUTHOR
 
