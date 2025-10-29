@@ -1,8 +1,42 @@
-# Changelog for MERM::Base
+# Changelog for Dev::Util
 
 All notable changes to this project will be documented in this file.
 
-## [version/v2.0.7] - 2025-10-25
+## [unreleased]
+
+### ⚙️ Miscellaneous Tasks
+
+- *(merge)* Merge branch 'devutil'
+
+### 📚 Documentation
+
+- *(module)* Update manifest
+
+## [version/v2.0.7] - 2025-10-26
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* Bump version major level
+
+### 🚜 Refactor
+
+- *(module)* [**breaking**] Begin conversion to Dev::Util from MERM::Base
+- *(module)* [**breaking**] Convert Makefile.PL
+- *(module)* [**breaking**] Convert cliff toml
+- *(module)* [**breaking**] Convert example programs
+- *(module)* [**breaking**] Convert lib dir name
+- *(module)* [**breaking**] Convert pm modules
+- *(module)* [**breaking**] Convert tests
+
+### 🧪 Testing
+
+- *(prereqs)* Update list of required modules
+
+### 📚 Documentation
+
+- *(changelog)* Update changelog
+
+## [version/v1.1.6] - 2025-10-25
 
 ### ⚙️ Miscellaneous Tasks
 

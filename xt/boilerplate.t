@@ -54,6 +54,7 @@ TODO: {
     module_boilerplate_ok('lib/Dev/Util/Utils.pm');
     module_boilerplate_ok('lib/Dev/Util/OS.pm');
     module_boilerplate_ok('lib/Dev/Util/Backup.pm');
+    module_boilerplate_ok('lib/Dev/Util/Const.pm');
 
 }
 
