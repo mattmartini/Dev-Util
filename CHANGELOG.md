@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 
 - *(module)* Update manifest
 
-## [version/v2.0.7] - 2025-10-26
+## [version/v2.1.6] - 2025-10-26
 
 ### ⚙️ Miscellaneous Tasks
 
