@@ -96,6 +96,24 @@ are retained for future expansion.
 
 =back
 
+=head1 CONSTANTS
+
+These constants are defined as readonly:
+
+=over4
+
+=item C<$EMPTY_STR = q{};>
+
+=item C<$SPACE = q{ };>
+
+=item C<$SINGLE_QUOTE = q{'};>
+
+=item C<$DOUBLE_QUOTE = q{"};>
+
+=item C<$COMMA = q{,};>
+
+=back
+
 =head1 SUBROUTINES
 
 There are no public subroutines.
