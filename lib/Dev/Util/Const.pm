@@ -100,7 +100,7 @@ are retained for future expansion.
 
 These constants are defined as readonly:
 
-=over4
+=over 4
 
 =item C<$EMPTY_STR = q{};>
 
