@@ -13,58 +13,21 @@ use IPC::Cmd        qw[can_run run];
 our $VERSION = version->declare("v2.1.6");
 
 our %EXPORT_TAGS = (
-
-                    ftypes => [ qw(
-                                    file_is_plain
-                                    file_is_symbolic_link
-                                    file_is_pipe
-                                    file_is_socket
-                                    file_is_block
-                                    file_is_character
-                                )
-                              ],
-
-                    fattr => [ qw(
-                                   file_exists
-                                   file_readable
-                                   file_writeable
-                                   file_executable
-                                   file_is_empty
-                                   file_size_equals
-                                   file_owner_effective
-                                   file_owner_real
-                                   file_is_setuid
-                                   file_is_setgid
-                                   file_is_sticky
-                                   file_is_ascii
-                                   file_is_binary
+                     misc => [ qw(
+                                   mk_temp_dir
+                                   mk_temp_file
+                                   display_menu
+                                   get_keypress
+                                   prompt
+                                   yes_no_prompt
+                                   valid
+                                   banner
+                                   stat_date
+                                   status_for
+                                   ipc_run_l
+                                   ipc_run_s
                                )
                              ],
-
-                    dirs => [ qw(
-                                  dir_exists
-                                  dir_readable
-                                  dir_writeable
-                                  dir_executable
-                                  dir_suffix_slash
-                              )
-                            ],
-
-                    misc => [ qw(
-                                  mk_temp_dir
-                                  mk_temp_file
-                                  display_menu
-                                  get_keypress
-                                  prompt
-                                  yes_no_prompt
-                                  valid
-                                  banner
-                                  stat_date
-                                  status_for
-                                  ipc_run_l
-                                  ipc_run_s
-                              )
-                            ],
                    );
 
 # add all the other ":class" tags to the ":all" class, deleting duplicates
@@ -263,295 +226,6 @@ sub status_for {
     # usage: print status_for($file)->{mtime};
 }
 
-sub dir_suffix_slash {
-
-    # add a trailing slash to dir name if none exists
-    my $dir = shift;
-
-    $dir .= ( substr( $dir, -1, 1 ) eq '/' ) ? '' : '/';
-    return $dir;
-}
-
-sub file_exists {
-    my $file = shift;
-
-    if ( -e $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_readable {
-    my $file = shift;
-
-    if ( -e -r $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_writeable {
-    my $file = shift;
-
-    if ( -e -w $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_executable {
-    my $file = shift;
-
-    if ( -e -x $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_plain {
-    my $file = shift;
-
-    if ( -e -f $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_symbolic_link {
-    my $file = shift;
-
-    if ( -e -l $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_pipe {
-    my $file = shift;
-
-    if ( -e -p $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_socket {
-    my $file = shift;
-
-    if ( -e -S $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_block {
-    my $file = shift;
-
-    if ( -e -b $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_character {
-    my $file = shift;
-
-    if ( -e -c $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_empty {
-    my $file = shift;
-
-    if ( -e -z $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_size_equals {
-    my $file = shift;
-    my $size = shift;
-
-    unless ( file_exists($file) ) { return 0; }
-
-    my $file_size = -s $file;
-    if ( $file_size == $size ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_owner_effective {
-    my $file = shift;
-
-    if ( -e -o $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_owner_real {
-    my $file = shift;
-
-    if ( -e -O $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_setuid {
-    my $file = shift;
-
-    if ( -e -u $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_setgid {
-    my $file = shift;
-
-    if ( -e -g $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_sticky {
-    my $file = shift;
-
-    if ( -e -k $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_ascii {
-    my $file = shift;
-
-    if ( -e -T $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_binary {
-    my $file = shift;
-
-    if ( -e -B $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub dir_exists {
-    my $dir = shift;
-
-    if ( -e -d $dir ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub dir_readable {
-    my $dir = shift;
-
-    if ( -e -d -r $dir ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub dir_writeable {
-    my $dir = shift;
-
-    if ( -e -d -w $dir ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub dir_executable {
-    my $dir = shift;
-
-    if ( -e -d -x $dir ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
 # execute the cmd and return array of output or undef on failure
 sub ipc_run_l {
     my ($arg_ref) = @_;
@@ -619,26 +293,8 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 
     use Dev::Util::Utils;
 
-    my $fexists  = file_exists('/bla/somefile');
-    my $canreadf  = file_readable('/bla/somefile');
-    my $canwritef = file_writeable('/bla/somefile');
-    my $canexecf = file_executable('/bla/somefile');
-
-    my $isemptyfile = file_is_empty('/bla/somefile');
-    my $fileissize = file_size_equals('/bla/somefile', $number_of_bytes);
-
-    my $isplainfile = file_is_plain('/bla/somefile');
-    my $issymlink = file_is_symbolic_link('/bla/somefile');
-    ...
-
-    my $dexists  = dir_exists('/somedir');
-    my $canreadd  = dir_readable('/somedir');
-    my $canwrited = dir_writeable('/somedir');
-
     my $td = mk_temp_dir();
     my $tf = mk_temp_file($td);
-
-    my $slash_added_dir = dir_suffix_slash('/dir/path/no/slash');
 
     my $file_date     = stat_date( $test_file, 0, 'daily' );    # 20240221
     my $file_date     = stat_date( $test_file, 1, 'monthly' );  # 2024/02
@@ -653,72 +309,6 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 =head1 EXPORT_TAGS
 
 =over 4
-
-=item B<:ftypes>
-
-=over 8
-
-=item file_is_plain
-
-=item file_is_symbolic_link
-
-=item file_is_pipe
-
-=item file_is_socket
-
-=item file_is_block
-
-=item file_is_character
-
-=back
-
-=item B<:fattr>
-
-=over 8
-
-=item file_exists
-
-=item file_readable
-
-=item file_writeable
-
-=item file_executable
-
-=item file_is_empty
-
-=item file_size_equals
-
-=item file_owner_effective
-
-=item file_owner_real
-
-=item file_is_setuid
-
-=item file_is_setgid
-
-=item file_is_sticky
-
-=item file_is_ascii
-
-=item file_is_binary
-
-=back
-
-=item B<:dirs>
-
-=over 8
-
-=item dir_exists
-
-=item dir_readable
-
-=item dir_writeable
-
-=item dir_executable
-
-=item dir_suffix_slash
-
-=back
 
 =item B<:misc>
 
@@ -875,101 +465,12 @@ print status_for($file)->{mtime}
 available keys:
 dev ino mode nlink uid gid rdev size atime mtime ctime blksize blocks
 
-=head2 B<dir_suffix_slash>
+=head2 B<ipc_run_l>
+Run an external program and return it's output.
 
-ensures a dir ends in a slash by adding one if neccessary
 
-=head2 B<file_exists>
-
-Tests for file existance.
-
-=head2 B<file_readable>
-
-Tests for file existence and is readable.
-
-=head2 B<file_writeable>
-
-Tests for file existance and is writeable.
-
-=head2 B<file_executable>
-
-Tests for file existance and is executable.
-
-=head2 B<file_is_plain>
-
-Tests that file is a regular file.
-
-=head2 B<file_is_symbolic_link>
-
-Tests that file is a symbolic link.
-
-=head2 B<file_is_pipe>
-
-Tests that file is a named pipe.
-
-=head2 B<file_is_socket>
-
-Tests that file is a socket.
-
-=head2 B<file_is_block>
-
-Tests that file is a block special file.
-
-=head2 B<file_is_character>
-
-Tests that file is a block character file.
-
-=head2 B<file_is_empty>
-
-Check if the file is zero sized.
-
-=head2 B<file_size_equals>
-
-Check if the file size equals given size.
-
-=head2 B<file_owner_effective>
-
-Check if the file is owned by the effective uid.
-
-=head2 B<file_owner_real>
-
-Check if the file is owned by the real uid.
-
-=head2 B<file_is_setuid>
-
-Check if the file has setuid bit set.
-
-=head2 B<file_is_setgid>
-
-Check if the file has setgid bit set.
-
-=head2 B<file_is_sticky>
-
-Check if the file has sticky bit set.
-
-=head2 B<file_is_ascii>
-
-Check if the file is an ASCII or UTF-8 text file (heuristic guess).
-
-=head2 B<file_is_binary>
-
-Check if the file is a "binary" file (opposite of file_is_ascii).
-
-=head2 B<dir_exists>
-
-Tests for dir existance.
-
-=head2 B<dir_readable>
-
-Tests for dir existance and is readable.
-
-=head2 B<dir_writeable>
-
-Tests for dir existance and is writeable.
-
-=head2 B<dir_executable>
-
-Tests for dir existance and is exacutable.
+=head2 B<ipc_run_s>
+Run an external program and return the status of it's execution.
 
 =head1 AUTHOR
 

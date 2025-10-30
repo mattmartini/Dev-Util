@@ -4,6 +4,8 @@ coverage_report.sh
 examples/bu
 lib/Dev/Util.pm
 lib/Dev/Util/Backup.pm
+lib/Dev/Util/Const.pm
+lib/Dev/Util/File.pm
 lib/Dev/Util/OS.pm
 lib/Dev/Util/Syntax.pm
 lib/Dev/Util/Utils.pm
@@ -18,6 +20,8 @@ t/01-syntax.t
 t/02-utils.t
 t/03-os.t
 t/04-backup.t
+t/05-const.t
+t/06-file.t
 t/perlcritic.t
 t/perlcriticrc
 t/perltidy.t
