@@ -1,11 +1,10 @@
 #!/usr/bin/env perl
 
 use 5.018;
-use strict;
-use warnings;
-use Test::More;
+use Test2::V0;
+use Test2::Require::AuthorTesting;
 
-plan tests => 7;
+plan tests => 8;
 
 sub not_in_file_ok {
     my ( $filename, %regex ) = @_;
@@ -21,6 +20,7 @@ sub not_in_file_ok {
             }
         }
     }
+    close $fh;
 
     if (%violated) {
         fail("$filename contains boilerplate text");
@@ -29,6 +29,7 @@ sub not_in_file_ok {
     else {
         pass("$filename contains no boilerplate text");
     }
+    return;
 }
 
 sub module_boilerplate_ok {
@@ -38,16 +39,17 @@ sub module_boilerplate_ok {
                     'boilerplate description' => qr/Quick summary of what the module/,
                     'stub function definition' => qr/function[12]/,
                   );
+    return;
 }
 
-TODO: {
-    local $TODO = "Need to replace the boilerplate text";
+todo 'Need to replace the boilerplate text' => sub {
 
     not_in_file_ok(README => "The README is used..." => qr/The README is used/,
                    "'version information here'" => qr/to provide version information/,
                   );
 
-    not_in_file_ok( 'CHANGELOG.md' => "placeholder date/time" => qr(Date/time) );
+    not_in_file_ok(
+                        'CHANGELOG.md' => "placeholder date/time" => qr(Date/time) );
 
     module_boilerplate_ok('lib/Dev/Util.pm');
     module_boilerplate_ok('lib/Dev/Util/Syntax.pm');
@@ -56,5 +58,5 @@ TODO: {
     module_boilerplate_ok('lib/Dev/Util/Backup.pm');
     module_boilerplate_ok('lib/Dev/Util/Const.pm');
 
-}
+};
 
