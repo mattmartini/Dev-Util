@@ -6,7 +6,7 @@ use warnings;
 use version;
 use Test::More;
 
-plan tests => 38;
+plan tests => 40;
 
 BEGIN {
     my @modules = qw(
@@ -16,6 +16,7 @@ BEGIN {
         Dev::Util::OS
         Dev::Util::Backup
         Dev::Util::Const
+        Dev::Util::File
     );
 
     foreach my $module (@modules) {
