@@ -4,12 +4,6 @@ use lib 'lib';
 use Dev::Util::Syntax;
 use Exporter qw(import);
 
-use File::Temp;
-use Term::ReadKey;
-use Term::ANSIColor;
-use IO::Interactive qw(is_interactive);
-use IPC::Cmd        qw[can_run run];
-
 our $VERSION = version->declare("v2.1.6");
 
 our %EXPORT_TAGS = (

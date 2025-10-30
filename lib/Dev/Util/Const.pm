@@ -52,7 +52,7 @@ Version v2.1.6
 
 =head1 SYNOPSIS
 
-Dev::Util::Const - Defines named constants as Readonly, based on best practices. 
+Dev::Util::Const - Defines named constants as Readonly, based on best practices.
 This idea comes from B<Perl Best Practices> by Damian Conway I<pg. 56>.
 
     use Dev::Util::Const;
@@ -69,7 +69,7 @@ This idea comes from B<Perl Best Practices> by Damian Conway I<pg. 56>.
 =head2 Note
 
 The purpose of this module is to define the named constants.  As such the constants
-are exported by default.  
+are exported by default.
 
 The second and third examples above work but at the present time are superfluous. They
 are retained for future expansion.
@@ -125,7 +125,7 @@ Matt Martini, C<< <matt at imaginarywave.com> >>
 =head1 BUGS
 
 Please report any bugs or feature requests to C<bug-dev-util at rt.cpan.org>, or through
-the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util>.  I will 
+the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util>.  I will
 be notified, and then you'll automatically be notified of progress on your bug as I make changes.
 
 =head1 SUPPORT
