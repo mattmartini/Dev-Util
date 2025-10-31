@@ -1,7 +1,15 @@
 CHANGELOG.md
 cliff.toml
 coverage_report.sh
+docs/Dev::Util.md
+docs/Dev::Util::Backup.md
+docs/Dev::Util::Const.md
+docs/Dev::Util::File.md
+docs/Dev::Util::OS.md
+docs/Dev::Util::Syntax.md
+docs/Dev::Util::Utils.md
 examples/bu
+INSTALL.md
 lib/Dev/Util.pm
 lib/Dev/Util/Backup.pm
 lib/Dev/Util/Const.pm
@@ -30,7 +38,6 @@ VERSION
 xt/00-report-prereqs.t
 xt/boilerplate.t
 xt/kwalitee.t
-xt/manifest.t
 xt/manifest_check.t
 xt/pod-coverage.t
 xt/pod.t

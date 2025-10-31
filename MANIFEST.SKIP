@@ -27,6 +27,7 @@
 ^\.yath.rc
 \..*-yath-persist.json
 \.test_info
+^scratch
 
 # Finder artifacts
 \B\.DS_Store
