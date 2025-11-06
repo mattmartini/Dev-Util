@@ -332,8 +332,6 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 
 =item yes_no_prompt
 
-=item valid
-
 =item banner
 
 =item stat_date
@@ -350,45 +348,32 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 
 =head1 SUBROUTINES
 
-=head2 B<mk_temp_dir>
+=head2 B<mk_temp_dir(DIR)>
 
-Create a temporary directory in tmp for use in testing
+Create a temporary directory in the supplied parent dir. F</tmp> is the default if no dir given.
 
-=head2 B<mk_temp_file>
+C<DIR> a string or variable pointing to a directory.
 
-Create a temporary file in tmp or supplied dir for use in testing
+    my $td = mk_temp_dir();
 
-=head2 B<display_menu>
+=head2 B<mk_temp_file(DIR)>
 
-Display a menu of options
+Create a temporary file in the supplied dir. F</tmp> is the default if no dir given.
 
-=head3 settings
+    my $tf = mk_temp_file($td);
 
-=over 4
+=head2 B<display_menu(MSG,ITEMS)>
 
-=item choices
+Display a simple menu of options. The choices come from an array.  Returns the index of the choice.
 
-array of menu items
+C<MSG> a string or variable containing the prompt message to display.
 
-=back
+C<ITEMS> a reference to an array of the choices to list
 
-=head2 B<get_keypress>
+    my $msg   = 'Pick one of the suits: ';
+    my @items = qw( hearts clubs spades diamonds );
+    display_menu( $msg, \@items );
 
-Return a single keypress
-
-=head3 settings
-
-=over 4
-
-=item msg
-
-text to display
-
-=item default
-
-default value, if any
-
-=back
 
 =head2 B<prompt>
 
@@ -428,33 +413,14 @@ text to display
 
 Returns: 1 -- yes, 0 -- no
 
-=head2 B<valid>
-
-helper function for the prompt
-
-returns undef if selection is valid , errmsg if error
-
-=head3 Params
-
-=over 4
-
-=item str
-
-user response
-
-=item valid
-
-either ref_array of valid answers or ref_sub that returns true/false
-
-=item okempty
-
-is empty string ok
-
-=back
 
 =head2 B<banner>
 
-print a banner
+Print a banner message on the supplied file handle (defaults to C<STDOUT>)
+
+    banner( "Hello World", $outputFH );
+
+C<$outputFH> is a file handle where the banner will be output
 
 =head2 B<stat_date>
 
