@@ -4,7 +4,7 @@ use Test2::V0;
 use lib 'lib';
 
 use Dev::Util::Syntax;
-use Dev::Util qw(::Utils ::Backup);
+use Dev::Util qw(::Utils ::Backup ::File);
 use File::Copy;
 
 plan tests => 6;

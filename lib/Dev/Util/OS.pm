@@ -4,7 +4,7 @@ use lib 'lib';
 use Dev::Util::Syntax;
 use Exporter qw(import);
 
-our $VERSION = version->declare("v2.0.7");
+our $VERSION = version->declare("v2.1.6");
 
 our @EXPORT_OK = qw(
     get_os
@@ -69,7 +69,7 @@ Dev::Util::OS - OS discovery and functions
 
 =head1 VERSION
 
-Version v2.0.7
+Version v2.1.6
 
 =head1 SYNOPSIS
 

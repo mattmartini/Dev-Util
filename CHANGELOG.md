@@ -1,8 +1,80 @@
-# Changelog for MERM::Base
+# Changelog for Dev::Util
 
 All notable changes to this project will be documented in this file.
 
-## [version/v2.0.7] - 2025-10-25
+## [unreleased]
+
+### 🐛 Bug Fixes
+
+- *(pod)* Fix typo in pod
+
+### 🚜 Refactor
+
+- *(utils)* [**breaking**] Move file and dir functions to new module: Dev::Util::File
+- *(use)* Remove un-needed modules
+- *(test)* Modernize Author tests
+
+### 🧪 Testing
+
+- *(xt)* Include xt tests when running yath
+- *(perlcritic)* Update perl critic test
+- *(load)* Include Dev::Util::File in load test
+
+### 📚 Documentation
+
+- *(constants)* Define the constants
+- *(install)* Add installation documentation
+
+### 🚧 Build
+
+- *(git)* Update git ignore file
+- *(manifest)* Exclude scratch dir from manifest
+
+## [version/v2.1.6] - 2025-10-29
+
+### ⚙️ Miscellaneous Tasks
+
+- *(merge)* Merge branch 'devutil'
+- *(version)* Bump version minor level
+
+### 🚜 Refactor
+
+- *(utils)* [**breaking**] Move names constants to separate module, Dev::Util::Const
+
+### 🧪 Testing
+
+- *(const)* New tests for Const module
+- *(module)* Include new Const module in loading tests
+
+### 📚 Documentation
+
+- *(module)* Update manifest
+
+## [version/v2.0.7] - 2025-10-26
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* Bump version major level
+
+### 🚜 Refactor
+
+- *(module)* [**breaking**] Begin conversion to Dev::Util from MERM::Base
+- *(module)* [**breaking**] Convert Makefile.PL
+- *(module)* [**breaking**] Convert cliff toml
+- *(module)* [**breaking**] Convert example programs
+- *(module)* [**breaking**] Convert lib dir name
+- *(module)* [**breaking**] Convert pm modules
+- *(module)* [**breaking**] Convert tests
+
+### 🧪 Testing
+
+- *(prereqs)* Update list of required modules
+
+### 📚 Documentation
+
+- *(changelog)* Update changelog
+
+## [version/v1.1.6] - 2025-10-25
 
 ### ⚙️ Miscellaneous Tasks
 

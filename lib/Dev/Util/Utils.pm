@@ -8,73 +8,26 @@ use File::Temp;
 use Term::ReadKey;
 use Term::ANSIColor;
 use IO::Interactive qw(is_interactive);
+use IO::Prompt      qw();                 # don't import prompt
 use IPC::Cmd        qw[can_run run];
 
-our $VERSION = version->declare("v2.0.7");
+our $VERSION = version->declare("v2.1.6");
 
 our %EXPORT_TAGS = (
-
-                    ftypes => [ qw(
-                                    file_is_plain
-                                    file_is_symbolic_link
-                                    file_is_pipe
-                                    file_is_socket
-                                    file_is_block
-                                    file_is_character
-                                )
-                              ],
-
-                    fattr => [ qw(
-                                   file_exists
-                                   file_readable
-                                   file_writeable
-                                   file_executable
-                                   file_is_empty
-                                   file_size_equals
-                                   file_owner_effective
-                                   file_owner_real
-                                   file_is_setuid
-                                   file_is_setgid
-                                   file_is_sticky
-                                   file_is_ascii
-                                   file_is_binary
+                     misc => [ qw(
+                                   mk_temp_dir
+                                   mk_temp_file
+                                   display_menu
+                                   prompt
+                                   yes_no_prompt
+                                   banner
+                                   stat_date
+                                   status_for
+                                   ipc_run_l
+                                   ipc_run_s
+                                   read_list
                                )
                              ],
-
-                    dirs => [ qw(
-                                  dir_exists
-                                  dir_readable
-                                  dir_writeable
-                                  dir_executable
-                                  dir_suffix_slash
-                              )
-                            ],
-
-                    misc => [ qw(
-                                  mk_temp_dir
-                                  mk_temp_file
-                                  display_menu
-                                  get_keypress
-                                  prompt
-                                  yes_no_prompt
-                                  valid
-                                  banner
-                                  stat_date
-                                  status_for
-                                  ipc_run_l
-                                  ipc_run_s
-                              )
-                            ],
-
-                    named_constants => [ qw(
-                                             $EMPTY_STR
-                                             $SPACE
-                                             $SINGLE_QUOTE
-                                             $DOUBLE_QUOTE
-                                             $COMMA
-                                         )
-                                       ]
-
                    );
 
 # add all the other ":class" tags to the ":all" class, deleting duplicates
@@ -85,19 +38,9 @@ our %EXPORT_TAGS = (
 }
 Exporter::export_ok_tags('all');
 
-sub _define_named_constants {
-    Readonly our $EMPTY_STR    => q{};
-    Readonly our $SPACE        => q{ };
-    Readonly our $SINGLE_QUOTE => q{'};
-    Readonly our $DOUBLE_QUOTE => q{"};
-    Readonly our $COMMA        => q{,};
-    return;
-}
-_define_named_constants();
-
 sub mk_temp_dir {
-
-    my $temp_dir = File::Temp->newdir( DIR     => '/tmp',
+    my $dir = shift || '/tmp';
+    my $temp_dir = File::Temp->newdir( DIR     => $dir,
                                        CLEANUP => 1 );
 
     return ($temp_dir);
@@ -115,103 +58,86 @@ sub mk_temp_file {
     print $temp_file 'super blood wolf moon' . "\n";
 
     return ($temp_file);
-}    # mk_temp_file
+}
 
 sub display_menu {
     my $msg         = shift;
-    my (@choices)   = @_;
-    my $num_choices = $#choices;
-    if ( $num_choices > 36 ) { die "Error: Too many choices in menu.\n" }
-    my $j;
-    for ( my $i = 0; $i <= $num_choices; $i++ ) {
-        if ( $i < 10 ) {
-            $j = $i;
-        }
-        else {
-            $j = chr( 87 + $i );
-        }
-        printf( "  %s - %s\n", $j, $choices[$i] );
-    }
+    my $choices_ref = shift;
 
-    print colored ( $msg, 'blue' );
-    return get_keypress($num_choices);
-}
+    my %choice_hash = map { $choices_ref->[$_] => $_ } 0 .. $#{ $choices_ref };
 
-sub get_keypress {
-    my $num_choices = shift
-        || die "You must provide a max number of choices.\n";
-    open( my $TTY, '<', "/dev/tty" ) or croak "Can't read from tty.\n";
-    ReadMode "raw";
-    my $key  = ReadKey 0, $TTY;
-    my $kval = ord($key) - 48;
-    ReadMode "normal";
-    close($TTY);
-    print "$key\n";
+    my $chosen = IO::Prompt::prompt(
+                                     $msg,
+                                     -onechar,
+                                     -menu    => $choices_ref,
+                                     -default => 'a'
+                                   );
 
-    if ( $kval == -38 ) { $kval = 0; }
-    if ( $kval >= 49 )  { $kval -= 39; }
-    if ( $kval < 0 || $kval > $num_choices ) {
-        die "Invalid choice.\n";
-    }
-    return $kval;
+    return $choice_hash{ $chosen };
 }
 
 sub prompt {
-    my ( $msg, $default ) = @_;
-    my $str;
+    my ($settings) = @_;
 
-    $msg .= " [$default]" if ($default);
+    my $msg = $settings->{ prepend };
+    $msg .= $settings->{ text } || '';
+    $msg .= " [$settings->{default}]" if ( defined $settings->{ default } );
+    $msg .= $settings->{ append };
 
-    while ( ( $str ne $default ) && !$str ) {
-        print "$msg ? ";
-        $str = <STDIN>;
-        chomp $str;
-        $str = ($default) ? $default : $str unless ($str);
+    my $prompt_args = { -prompt => $msg };
+    if ( $settings->{ noecho } ) { $prompt_args->{ -echo } = '' }
+    ## if ( $settings->{ okempty } ) { ... }    # TODO: figure out okempty sol'n
+    if ( defined $settings->{ default } ) {
+        $prompt_args->{ -default } = $settings->{ default };
     }
+    if ( defined $settings->{ valid } ) {
+        if ( ref( $settings->{ valid } ) eq 'ARRAY' ) {
+            $prompt_args->{ -menu }     = $settings->{ valid };
+            $prompt_args->{ -one_char } = $msg;
+        }
+        elsif ( ref( $settings->{ valid } ) eq 'CODE' ) {
 
-    return $str;
-}
-
-sub yes_no_prompt {
-    my ( $msg, $default ) = @_;
-    my $str = '';
-
-    if ( defined $default ) {
-        $msg .= ($default) ? ' ([Y]/N)? ' : ' (Y/[N])? ';
-    }
-    else {
-        $msg .= ' (Y/N)? ';
-    }
-
-    while ( $str !~ /[yn]/i ) {
-        print "$msg";
-        $str = <STDIN>;
-        chomp $str;
-        if ( defined $default ) {
-            $str = ($default) ? 'y' : 'n' unless ($str);
+            # $prompt_args->{ -require } = { '%s (dir must exist): ' => \&dir_writable };
+            $prompt_args->{ -require }
+                = { '%s (response not valid): ' => $settings->{ valid } };
+        }
+        else {
+            croak "Validitiy test malformed.\n";
         }
     }
+    my $response = IO::Prompt::prompt($prompt_args);
+    print "\n" if ( exists $settings->{ noecho } );
 
-    return ( $str =~ /y/i ) ? 1 : 0;
+    return $response->{ value };
 }
 
-sub valid {
-    my $str     = shift;
-    my $valid   = shift;
-    my $okempty = shift;
+# TODO: must reverse logic of calls to valid
 
-    return unless ($valid);    #no valid options give, so return undef
+# Maintain API for existing code even thought changing to IO::Prompt
+sub yes_no_prompt {
+    my ($settings) = @_;
+    my $ynd;
 
-    return   if ( !$str && !$okempty );    # return undef if no str and okempty
-    return 1 if ( !$str && $okempty );     # return true if no str and okempty
+    if ( exists $settings->{ default } ) {
+        $ynd = ( $settings->{ default } ) ? ' ([Y]/N)' : ' (Y/[N])';
+    }
+    else {
+        $ynd = ' (Y/N)';
+    }
 
-    #valid is a sub ref -- call it
-    return &$valid($str) if ( ref($valid) eq 'CODE' );
+    my $msg = $settings->{ prepend };
+    $msg .= $settings->{ text } || '';
+    $msg .= $ynd;
+    $msg .= $settings->{ append };
 
-    #default -- simply grep for valid reponse in array ref
-    return 1 if grep { /^$str$/i } @$valid;
-
-    return 0;                              # "Invalid choice"
+    return
+        IO::Prompt::prompt(
+                            $msg,
+                            -onechar,
+                            -default => ( $settings->{ default } ) ? 'Y' : 'N',
+                            -yes_no,
+                            -require => { "Please choose$ynd: " => qr/[YN]/i }
+                          );
 }
 
 sub banner {
@@ -283,295 +209,6 @@ sub status_for {
     # usage: print status_for($file)->{mtime};
 }
 
-sub dir_suffix_slash {
-
-    # add a trailing slash to dir name if none exists
-    my $dir = shift;
-
-    $dir .= ( substr( $dir, -1, 1 ) eq '/' ) ? '' : '/';
-    return $dir;
-}
-
-sub file_exists {
-    my $file = shift;
-
-    if ( -e $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_readable {
-    my $file = shift;
-
-    if ( -e -r $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_writeable {
-    my $file = shift;
-
-    if ( -e -w $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_executable {
-    my $file = shift;
-
-    if ( -e -x $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_plain {
-    my $file = shift;
-
-    if ( -e -f $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_symbolic_link {
-    my $file = shift;
-
-    if ( -e -l $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_pipe {
-    my $file = shift;
-
-    if ( -e -p $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_socket {
-    my $file = shift;
-
-    if ( -e -S $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_block {
-    my $file = shift;
-
-    if ( -e -b $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_character {
-    my $file = shift;
-
-    if ( -e -c $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_empty {
-    my $file = shift;
-
-    if ( -e -z $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_size_equals {
-    my $file = shift;
-    my $size = shift;
-
-    unless ( file_exists($file) ) { return 0; }
-
-    my $file_size = -s $file;
-    if ( $file_size == $size ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_owner_effective {
-    my $file = shift;
-
-    if ( -e -o $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_owner_real {
-    my $file = shift;
-
-    if ( -e -O $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_setuid {
-    my $file = shift;
-
-    if ( -e -u $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_setgid {
-    my $file = shift;
-
-    if ( -e -g $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_sticky {
-    my $file = shift;
-
-    if ( -e -k $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_ascii {
-    my $file = shift;
-
-    if ( -e -T $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub file_is_binary {
-    my $file = shift;
-
-    if ( -e -B $file ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub dir_exists {
-    my $dir = shift;
-
-    if ( -e -d $dir ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub dir_readable {
-    my $dir = shift;
-
-    if ( -e -d -r $dir ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub dir_writeable {
-    my $dir = shift;
-
-    if ( -e -d -w $dir ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
-sub dir_executable {
-    my $dir = shift;
-
-    if ( -e -d -x $dir ) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-    return;
-}
-
 # execute the cmd and return array of output or undef on failure
 sub ipc_run_l {
     my ($arg_ref) = @_;
@@ -619,6 +256,29 @@ sub ipc_run_s {
     return 0;
 }
 
+sub read_list {
+    my $input_file = shift;
+    my $sep        = shift || "\n";
+
+    $sep = undef if ( !wantarray );
+    local $INPUT_RECORD_SEPARATOR = $sep;
+
+    my ( $line, @list );
+
+    open( my $input, '<', $input_file )
+        or die "can't open file, $input_file $!\n";
+    LINE:
+    while ( defined( $line = <$input> ) ) {
+        chomp($line);
+        next LINE if ( $line =~ m|^$| );    # remove blank lines
+        next LINE if ( $line =~ m|^#| );    # remove comments
+        push @list, $line;
+    }
+    close($input);
+
+    return wantarray ? @list : $list[0];
+}
+
 1;    # End of Dev::Util::Utils
 
 =pod
@@ -631,7 +291,7 @@ Dev::Util::Utils - General utility functions for programming
 
 =head1 VERSION
 
-Version v2.0.7
+Version v2.1.6
 
 =head1 SYNOPSIS
 
@@ -639,26 +299,8 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 
     use Dev::Util::Utils;
 
-    my $fexists  = file_exists('/bla/somefile');
-    my $canreadf  = file_readable('/bla/somefile');
-    my $canwritef = file_writeable('/bla/somefile');
-    my $canexecf = file_executable('/bla/somefile');
-
-    my $isemptyfile = file_is_empty('/bla/somefile');
-    my $fileissize = file_size_equals('/bla/somefile', $number_of_bytes);
-
-    my $isplainfile = file_is_plain('/bla/somefile');
-    my $issymlink = file_is_symbolic_link('/bla/somefile');
-    ...
-
-    my $dexists  = dir_exists('/somedir');
-    my $canreadd  = dir_readable('/somedir');
-    my $canwrited = dir_writeable('/somedir');
-
     my $td = mk_temp_dir();
     my $tf = mk_temp_file($td);
-
-    my $slash_added_dir = dir_suffix_slash('/dir/path/no/slash');
 
     my $file_date     = stat_date( $test_file, 0, 'daily' );    # 20240221
     my $file_date     = stat_date( $test_file, 1, 'monthly' );  # 2024/02
@@ -667,78 +309,12 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 
     my $msg    = 'Pick a choice from the list:';
     my @items  = ( 'choice one', 'choice two', 'choice three', );
-    my $choice = display_menu( $msg, @items );
+    my $choice = display_menu( $msg, \@items );
 
 
 =head1 EXPORT_TAGS
 
 =over 4
-
-=item B<:ftypes>
-
-=over 8
-
-=item file_is_plain
-
-=item file_is_symbolic_link
-
-=item file_is_pipe
-
-=item file_is_socket
-
-=item file_is_block
-
-=item file_is_character
-
-=back
-
-=item B<:fattr>
-
-=over 8
-
-=item file_exists
-
-=item file_readable
-
-=item file_writeable
-
-=item file_executable
-
-=item file_is_empty
-
-=item file_size_equals
-
-=item file_owner_effective
-
-=item file_owner_real
-
-=item file_is_setuid
-
-=item file_is_setgid
-
-=item file_is_sticky
-
-=item file_is_ascii
-
-=item file_is_binary
-
-=back
-
-=item B<:dirs>
-
-=over 8
-
-=item dir_exists
-
-=item dir_readable
-
-=item dir_writeable
-
-=item dir_executable
-
-=item dir_suffix_slash
-
-=back
 
 =item B<:misc>
 
@@ -756,8 +332,6 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 
 =item yes_no_prompt
 
-=item valid
-
 =item banner
 
 =item stat_date
@@ -770,65 +344,36 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 
 =back
 
-=item B<:named_constants>
-
-=over 8
-
-=item $EMPTY_STR
-
-=item $SPACE
-
-=item $SINGLE_QUOTE
-
-=item $DOUBLE_QUOTE
-
-=item $COMMA
-
-=back
-
 =back
 
 =head1 SUBROUTINES
 
-=head2 B<mk_temp_dir>
+=head2 B<mk_temp_dir(DIR)>
 
-Create a temporary directory in tmp for use in testing
+Create a temporary directory in the supplied parent dir. F</tmp> is the default if no dir given.
 
-=head2 B<mk_temp_file>
+C<DIR> a string or variable pointing to a directory.
 
-Create a temporary file in tmp or supplied dir for use in testing
+    my $td = mk_temp_dir();
 
-=head2 B<display_menu>
+=head2 B<mk_temp_file(DIR)>
 
-Display a menu of options
+Create a temporary file in the supplied dir. F</tmp> is the default if no dir given.
 
-=head3 settings
+    my $tf = mk_temp_file($td);
 
-=over 4
+=head2 B<display_menu(MSG,ITEMS)>
 
-=item choices
+Display a simple menu of options. The choices come from an array.  Returns the index of the choice.
 
-array of menu items
+C<MSG> a string or variable containing the prompt message to display.
 
-=back
+C<ITEMS> a reference to an array of the choices to list
 
-=head2 B<get_keypress>
+    my $msg   = 'Pick one of the suits: ';
+    my @items = qw( hearts clubs spades diamonds );
+    display_menu( $msg, \@items );
 
-Return a single keypress
-
-=head3 settings
-
-=over 4
-
-=item msg
-
-text to display
-
-=item default
-
-default value, if any
-
-=back
 
 =head2 B<prompt>
 
@@ -868,33 +413,14 @@ text to display
 
 Returns: 1 -- yes, 0 -- no
 
-=head2 B<valid>
-
-helper function for the prompt
-
-returns undef if selection is valid , errmsg if error
-
-=head3 Params
-
-=over 4
-
-=item str
-
-user response
-
-=item valid
-
-either ref_array of valid answers or ref_sub that returns true/false
-
-=item okempty
-
-is empty string ok
-
-=back
 
 =head2 B<banner>
 
-print a banner
+Print a banner message on the supplied file handle (defaults to C<STDOUT>)
+
+    banner( "Hello World", $outputFH );
+
+C<$outputFH> is a file handle where the banner will be output
 
 =head2 B<stat_date>
 
@@ -911,105 +437,15 @@ print status_for($file)->{mtime}
 available keys:
 dev ino mode nlink uid gid rdev size atime mtime ctime blksize blocks
 
-=head2 B<dir_suffix_slash>
+=head2 B<ipc_run_l>
+Run an external program and return it's output.
 
-ensures a dir ends in a slash by adding one if neccessary
 
-=head2 B<file_exists>
+=head2 B<ipc_run_s>
+Run an external program and return the status of it's execution.
 
-Tests for file existance.
-
-=head2 B<file_readable>
-
-Tests for file existence and is readable.
-
-=head2 B<file_writeable>
-
-Tests for file existance and is writeable.
-
-=head2 B<file_executable>
-
-Tests for file existance and is executable.
-
-=head2 B<file_is_plain>
-
-Tests that file is a regular file.
-
-=head2 B<file_is_symbolic_link>
-
-Tests that file is a symbolic link.
-
-=head2 B<file_is_pipe>
-
-Tests that file is a named pipe.
-
-=head2 B<file_is_socket>
-
-Tests that file is a socket.
-
-=head2 B<file_is_block>
-
-Tests that file is a block special file.
-
-=head2 B<file_is_character>
-
-Tests that file is a block character file.
-
-=head2 B<file_is_empty>
-
-Check if the file is zero sized.
-
-=head2 B<file_size_equals>
-
-Check if the file size equals given size.
-
-=head2 B<file_owner_effective>
-
-Check if the file is owned by the effective uid.
-
-=head2 B<file_owner_real>
-
-Check if the file is owned by the real uid.
-
-=head2 B<file_is_setuid>
-
-Check if the file has setuid bit set.
-
-=head2 B<file_is_setgid>
-
-Check if the file has setgid bit set.
-
-=head2 B<file_is_sticky>
-
-Check if the file has sticky bit set.
-
-=head2 B<file_is_ascii>
-
-Check if the file is an ASCII or UTF-8 text file (heuristic guess).
-
-=head2 B<file_is_binary>
-
-Check if the file is a "binary" file (opposite of file_is_ascii).
-
-=head2 B<dir_exists>
-
-Tests for dir existance.
-
-=head2 B<dir_readable>
-
-Tests for dir existance and is readable.
-
-=head2 B<dir_writeable>
-
-Tests for dir existance and is writeable.
-
-=head2 B<dir_executable>
-
-Tests for dir existance and is exacutable.
-
-=head2 B<_define_named_constants>
-
-Define named constants as Readonly.
+=head2 B<read_list>
+read a list from an input file rtn an array of lines
 
 =head1 AUTHOR
 
