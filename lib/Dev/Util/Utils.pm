@@ -58,28 +58,23 @@ sub mk_temp_file {
     print $temp_file 'super blood wolf moon' . "\n";
 
     return ($temp_file);
-}    # mk_temp_file
+}
 
 sub display_menu {
     my $msg         = shift;
-    my (@choices)   = @_;
-    my $num_choices = $#choices;
-    if ( $num_choices > 36 ) { die "Error: Too many choices in menu.\n" }
-    my $j;
-    for ( my $i = 0; $i <= $num_choices; $i++ ) {
-        if ( $i < 10 ) {
-            $j = $i;
-        }
-        else {
-            $j = chr( 87 + $i );
-        }
-        printf( "  %s - %s\n", $j, $choices[$i] );
-    }
+    my $choices_ref = shift;
 
-    print colored ( $msg, 'blue' );
-    return get_keypress($num_choices);
+    my %choice_hash = map { $choices_ref->[$_] => $_ } 0 .. $#{ $choices_ref };
+
+    my $chosen = prompt(
+                         $msg,
+                         -onechar,
+                         -menu    => $choices_ref,
+                         -default => 'a'
+                       );
+
+    return $choice_hash{ $chosen };
 }
-
 
 sub prompt {
     my ( $msg, $default ) = @_;
@@ -295,7 +290,7 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 
     my $msg    = 'Pick a choice from the list:';
     my @items  = ( 'choice one', 'choice two', 'choice three', );
-    my $choice = display_menu( $msg, @items );
+    my $choice = display_menu( $msg, \@items );
 
 
 =head1 EXPORT_TAGS
