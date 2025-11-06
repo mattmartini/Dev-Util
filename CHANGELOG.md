@@ -2,28 +2,70 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [version/v2.12.4] - 2025-11-06
+
+### 🚀 Features
+
+- *(docs)* Add script to make docs for modules
+- *(read_list)* Add read_list function
+- *(mk_tmp_dir)* Add ability to specify temp dir
 
 ### 🐛 Bug Fixes
 
 - *(pod)* Fix typo in pod
+- *(display_menu)* Use prompt from IO::Prompt, not the local one
+
+### ⚙️ Miscellaneous Tasks
+
+- Merge branch 'utils'
+
+* utils: (26 commits)
+  fix(display_menu): Use prompt from IO::Prompt, not the local one
+  docs(pod): Update Pod docs
+  test(valid): Remove tests for deleted function
+  refactor(prompt): Modernize code with IO::Prompt, keeping API
+  refactor(display_menu): Modernize code, use IO::Prompt
+  feat(mk_tmp_dir): Add ability to specify temp dir
+  feat(read_list): Add read_list function
+  refactor(yes_no_prompt): Rewrite function using IO::Prompt
+  refactor: Remove get_keypress and valid functions, and tests
+  docs(markdown): Create markdown docs for modules via make_docs.sh
+  feat(docs): Add script to make docs for modules
+  build(manifest): Exclude scratch dir from manifest
+  fix(pod): Fix typo in pod
+  test(load): Include Dev::Util::File in load test
+  build(git): Update git ignore file
+  test(perlcritic): Update perl critic test
+  test(xt): Include xt tests when running yath
+  docs(install): Add installation documentation
+  refactor(test): Modernize Author tests
+  refactor(use): Remove un-needed modules
+  ...
+- *(version)* Update version to v2.12.4
 
 ### 🚜 Refactor
 
 - *(utils)* [**breaking**] Move file and dir functions to new module: Dev::Util::File
 - *(use)* Remove un-needed modules
 - *(test)* Modernize Author tests
+- Remove get_keypress and valid functions, and tests
+- *(yes_no_prompt)* Rewrite function using IO::Prompt
+- *(display_menu)* Modernize code, use IO::Prompt
+- *(prompt)* Modernize code with IO::Prompt, keeping API
 
 ### 🧪 Testing
 
 - *(xt)* Include xt tests when running yath
 - *(perlcritic)* Update perl critic test
 - *(load)* Include Dev::Util::File in load test
+- *(valid)* Remove tests for deleted function
 
 ### 📚 Documentation
 
 - *(constants)* Define the constants
 - *(install)* Add installation documentation
+- *(markdown)* Create markdown docs for modules via make_docs.sh
+- *(pod)* Update Pod docs
 
 ### 🚧 Build
 

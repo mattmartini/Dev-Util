@@ -8,7 +8,7 @@ use Dev::Util qw(::OS ::Utils ::File);
 
 use Socket;
 
-plan tests => 50;
+plan tests => 55;
 
 #======================================#
 #           Make test files            #
@@ -299,5 +299,45 @@ is( dir_suffix_slash($test_dir_w),
     "dir_suffix_slash - don't change dir if has trailing slash" );
 is( dir_suffix_slash($test_dir_wo),
     $test_dir_w, "dir_suffix_slash - add slash to dir if no trailing slash" );
+
+#======================================#
+#              mk_temp_dir             #
+#======================================#
+
+#======================================#
+#              mk_temp_file            #
+#======================================#
+
+#======================================#
+#              stat_date               #
+#======================================#
+
+system("touch -t  202402201217.23 $tf");
+my $expected_date = '20240220';
+my $file_date     = stat_date($tf);
+is( $file_date, $expected_date, "stat_date - default daily case" );
+
+$expected_date = '2024/02/20';
+$file_date     = stat_date( $tf, 1 );
+is( $file_date, $expected_date, "stat_date - dir_format daily case" );
+
+$expected_date = '202402';
+$file_date     = stat_date( $tf, 0, 'monthly' );
+is( $file_date, $expected_date, "stat_date - default monthly case" );
+
+$expected_date = '2024/02';
+$file_date     = stat_date( $tf, 1, 'monthly' );
+is( $file_date, $expected_date, "stat_date - dir_format monthly case" );
+
+#======================================#
+#              status_for              #
+#======================================#
+
+my $file_mtime = status_for($tf)->{ mtime };
+is( $file_mtime, '1708449443', 'status_for - mtime of file' );
+
+#======================================#
+#              read_list               #
+#======================================#
 
 done_testing;

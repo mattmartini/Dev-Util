@@ -8,7 +8,7 @@ use Dev::Util qw(::OS ::Utils ::File);
 
 use Socket;
 
-plan tests => 13;
+plan tests => 8;
 
 #======================================#
 #                banner                #
@@ -29,30 +29,6 @@ banner( "Hello World", $outputFH );
 close $outputFH;
 
 is( $output, $expected, 'Banner Test' );
-
-# #======================================#
-# #                valid                 #
-# #======================================#
-
-# my @valid    = qw (bee bat bear);
-# my $okempty  = 1;
-# my $good_str = 'bat';
-# my $bad_str  = 'snake';
-
-# is( valid($good_str), undef,
-#     'valid - no valid criteria given returns undef' );
-# is( valid( '', \@valid, $okempty ),
-#     1, 'valid - empty string with okempty given returns true' );
-# is( valid( '', \@valid, 0 ),
-#     undef, 'valid - empty string without okempty given returns undef' );
-# is( valid( $good_str, \@valid, $okempty ),
-#     1, 'valid - good string with okempty given returns true' );
-# is( valid( $good_str, \@valid, 0 ),
-#     1, 'valid - good string without okempty given returns true' );
-# is( valid( $bad_str, \@valid, $okempty ),
-#     0, 'valid - bad string with okempty given returns false' );
-# is( valid( $bad_str, \@valid, 0 ),
-#     0, 'valid - bad string without okempty given returns false' );
 
 #======================================#
 #           Make test files            #
@@ -77,34 +53,6 @@ symlink( $tff, $tsl );
 socket( my $ts, PF_INET, SOCK_STREAM, ( getprotobyname('tcp') )[2] );
 my $trf = '/bin/cat';
 my $dnf = '/dev/null';
-
-#======================================#
-#              stat_date               #
-#======================================#
-
-system("touch -t  202402201217.23 $tf");
-my $expected_date = '20240220';
-my $file_date     = stat_date($tf);
-is( $file_date, $expected_date, "stat_date - default daily case" );
-
-$expected_date = '2024/02/20';
-$file_date     = stat_date( $tf, 1 );
-is( $file_date, $expected_date, "stat_date - dir_format daily case" );
-
-$expected_date = '202402';
-$file_date     = stat_date( $tf, 0, 'monthly' );
-is( $file_date, $expected_date, "stat_date - default monthly case" );
-
-$expected_date = '2024/02';
-$file_date     = stat_date( $tf, 1, 'monthly' );
-is( $file_date, $expected_date, "stat_date - dir_format monthly case" );
-
-#======================================#
-#              status_for              #
-#======================================#
-
-my $file_mtime = status_for($tf)->{ mtime };
-is( $file_mtime, '1708449443', 'status_for - mtime of file' );
 
 #======================================#
 #             display_menu             #

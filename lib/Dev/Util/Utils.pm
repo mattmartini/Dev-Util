@@ -15,17 +15,12 @@ our $VERSION = version->declare("v2.12.4");
 
 our %EXPORT_TAGS = (
                      misc => [ qw(
-                                   mk_temp_dir
-                                   mk_temp_file
                                    display_menu
                                    prompt
                                    yes_no_prompt
                                    banner
-                                   stat_date
-                                   status_for
                                    ipc_run_l
                                    ipc_run_s
-                                   read_list
                                )
                              ],
                    );
@@ -37,28 +32,6 @@ our %EXPORT_TAGS = (
         foreach keys %EXPORT_TAGS;
 }
 Exporter::export_ok_tags('all');
-
-sub mk_temp_dir {
-    my $dir = shift || '/tmp';
-    my $temp_dir = File::Temp->newdir( DIR     => $dir,
-                                       CLEANUP => 1 );
-
-    return ($temp_dir);
-}    # mk_temp_dir
-
-sub mk_temp_file {
-    my $temp_dir = shift || '/tmp';
-
-    my $temp_file = File::Temp->new(
-                                     DIR    => $temp_dir,
-                                     SUFFIX => '.test',
-                                     UNLINK => 1
-                                   );
-
-    print $temp_file 'super blood wolf moon' . "\n";
-
-    return ($temp_file);
-}
 
 sub display_menu {
     my $msg         = shift;
@@ -166,49 +139,6 @@ sub banner {
     return;
 }
 
-sub stat_date {
-    my $file        = shift;
-    my $dir_format  = shift || 0;
-    my $date_format = shift || 'daily';
-    my ( $date, $format );
-
-    my $mtime = ( stat $file )[9];
-
-    if ( $date_format eq 'monthly' ) {
-        $format = $dir_format ? "%04d/%02d" : "%04d%02d";
-        $date = sprintf(
-                         $format,
-                         sub { ( $_[5] + 1900, $_[4] + 1 ) }
-                         ->( localtime($mtime) )
-                       );
-    }
-    else {
-        $format = $dir_format ? "%04d/%02d/%02d" : "%04d%02d%02d";
-        $date = sprintf(
-                         $format,
-                         sub { ( $_[5] + 1900, $_[4] + 1, $_[3] ) }
-                         ->( localtime($mtime) )
-                       );
-    }
-    return $date;
-}
-
-sub status_for {
-    my ($file) = @_;
-    Readonly my @STAT_FIELDS =>
-        qw( dev ino mode nlink uid gid rdev size atime mtime ctime blksize blocks );
-
-    # The hash to be returned...
-    my %stat_hash = ( file => $file );
-
-    # Load each stat datum into an appropriately named entry of the hash...
-    @stat_hash{ @STAT_FIELDS } = stat $file;
-
-    return \%stat_hash;
-
-    # usage: print status_for($file)->{mtime};
-}
-
 # execute the cmd and return array of output or undef on failure
 sub ipc_run_l {
     my ($arg_ref) = @_;
@@ -256,29 +186,6 @@ sub ipc_run_s {
     return 0;
 }
 
-sub read_list {
-    my $input_file = shift;
-    my $sep        = shift || "\n";
-
-    $sep = undef if ( !wantarray );
-    local $INPUT_RECORD_SEPARATOR = $sep;
-
-    my ( $line, @list );
-
-    open( my $input, '<', $input_file )
-        or die "can't open file, $input_file $!\n";
-    LINE:
-    while ( defined( $line = <$input> ) ) {
-        chomp($line);
-        next LINE if ( $line =~ m|^$| );    # remove blank lines
-        next LINE if ( $line =~ m|^#| );    # remove comments
-        push @list, $line;
-    }
-    close($input);
-
-    return wantarray ? @list : $list[0];
-}
-
 1;    # End of Dev::Util::Utils
 
 =pod
@@ -299,11 +206,7 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 
     use Dev::Util::Utils;
 
-    my $td = mk_temp_dir();
-    my $tf = mk_temp_file($td);
 
-    my $file_date     = stat_date( $test_file, 0, 'daily' );    # 20240221
-    my $file_date     = stat_date( $test_file, 1, 'monthly' );  # 2024/02
 
     banner( "Hello World", $outputFH );
 
@@ -320,23 +223,13 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 
 =over 8
 
-=item mk_temp_dir
-
-=item mk_temp_file
-
 =item display_menu
-
-=item get_keypress
 
 =item prompt
 
 =item yes_no_prompt
 
 =item banner
-
-=item stat_date
-
-=item status_for
 
 =item ipc_run_l
 
@@ -347,20 +240,6 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 =back
 
 =head1 SUBROUTINES
-
-=head2 B<mk_temp_dir(DIR)>
-
-Create a temporary directory in the supplied parent dir. F</tmp> is the default if no dir given.
-
-C<DIR> a string or variable pointing to a directory.
-
-    my $td = mk_temp_dir();
-
-=head2 B<mk_temp_file(DIR)>
-
-Create a temporary file in the supplied dir. F</tmp> is the default if no dir given.
-
-    my $tf = mk_temp_file($td);
 
 =head2 B<display_menu(MSG,ITEMS)>
 
@@ -422,30 +301,12 @@ Print a banner message on the supplied file handle (defaults to C<STDOUT>)
 
 C<$outputFH> is a file handle where the banner will be output
 
-=head2 B<stat_date>
-
-return the stat date of a file
-
-   format: YYYYMMDD,
-or format: YYYY/MM/DD if dir_format is true
-or format: YYYYMM or YYYY/MM if date_type is monthly
-
-=head2 B<status_for>
-
-return hash_ref of file stat info.
-print status_for($file)->{mtime}
-available keys:
-dev ino mode nlink uid gid rdev size atime mtime ctime blksize blocks
-
 =head2 B<ipc_run_l>
 Run an external program and return it's output.
 
 
 =head2 B<ipc_run_s>
 Run an external program and return the status of it's execution.
-
-=head2 B<read_list>
-read a list from an input file rtn an array of lines
 
 =head1 AUTHOR
 
