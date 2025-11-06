@@ -8,6 +8,7 @@ use File::Temp;
 use Term::ReadKey;
 use Term::ANSIColor;
 use IO::Interactive qw(is_interactive);
+use IO::Prompt      qw();                 # don't import prompt
 use IPC::Cmd        qw[can_run run];
 
 our $VERSION = version->declare("v2.1.6");
@@ -95,29 +96,34 @@ sub prompt {
     return $str;
 }
 
-sub yes_no_prompt {
-    my ( $msg, $default ) = @_;
-    my $str = '';
+# TODO: must reverse logic of calls to valid
 
-    if ( defined $default ) {
-        $msg .= ($default) ? ' ([Y]/N)? ' : ' (Y/[N])? ';
+# Maintain API for existing code even thought changing to IO::Prompt
+sub yes_no_prompt {
+    my ($settings) = @_;
+    my $ynd;
+
+    if ( exists $settings->{ default } ) {
+        $ynd = ( $settings->{ default } ) ? ' ([Y]/N)' : ' (Y/[N])';
     }
     else {
-        $msg .= ' (Y/N)? ';
+        $ynd = ' (Y/N)';
     }
 
-    while ( $str !~ /[yn]/i ) {
-        print "$msg";
-        $str = <STDIN>;
-        chomp $str;
-        if ( defined $default ) {
-            $str = ($default) ? 'y' : 'n' unless ($str);
-        }
-    }
+    my $msg = $settings->{ prepend };
+    $msg .= $settings->{ text } || '';
+    $msg .= $ynd;
+    $msg .= $settings->{ append };
 
-    return ( $str =~ /y/i ) ? 1 : 0;
+    return
+        IO::Prompt::prompt(
+                            $msg,
+                            -onechar,
+                            -default => ( $settings->{ default } ) ? 'Y' : 'N',
+                            -yes_no,
+                            -require => { "Please choose$ynd: " => qr/[YN]/i }
+                          );
 }
-
 
 sub banner {
     my $banner = shift;
