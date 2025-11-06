@@ -39,8 +39,8 @@ our %EXPORT_TAGS = (
 Exporter::export_ok_tags('all');
 
 sub mk_temp_dir {
-
-    my $temp_dir = File::Temp->newdir( DIR     => '/tmp',
+    my $dir = shift || '/tmp';
+    my $temp_dir = File::Temp->newdir( DIR     => $dir,
                                        CLEANUP => 1 );
 
     return ($temp_dir);
