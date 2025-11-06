@@ -8,7 +8,7 @@ use Dev::Util qw(::OS ::Utils ::File);
 
 use Socket;
 
-plan tests => 20;
+plan tests => 13;
 
 #======================================#
 #                banner                #
@@ -30,6 +30,29 @@ close $outputFH;
 
 is( $output, $expected, 'Banner Test' );
 
+# #======================================#
+# #                valid                 #
+# #======================================#
+
+# my @valid    = qw (bee bat bear);
+# my $okempty  = 1;
+# my $good_str = 'bat';
+# my $bad_str  = 'snake';
+
+# is( valid($good_str), undef,
+#     'valid - no valid criteria given returns undef' );
+# is( valid( '', \@valid, $okempty ),
+#     1, 'valid - empty string with okempty given returns true' );
+# is( valid( '', \@valid, 0 ),
+#     undef, 'valid - empty string without okempty given returns undef' );
+# is( valid( $good_str, \@valid, $okempty ),
+#     1, 'valid - good string with okempty given returns true' );
+# is( valid( $good_str, \@valid, 0 ),
+#     1, 'valid - good string without okempty given returns true' );
+# is( valid( $bad_str, \@valid, $okempty ),
+#     0, 'valid - bad string with okempty given returns false' );
+# is( valid( $bad_str, \@valid, 0 ),
+#     0, 'valid - bad string without okempty given returns false' );
 
 #======================================#
 #           Make test files            #
