@@ -4,15 +4,53 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### 🐛 Bug Fixes
+
+- *(pod)* Fix typo in pod
+
+### 🚜 Refactor
+
+- *(utils)* [**breaking**] Move file and dir functions to new module: Dev::Util::File
+- *(use)* Remove un-needed modules
+- *(test)* Modernize Author tests
+
+### 🧪 Testing
+
+- *(xt)* Include xt tests when running yath
+- *(perlcritic)* Update perl critic test
+- *(load)* Include Dev::Util::File in load test
+
+### 📚 Documentation
+
+- *(constants)* Define the constants
+- *(install)* Add installation documentation
+
+### 🚧 Build
+
+- *(git)* Update git ignore file
+- *(manifest)* Exclude scratch dir from manifest
+
+## [version/v2.1.6] - 2025-10-29
+
 ### ⚙️ Miscellaneous Tasks
 
 - *(merge)* Merge branch 'devutil'
+- *(version)* Bump version minor level
+
+### 🚜 Refactor
+
+- *(utils)* [**breaking**] Move names constants to separate module, Dev::Util::Const
+
+### 🧪 Testing
+
+- *(const)* New tests for Const module
+- *(module)* Include new Const module in loading tests
 
 ### 📚 Documentation
 
 - *(module)* Update manifest
 
-## [version/v2.1.6] - 2025-10-26
+## [version/v2.0.7] - 2025-10-26
 
 ### ⚙️ Miscellaneous Tasks
 
