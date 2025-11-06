@@ -11,7 +11,7 @@ use IO::Interactive qw(is_interactive);
 use IO::Prompt      qw();                 # don't import prompt
 use IPC::Cmd        qw[can_run run];
 
-our $VERSION = version->declare("v2.1.6");
+our $VERSION = version->declare("v2.12.4");
 
 our %EXPORT_TAGS = (
                      misc => [ qw(
@@ -291,7 +291,7 @@ Dev::Util::Utils - General utility functions for programming
 
 =head1 VERSION
 
-Version v2.1.6
+Version v2.12.4
 
 =head1 SYNOPSIS
 
