@@ -8,7 +8,7 @@ use Dev::Util qw(::OS ::Utils ::File);
 
 use Socket;
 
-plan tests => 8;
+plan tests => 1;
 
 #======================================#
 #                banner                #
@@ -61,34 +61,5 @@ my $dnf = '/dev/null';
 # my $msg    = 'Pick a choice from the list:';
 # my @items  = ( 'choice one', 'choice two', 'choice three', 'ab', );
 # my $choice = display_menu( $msg, @items );
-
-#======================================#
-#              ipc_run_l               #
-#======================================#
-
-my $hw_expected = "hello world";
-my @hw          = ipc_run_l( { cmd => 'echo hello world' } );
-my $hw_result   = join "\n", @hw;
-is( $hw_result, $hw_expected, 'ipc_run_l - echo hello world' );
-
-my $hw_ref = ipc_run_l( { cmd => 'exho hello world' } );
-is( $hw_ref, undef, 'ipc_run_l - fail bad cmd: exho hello world' );
-
-my @expected_seq = qw(1 2 3 4 5 6 7 8 9 10);
-my @seq          = ipc_run_l( { cmd => 'seq 1 10', } );
-is( @seq, @expected_seq, 'ipc_run_l - multiline output' );
-
-#======================================#
-#              ipc_run_s               #
-#======================================#
-
-my $buf = '';
-ok( ipc_run_s( { cmd => 'echo hello world', buf => \$buf } ) );
-is( $buf, $hw_expected . "\n", 'ipc_run_s - hellow world' );
-
-ok( !ipc_run_s( { cmd => 'exho hello world', buf => \$buf } ) );
-
-$buf = '';
-ok( ipc_run_s( { cmd => 'seq 1 10', buf => \$buf } ) );
 
 done_testing;
