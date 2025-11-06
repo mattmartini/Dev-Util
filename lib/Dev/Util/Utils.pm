@@ -66,12 +66,12 @@ sub display_menu {
 
     my %choice_hash = map { $choices_ref->[$_] => $_ } 0 .. $#{ $choices_ref };
 
-    my $chosen = prompt(
-                         $msg,
-                         -onechar,
-                         -menu    => $choices_ref,
-                         -default => 'a'
-                       );
+    my $chosen = IO::Prompt::prompt(
+                                     $msg,
+                                     -onechar,
+                                     -menu    => $choices_ref,
+                                     -default => 'a'
+                                   );
 
     return $choice_hash{ $chosen };
 }
