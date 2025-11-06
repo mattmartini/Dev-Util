@@ -24,6 +24,8 @@ OS discovery and functions
     is_linux
     is_mac
     is_sunos
+    ipc_run_l
+    ipc_run_s
 
 # SUBROUTINES
 
@@ -56,6 +58,14 @@ Return true if the current system is MacOS (Darwin).
 Return true if the current system is SunOS.
 
     my $system_is_sunOS = is_sunos();
+
+## **ipc\_run\_l**
+
+Run an external program and return it's output.
+
+## **ipc\_run\_s**
+
+Run an external program and return the status of it's execution.
 
 # AUTHOR
 

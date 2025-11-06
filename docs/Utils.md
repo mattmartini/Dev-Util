@@ -12,11 +12,7 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 
     use Dev::Util::Utils;
 
-    my $td = mk_temp_dir();
-    my $tf = mk_temp_file($td);
 
-    my $file_date     = stat_date( $test_file, 0, 'daily' );    # 20240221
-    my $file_date     = stat_date( $test_file, 1, 'monthly' );  # 2024/02
 
     banner( "Hello World", $outputFH );
 
@@ -27,33 +23,12 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 # EXPORT\_TAGS
 
 - **:misc**
-    - mk\_temp\_dir
-    - mk\_temp\_file
     - display\_menu
-    - get\_keypress
     - prompt
     - yes\_no\_prompt
     - banner
-    - stat\_date
-    - status\_for
-    - ipc\_run\_l
-    - ipc\_run\_s
 
 # SUBROUTINES
-
-## **mk\_temp\_dir(DIR)**
-
-Create a temporary directory in the supplied parent dir. `/tmp` is the default if no dir given.
-
-`DIR` a string or variable pointing to a directory.
-
-    my $td = mk_temp_dir();
-
-## **mk\_temp\_file(DIR)**
-
-Create a temporary file in the supplied dir. `/tmp` is the default if no dir given.
-
-    my $tf = mk_temp_file($td);
 
 ## **display\_menu(MSG,ITEMS)**
 
@@ -104,30 +79,6 @@ Print a banner message on the supplied file handle (defaults to `STDOUT`)
     banner( "Hello World", $outputFH );
 
 `$outputFH` is a file handle where the banner will be output
-
-## **stat\_date**
-
-return the stat date of a file
-
-    format: YYYYMMDD,
- or format: YYYY/MM/DD if dir_format is true
- or format: YYYYMM or YYYY/MM if date_type is monthly
-
-## **status\_for**
-
-return hash\_ref of file stat info.
-print status\_for($file)->{mtime}
-available keys:
-dev ino mode nlink uid gid rdev size atime mtime ctime blksize blocks
-
-## **ipc\_run\_l**
-Run an external program and return it's output.
-
-## **ipc\_run\_s**
-Run an external program and return the status of it's execution.
-
-## **read\_list**
-read a list from an input file rtn an array of lines
 
 # AUTHOR
 

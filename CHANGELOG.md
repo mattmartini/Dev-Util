@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🚜 Refactor
+
+- *(file)* [**breaking**] Move functions to File from Utils
+- *(os)* [**breaking**] Move functions to OS from Utils
+
+### 🧪 Testing
+
+- Test functions in new module
+
 ## [version/v2.12.4] - 2025-11-06
 
 ### 🚀 Features

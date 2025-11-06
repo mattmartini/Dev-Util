@@ -30,6 +30,12 @@ Dev::Util::File - provides functions to assist working with files and dirs, menu
 
     my $slash_added_dir = dir_suffix_slash('/dir/path/no/slash');
 
+    my $td = mk_temp_dir();
+    my $tf = mk_temp_file($td);
+
+    my $file_date     = stat_date( $test_file, 0, 'daily' );    # 20240221
+    my $file_date     = stat_date( $test_file, 1, 'monthly' );  # 2024/02
+
 # EXPORT\_TAGS
 
 - **:fattr**
@@ -59,6 +65,12 @@ Dev::Util::File - provides functions to assist working with files and dirs, menu
     - dir\_writable
     - dir\_executable
     - dir\_suffix\_slash
+- **:misc**
+    - mk\_temp\_dir
+    - mk\_temp\_file
+    - stat\_date
+    - status\_for
+    - read\_list
 
 # SUBROUTINES
 
@@ -213,6 +225,45 @@ Tests for dir existence and is executable. Returns true if the directory is exec
 Ensures a dir ends in a slash by adding one if necessary.
 
     my $slash_added_dir = dir_suffix_slash('/dir/path/no/slash');
+
+## **mk\_temp\_dir(DIR)**
+
+Create a temporary directory in the supplied parent dir. `/tmp` is the default if no dir given.
+
+`DIR` a string or variable pointing to a directory.
+
+    my $td = mk_temp_dir();
+
+## **mk\_temp\_file(DIR)**
+
+Create a temporary file in the supplied dir. `/tmp` is the default if no dir given.
+
+    my $tf = mk_temp_file($td);
+
+## **stat\_date**
+
+Return the stat date of a file
+
+    my $file_date     = stat_date( $test_file, 0, 'daily' );    # 20240221
+    my $file_date     = stat_date( $test_file, 1, 'monthly' );  # 2024/02
+
+       format: YYYYMMDD,
+    or format: YYYY/MM/DD if dir_format is true
+    or format: YYYYMM or YYYY/MM if date_type is monthly
+
+## **status\_for**
+
+Return hash\_ref of file stat info.
+
+    print status_for($file)->{mtime}
+
+Available keys:
+
+    dev ino mode nlink uid gid rdev size atime mtime ctime blksize blocks
+
+## **read\_list**
+
+Read a list from an input file rtn an array of lines
 
 # AUTHOR
 
