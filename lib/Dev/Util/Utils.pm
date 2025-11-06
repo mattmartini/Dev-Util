@@ -25,6 +25,7 @@ our %EXPORT_TAGS = (
                                    status_for
                                    ipc_run_l
                                    ipc_run_s
+                                   read_list
                                )
                              ],
                    );
@@ -241,6 +242,29 @@ sub ipc_run_s {
     return 0;
 }
 
+sub read_list {
+    my $input_file = shift;
+    my $sep        = shift || "\n";
+
+    $sep = undef if ( !wantarray );
+    local $INPUT_RECORD_SEPARATOR = $sep;
+
+    my ( $line, @list );
+
+    open( my $input, '<', $input_file )
+        or die "can't open file, $input_file $!\n";
+    LINE:
+    while ( defined( $line = <$input> ) ) {
+        chomp($line);
+        next LINE if ( $line =~ m|^$| );    # remove blank lines
+        next LINE if ( $line =~ m|^#| );    # remove comments
+        push @list, $line;
+    }
+    close($input);
+
+    return wantarray ? @list : $list[0];
+}
+
 1;    # End of Dev::Util::Utils
 
 =pod
@@ -439,6 +463,9 @@ Run an external program and return it's output.
 
 =head2 B<ipc_run_s>
 Run an external program and return the status of it's execution.
+
+=head2 B<read_list>
+read a list from an input file rtn an array of lines
 
 =head1 AUTHOR
 
