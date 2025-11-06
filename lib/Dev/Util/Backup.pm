@@ -255,7 +255,7 @@ backups of them using C<backup>.
 
 =head1 EXPORT
 
-backup
+    backup
 
 =head1 SUBROUTINES
 

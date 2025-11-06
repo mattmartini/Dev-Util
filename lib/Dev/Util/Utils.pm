@@ -9,7 +9,6 @@ use Term::ReadKey;
 use Term::ANSIColor;
 use IO::Interactive qw(is_interactive);
 use IO::Prompt      qw();                 # don't import prompt
-use IPC::Cmd        qw[can_run run];
 
 our $VERSION = version->declare("v2.12.4");
 
@@ -19,8 +18,6 @@ our %EXPORT_TAGS = (
                                    prompt
                                    yes_no_prompt
                                    banner
-                                   ipc_run_l
-                                   ipc_run_s
                                )
                              ],
                    );
@@ -139,53 +136,6 @@ sub banner {
     return;
 }
 
-# execute the cmd and return array of output or undef on failure
-sub ipc_run_l {
-    my ($arg_ref) = @_;
-    $arg_ref->{ debug } ||= 0;
-    warn "cmd: $arg_ref->{ cmd }\n" if $arg_ref->{ debug };
-
-    my ( $success, $error_message, $full_buf, $stdout_buf, $stderr_buf )
-        = run(
-               command => $arg_ref->{ cmd },
-               verbose => $arg_ref->{ verbose } || 0,
-               timeout => $arg_ref->{ timeout } || 10,
-             );
-
-    # each element of $stdout_buf can contain multiple lines
-    # flatten to one line per element in result returned
-    if ($success) {
-        my @result;
-        foreach my $lines ( @{ $stdout_buf } ) {
-            foreach my $line ( split( /\n/, $lines ) ) {
-                push @result, $line;
-            }
-        }
-        return @result;
-    }
-    return;
-}
-
-# execute the cmd return 1 on success 0 on failure
-sub ipc_run_s {
-    my ($arg_ref) = @_;
-    $arg_ref->{ debug } ||= 0;
-    warn "cmd: $arg_ref->{ cmd }\n" if $arg_ref->{ debug };
-
-    if (
-          scalar run(
-                      command => $arg_ref->{ cmd },
-                      buffer  => $arg_ref->{ buf },
-                      verbose => $arg_ref->{ verbose } || 0,
-                      timeout => $arg_ref->{ timeout } || 10,
-                    )
-       )
-    {
-        return 1;
-    }
-    return 0;
-}
-
 1;    # End of Dev::Util::Utils
 
 =pod
@@ -230,10 +180,6 @@ Dev::Util::Utils - provides functions to assist working with files and dirs, men
 =item yes_no_prompt
 
 =item banner
-
-=item ipc_run_l
-
-=item ipc_run_s
 
 =back
 
@@ -301,12 +247,6 @@ Print a banner message on the supplied file handle (defaults to C<STDOUT>)
 
 C<$outputFH> is a file handle where the banner will be output
 
-=head2 B<ipc_run_l>
-Run an external program and return it's output.
-
-
-=head2 B<ipc_run_s>
-Run an external program and return the status of it's execution.
 
 =head1 AUTHOR
 
