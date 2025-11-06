@@ -17,10 +17,8 @@ our %EXPORT_TAGS = (
                                    mk_temp_dir
                                    mk_temp_file
                                    display_menu
-                                   get_keypress
                                    prompt
                                    yes_no_prompt
-                                   valid
                                    banner
                                    stat_date
                                    status_for
@@ -80,24 +78,6 @@ sub display_menu {
     return get_keypress($num_choices);
 }
 
-sub get_keypress {
-    my $num_choices = shift
-        || die "You must provide a max number of choices.\n";
-    open( my $TTY, '<', "/dev/tty" ) or croak "Can't read from tty.\n";
-    ReadMode "raw";
-    my $key  = ReadKey 0, $TTY;
-    my $kval = ord($key) - 48;
-    ReadMode "normal";
-    close($TTY);
-    print "$key\n";
-
-    if ( $kval == -38 ) { $kval = 0; }
-    if ( $kval >= 49 )  { $kval -= 39; }
-    if ( $kval < 0 || $kval > $num_choices ) {
-        die "Invalid choice.\n";
-    }
-    return $kval;
-}
 
 sub prompt {
     my ( $msg, $default ) = @_;
@@ -138,24 +118,6 @@ sub yes_no_prompt {
     return ( $str =~ /y/i ) ? 1 : 0;
 }
 
-sub valid {
-    my $str     = shift;
-    my $valid   = shift;
-    my $okempty = shift;
-
-    return unless ($valid);    #no valid options give, so return undef
-
-    return   if ( !$str && !$okempty );    # return undef if no str and okempty
-    return 1 if ( !$str && $okempty );     # return true if no str and okempty
-
-    #valid is a sub ref -- call it
-    return &$valid($str) if ( ref($valid) eq 'CODE' );
-
-    #default -- simply grep for valid reponse in array ref
-    return 1 if grep { /^$str$/i } @$valid;
-
-    return 0;                              # "Invalid choice"
-}
 
 sub banner {
     my $banner = shift;
