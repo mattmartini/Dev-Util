@@ -77,19 +77,38 @@ sub display_menu {
 }
 
 sub prompt {
-    my ( $msg, $default ) = @_;
-    my $str;
+    my ($settings) = @_;
 
-    $msg .= " [$default]" if ($default);
+    my $msg = $settings->{ prepend };
+    $msg .= $settings->{ text } || '';
+    $msg .= " [$settings->{default}]" if ( defined $settings->{ default } );
+    $msg .= $settings->{ append };
 
-    while ( ( $str ne $default ) && !$str ) {
-        print "$msg ? ";
-        $str = <STDIN>;
-        chomp $str;
-        $str = ($default) ? $default : $str unless ($str);
+    my $prompt_args = { -prompt => $msg };
+    if ( $settings->{ noecho } ) { $prompt_args->{ -echo } = '' }
+    ## if ( $settings->{ okempty } ) { ... }    # TODO: figure out okempty sol'n
+    if ( defined $settings->{ default } ) {
+        $prompt_args->{ -default } = $settings->{ default };
     }
+    if ( defined $settings->{ valid } ) {
+        if ( ref( $settings->{ valid } ) eq 'ARRAY' ) {
+            $prompt_args->{ -menu }     = $settings->{ valid };
+            $prompt_args->{ -one_char } = $msg;
+        }
+        elsif ( ref( $settings->{ valid } ) eq 'CODE' ) {
 
-    return $str;
+            # $prompt_args->{ -require } = { '%s (dir must exist): ' => \&dir_writable };
+            $prompt_args->{ -require }
+                = { '%s (response not valid): ' => $settings->{ valid } };
+        }
+        else {
+            croak "Validitiy test malformed.\n";
+        }
+    }
+    my $response = IO::Prompt::prompt($prompt_args);
+    print "\n" if ( exists $settings->{ noecho } );
+
+    return $response->{ value };
 }
 
 # TODO: must reverse logic of calls to valid
