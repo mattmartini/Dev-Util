@@ -5,7 +5,6 @@ use lib 'lib';
 
 use Dev::Util::Syntax;
 use Dev::Util::Const;
-## use Dev::Util::Const qw(:named_constants);
 
 use Socket;
 
@@ -18,10 +17,10 @@ my $dq      = q{"};
 my $comm    = q{,};
 
 is( $EMPTY_STR,    $emt_str, 'empty string' );
-is( $SPACE,        $sp,      'empty string' );
-is( $SINGLE_QUOTE, $sq,      'empty string' );
-is( $DOUBLE_QUOTE, $dq,      'empty string' );
-is( $COMMA,        $comm,    'empty string' );
+is( $SPACE,        $sp,      'space' );
+is( $SINGLE_QUOTE, $sq,      'single quote' );
+is( $DOUBLE_QUOTE, $dq,      'double quote' );
+is( $COMMA,        $comm,    'comma' );
 
 done_testing;
 
