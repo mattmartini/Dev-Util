@@ -8,10 +8,16 @@ All notable changes to this project will be documented in this file.
 
 - *(file)* [**breaking**] Move functions to File from Utils
 - *(os)* [**breaking**] Move functions to OS from Utils
+- *(utils)* [**breaking**] Move Utils to Query
 
 ### 🧪 Testing
 
 - Test functions in new module
+- *(query)* Convert to Query from Utils
+
+### 📚 Documentation
+
+- *(pod)* Update Pod docs
 
 ## [version/v2.12.4] - 2025-11-06
 

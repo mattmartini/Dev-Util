@@ -1,6 +1,6 @@
 # NAME
 
-Dev::Util::Utils - General utility functions for programming
+Dev::Util::Query - General utility functions for programming
 
 # VERSION
 
@@ -8,9 +8,9 @@ Version v2.12.4
 
 # SYNOPSIS
 
-Dev::Util::Utils - provides functions to assist working with files and dirs, menus and prompts, and running external programs.
+Dev::Util::Query - provides functions to assist working with files and dirs, menus and prompts, and running external programs.
 
-    use Dev::Util::Utils;
+    use Dev::Util::Query;
 
 
 
@@ -94,7 +94,7 @@ automatically be notified of progress on your bug as I make changes.
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc Dev::Util::Utils
+    perldoc Dev::Util::Query
 
 You can also look for information at:
 
