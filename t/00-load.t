@@ -12,7 +12,7 @@ BEGIN {
     my @modules = qw(
         Dev::Util
         Dev::Util::Syntax
-        Dev::Util::Utils
+        Dev::Util::Query
         Dev::Util::OS
         Dev::Util::Backup
         Dev::Util::Const

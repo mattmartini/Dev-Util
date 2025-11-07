@@ -4,7 +4,7 @@ use Test2::V0;
 use lib 'lib';
 
 use Dev::Util::Syntax;
-use Dev::Util qw(::OS ::Utils ::File);
+use Dev::Util qw(::OS ::Query ::File);
 
 use Socket;
 
