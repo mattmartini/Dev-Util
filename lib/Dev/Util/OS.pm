@@ -13,8 +13,8 @@ our @EXPORT_OK = qw(
     is_linux
     is_mac
     is_sunos
-    ipc_run_l
-    ipc_run_s
+    ipc_run_c
+    ipc_run_e
 );
 
 our %EXPORT_TAGS = ( all => \@EXPORT_OK );
@@ -60,8 +60,28 @@ sub is_sunos {
     }
 }
 
-# execute the cmd and return array of output or undef on failure
-sub ipc_run_l {
+# execute the cmd return 1 on success 0 on failure
+sub ipc_run_e {
+    my ($arg_ref) = @_;
+    $arg_ref->{ debug } ||= 0;
+    warn "cmd: $arg_ref->{ cmd }\n" if $arg_ref->{ debug };
+
+    if (
+          scalar run(
+                      command => $arg_ref->{ cmd },
+                      buffer  => $arg_ref->{ buf },
+                      verbose => $arg_ref->{ verbose } || 0,
+                      timeout => $arg_ref->{ timeout } || 10,
+                    )
+       )
+    {
+        return 1;
+    }
+    return 0;
+}
+
+# capture the output of the cmd and return it as an array or undef on failure
+sub ipc_run_c {
     my ($arg_ref) = @_;
     $arg_ref->{ debug } ||= 0;
     warn "cmd: $arg_ref->{ cmd }\n" if $arg_ref->{ debug };
@@ -85,26 +105,6 @@ sub ipc_run_l {
         return @result;
     }
     return;
-}
-
-# execute the cmd return 1 on success 0 on failure
-sub ipc_run_s {
-    my ($arg_ref) = @_;
-    $arg_ref->{ debug } ||= 0;
-    warn "cmd: $arg_ref->{ cmd }\n" if $arg_ref->{ debug };
-
-    if (
-          scalar run(
-                      command => $arg_ref->{ cmd },
-                      buffer  => $arg_ref->{ buf },
-                      verbose => $arg_ref->{ verbose } || 0,
-                      timeout => $arg_ref->{ timeout } || 10,
-                    )
-       )
-    {
-        return 1;
-    }
-    return 0;
 }
 
 1;    # End of Dev::Util::OS
@@ -139,8 +139,8 @@ OS discovery and functions
     is_linux
     is_mac
     is_sunos
-    ipc_run_l
-    ipc_run_s
+    ipc_run_e
+    ipc_run_c
 
 =head1 SUBROUTINES
 
@@ -174,13 +174,13 @@ Return true if the current system is SunOS.
 
     my $system_is_sunOS = is_sunos();
 
-=head2 B<ipc_run_l>
-
-Run an external program and return it's output.
-
-=head2 B<ipc_run_s>
+=head2 B<ipc_run_e>
 
 Run an external program and return the status of it's execution.
+
+=head2 B<ipc_run_c>
+
+Run an external program, capture its output.  Return the output or return undef on failure.
 
 =head1 AUTHOR
 

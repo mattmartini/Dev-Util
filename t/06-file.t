@@ -304,9 +304,13 @@ is( dir_suffix_slash($test_dir_wo),
 #              mk_temp_dir             #
 #======================================#
 
+# no additional tests needed as functionality is tested above
+
 #======================================#
 #              mk_temp_file            #
 #======================================#
+
+# no additional tests needed as functionality is tested above
 
 #======================================#
 #              stat_date               #

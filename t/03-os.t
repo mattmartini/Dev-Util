@@ -64,32 +64,32 @@ else {
 }
 
 #======================================#
-#              ipc_run_l               #
+#              ipc_run_c               #
 #======================================#
 
 my $hw_expected = "hello world";
-my @hw          = ipc_run_l( { cmd => 'echo hello world' } );
+my @hw          = ipc_run_c( { cmd => 'echo hello world' } );
 my $hw_result   = join "\n", @hw;
-is( $hw_result, $hw_expected, 'ipc_run_l - echo hello world' );
+is( $hw_result, $hw_expected, 'ipc_run_c - echo hello world' );
 
-my $hw_ref = ipc_run_l( { cmd => 'exho hello world' } );
-is( $hw_ref, undef, 'ipc_run_l - fail bad cmd: exho hello world' );
+my $hw_ref = ipc_run_c( { cmd => 'exho hello world' } );
+is( $hw_ref, undef, 'ipc_run_c - fail bad cmd: exho hello world' );
 
 my @expected_seq = qw(1 2 3 4 5 6 7 8 9 10);
-my @seq          = ipc_run_l( { cmd => 'seq 1 10', } );
-is( @seq, @expected_seq, 'ipc_run_l - multiline output' );
+my @seq          = ipc_run_c( { cmd => 'seq 1 10', } );
+is( @seq, @expected_seq, 'ipc_run_c - multiline output' );
 
 #======================================#
-#              ipc_run_s               #
+#              ipc_run_e               #
 #======================================#
 
-my $buf = '';
-ok( ipc_run_s( { cmd => 'echo hello world', buf => \$buf } ) );
-is( $buf, $hw_expected . "\n", 'ipc_run_s - hello world' );
+my $buf = qw{};
+ok( ipc_run_e( { cmd => 'echo hello world', buf => \$buf } ) );
+is( $buf, $hw_expected . "\n", 'ipc_run_e - hello world' );
 
-ok( !ipc_run_s( { cmd => 'exho hello world', buf => \$buf } ) );
+ok( !ipc_run_e( { cmd => 'exho hello world', buf => \$buf } ) );
 
-$buf = '';
-ok( ipc_run_s( { cmd => 'seq 1 10', buf => \$buf } ) );
+$buf = qw{};
+ok( ipc_run_e( { cmd => 'seq 1 10', buf => \$buf } ) );
 
 done_testing;
