@@ -85,7 +85,7 @@ is( @seq, @expected_seq, 'ipc_run_l - multiline output' );
 
 my $buf = '';
 ok( ipc_run_s( { cmd => 'echo hello world', buf => \$buf } ) );
-is( $buf, $hw_expected . "\n", 'ipc_run_s - hellow world' );
+is( $buf, $hw_expected . "\n", 'ipc_run_s - hello world' );
 
 ok( !ipc_run_s( { cmd => 'exho hello world', buf => \$buf } ) );
 
