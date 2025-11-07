@@ -18,6 +18,16 @@ All notable changes to this project will be documented in this file.
 ### 📚 Documentation
 
 - *(pod)* Update Pod docs
+- *(pod)* Update Pod docs
+
+### Other
+
+- *(other)* Merge branch 'query'
+
+* query:
+  docs(pod): Update Pod docs
+  test(query): Convert to Query from Utils
+  refactor(utils)!: Move Utils to Query
 
 ## [version/v2.12.4] - 2025-11-06
 

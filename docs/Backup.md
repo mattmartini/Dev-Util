@@ -4,7 +4,7 @@ Dev::Util::Backup - backup functions
 
 # VERSION
 
-Version v2.12.4
+Version v2.15.4
 
 # SYNOPSIS
 

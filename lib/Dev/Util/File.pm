@@ -4,7 +4,7 @@ use lib 'lib';
 use Dev::Util::Syntax;
 use Exporter qw(import);
 
-our $VERSION = version->declare("v2.12.4");
+our $VERSION = version->declare("v2.15.4");
 
 our %EXPORT_TAGS = (
                      fattr => [ qw(
@@ -447,7 +447,7 @@ Dev::Util::File - General utility functions for programming
 
 =head1 VERSION
 
-Version v2.12.4
+Version v2.15.4
 
 =head1 SYNOPSIS
 

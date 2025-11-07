@@ -4,7 +4,7 @@ Dev::Util::OS - OS discovery and functions
 
 # VERSION
 
-Version v2.12.4
+Version v2.15.4
 
 # SYNOPSIS
 

@@ -10,7 +10,7 @@ use Term::ANSIColor;
 use IO::Interactive qw(is_interactive);
 use IO::Prompt      qw();                 # don't import prompt
 
-our $VERSION = version->declare("v2.12.4");
+our $VERSION = version->declare("v2.15.4");
 
 our %EXPORT_TAGS = (
                      misc => [ qw(
@@ -148,7 +148,7 @@ Dev::Util::Query - General utility functions for programming
 
 =head1 VERSION
 
-Version v2.12.4
+Version v2.15.4
 
 =head1 SYNOPSIS
 
