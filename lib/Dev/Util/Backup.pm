@@ -301,7 +301,7 @@ L<https://metacpan.org/release/Dev-Util>
 
 =back
 
-=for ACKNOWLEDGEMENTS
+=for ACKNOWLEDGMENTS
 
 =head1 LICENSE AND COPYRIGHT
 

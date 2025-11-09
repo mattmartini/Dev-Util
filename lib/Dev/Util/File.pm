@@ -799,7 +799,7 @@ L<https://metacpan.org/release/Dev-Util>
 
 =back
 
-=head1 ACKNOWLEDGEMENTS
+=head1 ACKNOWLEDGMENTS
 
 =head1 LICENSE AND COPYRIGHT
 

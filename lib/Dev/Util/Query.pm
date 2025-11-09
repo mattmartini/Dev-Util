@@ -14,10 +14,10 @@ our $VERSION = version->declare("v2.15.4");
 
 our %EXPORT_TAGS = (
                      misc => [ qw(
-                                   display_menu
-                                   prompt
-                                   yes_no_prompt
                                    banner
+                                   display_menu
+                                   yes_no_prompt
+                                   prompt
                                )
                              ],
                    );
@@ -29,6 +29,32 @@ our %EXPORT_TAGS = (
         foreach keys %EXPORT_TAGS;
 }
 Exporter::export_ok_tags('all');
+
+sub banner {
+    my $banner = shift;
+    my $fh     = shift || \*STDOUT;
+
+    my $width;
+    if ( is_interactive() ) {
+        ($width) = GetTerminalSize();
+    }
+    else {
+        $width = 80;
+    }
+
+    my $spacer = ( $width - 2 ) - length($banner);
+    my $lspace = int( $spacer / 2 );
+    my $rspace = $lspace + $spacer % 2;
+
+    print $fh "#" x $width . "\n";
+    print $fh "#" . " " x ( $width - 2 ) . "#" . "\n";
+    print $fh "#" . " " x $lspace . $banner . " " x $rspace . "#" . "\n";
+    print $fh "#" . " " x ( $width - 2 ) . "#" . "\n";
+    print $fh "#" x $width . "\n";
+    print $fh "\n";
+
+    return;
+}
 
 sub display_menu {
     my $msg         = shift;
@@ -44,6 +70,33 @@ sub display_menu {
                                    );
 
     return $choice_hash{ $chosen };
+}
+
+# Maintain API for existing code even thought changing to IO::Prompt
+sub yes_no_prompt {
+    my ($settings) = @_;
+    my $ynd;
+
+    if ( exists $settings->{ default } ) {
+        $ynd = ( $settings->{ default } ) ? ' ([Y]/N)' : ' (Y/[N])';
+    }
+    else {
+        $ynd = ' (Y/N)';
+    }
+
+    my $msg = $settings->{ prepend };
+    $msg .= $settings->{ text } || '';
+    $msg .= $ynd;
+    $msg .= $settings->{ append };
+
+    return
+        IO::Prompt::prompt(
+                            $msg,
+                            -onechar,
+                            -default => ( $settings->{ default } ) ? 'Y' : 'N',
+                            -yes_no,
+                            -require => { "Please choose$ynd: " => qr/[YN]/i }
+                          );
 }
 
 sub prompt {
@@ -82,59 +135,6 @@ sub prompt {
 }
 
 # TODO: must reverse logic of calls to valid
-
-# Maintain API for existing code even thought changing to IO::Prompt
-sub yes_no_prompt {
-    my ($settings) = @_;
-    my $ynd;
-
-    if ( exists $settings->{ default } ) {
-        $ynd = ( $settings->{ default } ) ? ' ([Y]/N)' : ' (Y/[N])';
-    }
-    else {
-        $ynd = ' (Y/N)';
-    }
-
-    my $msg = $settings->{ prepend };
-    $msg .= $settings->{ text } || '';
-    $msg .= $ynd;
-    $msg .= $settings->{ append };
-
-    return
-        IO::Prompt::prompt(
-                            $msg,
-                            -onechar,
-                            -default => ( $settings->{ default } ) ? 'Y' : 'N',
-                            -yes_no,
-                            -require => { "Please choose$ynd: " => qr/[YN]/i }
-                          );
-}
-
-sub banner {
-    my $banner = shift;
-    my $fh     = shift || \*STDOUT;
-
-    my $width;
-    if ( is_interactive() ) {
-        ($width) = GetTerminalSize();
-    }
-    else {
-        $width = 80;
-    }
-
-    my $spacer = ( $width - 2 ) - length($banner);
-    my $lspace = int( $spacer / 2 );
-    my $rspace = $lspace + $spacer % 2;
-
-    print $fh "#" x $width . "\n";
-    print $fh "#" . " " x ( $width - 2 ) . "#" . "\n";
-    print $fh "#" . " " x $lspace . $banner . " " x $rspace . "#" . "\n";
-    print $fh "#" . " " x ( $width - 2 ) . "#" . "\n";
-    print $fh "#" x $width . "\n";
-    print $fh "\n";
-
-    return;
-}
 
 1;    # End of Dev::Util::Query
 
@@ -286,7 +286,7 @@ L<https://metacpan.org/release/Dev-Util>
 
 =back
 
-=head1 ACKNOWLEDGEMENTS
+=head1 ACKNOWLEDGMENTS
 
 =head1 LICENSE AND COPYRIGHT
 
