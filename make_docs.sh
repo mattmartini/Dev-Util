@@ -20,9 +20,19 @@ do
 done
 echo "done"
 
+echo -n "Updating Manifest..."
+rm MANIFEST
+make manifest
+echo "done"
+
 # Update Changelog
 echo -n "Updating Changelog..."
 rm CHANGELOG.md
 git cliff > CHANGELOG.md
+echo "done"
+
+echo -n "Updating Signatures..."
+rm SIGNATURE
+make signature
 echo "done"
 
