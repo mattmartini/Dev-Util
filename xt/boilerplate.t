@@ -4,7 +4,7 @@ use 5.018;
 use Test2::V0;
 use Test2::Require::AuthorTesting;
 
-plan tests => 8;
+plan tests => 9;
 
 sub not_in_file_ok {
     my ( $filename, %regex ) = @_;
@@ -52,11 +52,12 @@ todo 'Need to replace the boilerplate text' => sub {
                         'CHANGELOG.md' => "placeholder date/time" => qr(Date/time) );
 
     module_boilerplate_ok('lib/Dev/Util.pm');
-    module_boilerplate_ok('lib/Dev/Util/Syntax.pm');
-    module_boilerplate_ok('lib/Dev/Util/Utils.pm');
-    module_boilerplate_ok('lib/Dev/Util/OS.pm');
     module_boilerplate_ok('lib/Dev/Util/Backup.pm');
     module_boilerplate_ok('lib/Dev/Util/Const.pm');
+    module_boilerplate_ok('lib/Dev/Util/File.pm');
+    module_boilerplate_ok('lib/Dev/Util/OS.pm');
+    module_boilerplate_ok('lib/Dev/Util/Query.pm');
+    module_boilerplate_ok('lib/Dev/Util/Syntax.pm');
 
 };
 
