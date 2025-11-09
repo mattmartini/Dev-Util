@@ -6,7 +6,7 @@ use lib 'lib';
 use Dev::Util::Syntax;
 use Dev::Util qw(::OS);
 
-plan tests => 13;
+plan tests => 17;
 
 #======================================#
 #             get_hostname             #
@@ -68,8 +68,9 @@ else {
 #======================================#
 
 my $hw_expected = "hello world";
-my @hw          = ipc_run_c( { cmd => 'echo hello world' } );
-my $hw_result   = join "\n", @hw;
+my @hw
+    = ipc_run_c( { cmd => 'echo hello world', verbose => 1, timeout => 8 } );
+my $hw_result = join "\n", @hw;
 is( $hw_result, $hw_expected, 'ipc_run_c - echo hello world' );
 
 my $hw_ref = ipc_run_c( { cmd => 'exho hello world' } );
@@ -84,7 +85,19 @@ is( @seq, @expected_seq, 'ipc_run_c - multiline output' );
 #======================================#
 
 my $buf = qw{};
-ok( ipc_run_e( { cmd => 'echo hello world', buf => \$buf } ) );
+ok( ipc_run_e( { cmd => 'echo hello world', buf => \$buf, } ) );
+is( $buf, $hw_expected . "\n", 'ipc_run_e - hello world' );
+
+# $buf = qw{};
+# ok( ipc_run_e( { cmd => 'echo hello world', buf => \$buf, debug => 1 } ) );
+# is( $buf, $hw_expected . "\n", 'ipc_run_e - hello world' );
+
+$buf = qw{};
+ok( ipc_run_e( { cmd => 'echo hello world', buf => \$buf, verbose => 1 } ) );
+is( $buf, $hw_expected . "\n", 'ipc_run_e - hello world' );
+
+$buf = qw{};
+ok( ipc_run_e( { cmd => 'echo hello world', buf => \$buf, timeout => 5 } ) );
 is( $buf, $hw_expected . "\n", 'ipc_run_e - hello world' );
 
 ok( !ipc_run_e( { cmd => 'exho hello world', buf => \$buf } ) );
