@@ -1,12 +1,13 @@
 package Dev::Util;
 
+use lib 'lib';
 use 5.018;
 use strict;
 use warnings;
+use version;
 use Carp;
-use lib 'lib';
 
-use version; our $VERSION = version->declare("v2.17.4");
+our $VERSION = version->declare("v2.17.4");
 
 use Exporter   qw( );
 use List::Util qw( uniq );
