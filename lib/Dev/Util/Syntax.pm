@@ -6,12 +6,14 @@ use utf8;
 use strict;
 use warnings;
 use autodie;
+use version;
+use Readonly;
 use open qw(:std :utf8);
 
 use Import::Into;
 use Module::Runtime;
 
-use version; our $VERSION = version->declare("v2.17.4");
+our $VERSION = version->declare("v2.17.4");
 
 sub importables {
     my ($class) = @_;
