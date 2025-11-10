@@ -4,7 +4,6 @@ use lib 'lib';
 use Dev::Util::Syntax;
 use Exporter qw(import);
 
-use File::Temp;
 use Term::ReadKey;
 use Term::ANSIColor;
 use IO::Interactive qw(is_interactive);
@@ -63,7 +62,7 @@ sub display_menu {
     my %choice_hash = map { $choices_ref->[$_] => $_ } 0 .. $#{ $choices_ref };
 
     my $chosen = IO::Prompt::prompt(
-                                     $msg,
+                                     -prompt => $msg,
                                      -onechar,
                                      -menu    => $choices_ref,
                                      -default => 'a'
@@ -85,17 +84,17 @@ sub yes_no_prompt {
     }
 
     my $msg = $settings->{ prepend };
-    $msg .= $settings->{ text } || '';
+    $msg .= $settings->{ text } || q{};
     $msg .= $ynd;
     $msg .= $settings->{ append };
 
     return
         IO::Prompt::prompt(
-                            $msg,
+                            -prompt => $msg,
                             -onechar,
                             -default => ( $settings->{ default } ) ? 'Y' : 'N',
                             -yes_no,
-                            -require => { "Please choose$ynd: " => qr/[YN]/i }
+                            -require => { "Please choose${ynd}: " => qr/[YN]/i }
                           );
 }
 
@@ -103,12 +102,12 @@ sub prompt {
     my ($settings) = @_;
 
     my $msg = $settings->{ prepend };
-    $msg .= $settings->{ text } || '';
+    $msg .= $settings->{ text } || q{};
     $msg .= " [$settings->{default}]" if ( defined $settings->{ default } );
     $msg .= $settings->{ append };
 
     my $prompt_args = { -prompt => $msg };
-    if ( $settings->{ noecho } ) { $prompt_args->{ -echo } = '' }
+    if ( $settings->{ noecho } ) { $prompt_args->{ -echo } = q{} }
     ## if ( $settings->{ okempty } ) { ... }    # TODO: figure out okempty sol'n
     if ( defined $settings->{ default } ) {
         $prompt_args->{ -default } = $settings->{ default };
