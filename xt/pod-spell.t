@@ -10,10 +10,15 @@ add_stopwords(<DATA>);
 all_pod_files_spelling_ok(qw( bin lib examples));
 __DATA__
 AnnoCPAN
+CMD
+FH
 Readonly
 SunOS
 UTF
+YYYYMMDD
 ascii
+buf
+cmd
 cmds
 dir
 dirs
@@ -22,8 +27,7 @@ ftypes
 importables
 lib
 msg
-neccessary
+noecho
 readonly
 rtn
 v2
-
