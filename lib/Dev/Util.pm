@@ -71,7 +71,7 @@ This is equivalent to:
 
 =head1 SUBROUTINES/METHODS
 
-Modules do specific functions.  Load as neccessary.
+Modules do specific functions.  Load as necessary.
 
 =cut
 
