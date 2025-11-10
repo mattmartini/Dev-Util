@@ -4,7 +4,7 @@ Dev::Util - Base modules for Perl Development
 
 # VERSION
 
-Version v2.15.4
+Version v2.17.4
 
 # SYNOPSIS
 
@@ -59,7 +59,7 @@ You can also look for information at:
 
     [https://metacpan.org/release/Dev-Util](https://metacpan.org/release/Dev-Util)
 
-# ACKNOWLEDGEMENTS
+# ACKNOWLEDGMENTS
 
 # LICENSE AND COPYRIGHT
 

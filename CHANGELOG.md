@@ -4,6 +4,39 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### 🚀 Features
+
+- *(mk_temp_file)* Autoflush temp file, don't unlink it
+
+### 🚜 Refactor
+
+- *(ipc_run)* [**breaking**] Rename functions ipc_run_{l,s} to ipc_run_{c,e}
+- *(query)* Code clean up
+
+### 🧪 Testing
+
+- *(const)* Fix test diagnostic messages
+- *(spelling)* Add spell check for pod documentation
+- *(boilerplate)* Update list of submodules
+- *(coverage)* Add tests for better conditional coverage
+- *(read_list)* Add tests for read_list
+- *(query)* Add tests for query module
+
+### 🎨 Styling
+
+- *(test)* Fix typo in test message
+- *(spelling)* Fix mis-spelling of ACKNOWLEDGMENTS
+
+### 🚧 Build
+
+- *(docs)* Add make manifest and make signature
+
+## [version/v2.15.4] - 2025-11-07
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* Update version minor level
+
 ### 🚜 Refactor
 
 - *(file)* [**breaking**] Move functions to File from Utils

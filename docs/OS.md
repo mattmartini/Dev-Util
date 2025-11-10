@@ -4,7 +4,7 @@ Dev::Util::OS - OS discovery and functions
 
 # VERSION
 
-Version v2.15.4
+Version v2.17.4
 
 # SYNOPSIS
 
@@ -24,8 +24,8 @@ OS discovery and functions
     is_linux
     is_mac
     is_sunos
-    ipc_run_l
-    ipc_run_s
+    ipc_run_e
+    ipc_run_c
 
 # SUBROUTINES
 
@@ -59,13 +59,13 @@ Return true if the current system is SunOS.
 
     my $system_is_sunOS = is_sunos();
 
-## **ipc\_run\_l**
-
-Run an external program and return it's output.
-
-## **ipc\_run\_s**
+## **ipc\_run\_e**
 
 Run an external program and return the status of it's execution.
+
+## **ipc\_run\_c**
+
+Run an external program, capture its output.  Return the output or return undef on failure.
 
 # AUTHOR
 
@@ -97,7 +97,7 @@ You can also look for information at:
 
     [https://metacpan.org/release/Dev-Util](https://metacpan.org/release/Dev-Util)
 
-# ACKNOWLEDGEMENTS
+# ACKNOWLEDGMENTS
 
 # LICENSE AND COPYRIGHT
 

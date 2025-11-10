@@ -36,10 +36,10 @@ t/perlcriticrc
 t/perltidy.t
 test.pl
 VERSION
-xt/00-report-prereqs.dd
 xt/00-report-prereqs.t
 xt/boilerplate.t
 xt/kwalitee.t
 xt/manifest_check.t
 xt/pod-coverage.t
+xt/pod-spell.t
 xt/pod.t
