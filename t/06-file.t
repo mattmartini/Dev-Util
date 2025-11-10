@@ -1,14 +1,14 @@
 #!/usr/bin/env perl
 
-use Test2::V0;
 use lib 'lib';
+use Test2::V0;
 
 use Dev::Util::Syntax;
 use Dev::Util qw(::OS ::Query ::File);
 
 use Socket;
 
-plan tests => 55;
+plan tests => 57;
 
 #======================================#
 #           Make test files            #
@@ -24,7 +24,7 @@ my $no_dir  = '/nonexistant_dir';
 
 my $tff = $td . "/tempfile.$$.test";
 open( my $tff_h, '>', $tff ) or croak "Can't open file for writing\n";
-print $tff_h "Owner Persist Iris Seven";
+print { $tff_h } "Owner Persist\nIris Seven\n#Fence\n\n";
 close($tff_h);
 
 my $tsl = $td . "/symlink.$$.test";
@@ -92,7 +92,7 @@ is( file_is_empty($tff), 0, 'file_is_empty - non-empty file returns false' );
 #           file_size_equals           #
 #======================================#
 
-is( file_size_equals( $tff, 24 ),
+is( file_size_equals( $tff, 33 ),
     1, 'file_size_equals - correct size returns true' );
 is( file_size_equals( $td, 1 ),
     0, 'file_size_equals - incorrect size returns false' );
@@ -343,5 +343,13 @@ is( $file_mtime, '1708449443', 'status_for - mtime of file' );
 #======================================#
 #              read_list               #
 #======================================#
+my $expected_scalar = "Owner Persist\nIris Seven\n#Fence\n\n";
+my $scalar_list     = read_list($tff);
+is( $scalar_list, $expected_scalar, 'read_list - scarlar context' );
+
+# comments (begins with #) and blank lines are skipped
+my @expected_array = ( 'Owner Persist', 'Iris Seven' );
+my @array_list     = read_list($tff);
+is( @array_list, @expected_array, 'read_list - list context' );
 
 done_testing;
