@@ -4,11 +4,10 @@ use Test2::V0;
 use lib 'lib';
 
 use Dev::Util::Syntax;
-use Dev::Util qw(::OS ::Query ::File);
+use Dev::Util::Query qw(:all);
+use IO::Interactive  qw(is_interactive);
 
-use Socket;
-
-plan tests => 1;
+plan tests => 4;
 
 #======================================#
 #                banner                #
@@ -23,6 +22,8 @@ my $expected = <<'EOW';
 
 EOW
 
+banner("Hello World");
+
 my $output;
 open( my $outputFH, '>', \$output ) or croak;
 banner( "Hello World", $outputFH );
@@ -31,35 +32,46 @@ close $outputFH;
 is( $output, $expected, 'Banner Test' );
 
 #======================================#
-#           Make test files            #
-#======================================#
-
-my $test_file = 't/perlcriticrc';
-
-my $td = mk_temp_dir();
-my $tf = mk_temp_file($td);
-
-my $no_file = '/nonexistant_file';
-my $no_dir  = '/nonexistant_dir';
-
-my $tff = $td . "/tempfile.$$.test";
-open( my $tff_h, '>', $tff ) or croak "Can't open file for writing\n";
-print $tff_h "Owner Persist Iris Seven";
-close($tff_h);
-
-my $tsl = $td . "/symlink.$$.test";
-symlink( $tff, $tsl );
-
-socket( my $ts, PF_INET, SOCK_STREAM, ( getprotobyname('tcp') )[2] );
-my $trf = '/bin/cat';
-my $dnf = '/dev/null';
-
-#======================================#
 #             display_menu             #
 #======================================#
+SKIP: {
+    skip "Non-interactive test enviornment", 1 if ( !is_interactive() );
+    my $message = 'Pick a choice from the list:';
+    my @items   = qw{ apple pear peach banana };
+    my $choice  = display_menu( $message, \@items );
+    is( $choice, 0, 'display_menu -> apple' );
+}
 
-# my $msg    = 'Pick a choice from the list:';
-# my @items  = ( 'choice one', 'choice two', 'choice three', 'ab', );
-# my $choice = display_menu( $msg, @items );
+#======================================#
+#            yes_no_prompt             #
+#======================================#
+SKIP: {
+    skip "Non-interactive test enviornment", 1 if ( !is_interactive() );
+    my $choice = yes_no_prompt(
+                                { text    => "Rename Files?",
+                                  default => 1,
+                                  prepend => '>' x 3,
+                                  append  => ': '
+                                }
+                              );
+    is( $choice, 'y', 'yes_no_prompt -> y' );
+}
+
+#======================================#
+#                prompt                #
+#======================================#
+SKIP: {
+    skip "Non-interactive test enviornment", 1 if ( !is_interactive() );
+    my $choice = prompt(
+                         { text    => "Move Files Daily or Monthly",
+                           valid   => [ 'daily', 'monthly' ],
+                           default => 'daily',
+                           prepend => '> ' x 3,
+                           append  => ': ',
+                           noecho  => 0
+                         }
+                       );
+    is( $choice, 'daily', 'prompt -> daily' );
+}
 
 done_testing;
