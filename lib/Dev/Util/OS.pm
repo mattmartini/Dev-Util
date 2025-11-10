@@ -131,6 +131,8 @@ OS discovery and functions
     my $hostname = get_hostname();
     my $system_is_linux = is_linux();
     ...
+    my $status = ipc_run_e( { cmd => 'echo hello world', buf => \$buf } );
+    my @seq = ipc_run_c( { cmd => 'seq 1 10', } );
 
 =head1 EXPORT
 
@@ -174,13 +176,31 @@ Return true if the current system is SunOS.
 
     my $system_is_sunOS = is_sunos();
 
-=head2 B<ipc_run_e>
+=head2 B<ipc_run_e(ARGS_HASH)>
 
-Run an external program and return the status of it's execution.
+Execute an external program and return the status of it's execution.
+B<ARGS_HASH:>
+{ cmd => CMD, buf => BUFFER_REF, verbose => VERBOSE_BOOL, timeout => SECONDS, debug => DEBUG_BOOL }
 
-=head2 B<ipc_run_c>
+C<CMD> The external command to execute
 
-Run an external program, capture its output.  Return the output or return undef on failure.
+C<BUFFER_REF> A reference to a buffer
+
+C<VERBOSE_BOOL:optional> 1 (default) for verbose output, 0 not so much
+
+C<SECONDS:optional> number of seconds to wait for CMD to execute, default: 10 sec
+
+C<DEBUG_BOOL: optional> Debug flag, default: 0
+
+    my $status = ipc_run_e( { cmd => 'echo hello world', verbose => 1, timeout => 8 } );
+
+=head2 B<ipc_run_c(ARGS_HASH)>
+
+Capture the output of an external program.  Return the output or return undef on failure.
+B<ARGS_HASH:>
+{ cmd => CMD, buf => BUFFER_REF, verbose => VERBOSE_BOOL, timeout => SECONDS, debug => DEBUG_BOOL }
+
+    my @seq = ipc_run_c( { cmd => 'seq 1 10', } );
 
 =head1 AUTHOR
 

@@ -143,7 +143,7 @@ sub prompt {
 
 =head1 NAME
 
-Dev::Util::Query - General utility functions for programming
+Dev::Util::Query - Functions to prompt user for input, y/n, or menus.
 
 =head1 VERSION
 
@@ -151,11 +151,9 @@ Version v2.17.4
 
 =head1 SYNOPSIS
 
-Dev::Util::Query - provides functions to assist working with files and dirs, menus and prompts, and running external programs.
+Dev::Util::Query - provides functions to ask the user for input.
 
     use Dev::Util::Query;
-
-
 
     banner( "Hello World", $outputFH );
 
@@ -163,6 +161,15 @@ Dev::Util::Query - provides functions to assist working with files and dirs, men
     my @items  = ( 'choice one', 'choice two', 'choice three', );
     my $choice = display_menu( $msg, \@items );
 
+
+    my $action = yes_no_prompt(
+                           { text    => "Rename Files?", default => 1, });
+
+    my $dir = prompt(
+                      { text    => "Enter Destination Dir",
+                        valid   => \&dir_writable,
+                      }
+                    );
 
 =head1 EXPORT_TAGS
 
@@ -186,6 +193,17 @@ Dev::Util::Query - provides functions to assist working with files and dirs, men
 
 =head1 SUBROUTINES
 
+=head2 B<banner(MESSAGE, FH)>
+
+Print a banner message on the supplied file handle (defaults to C<STDOUT>)
+
+    banner( "Hello World" );
+    banner( "Hello World", $outputFH );
+
+C<MESSAGE> The message to display in the banner
+
+C<FH> is a file handle where the banner will be output, default: STDOUT
+
 =head2 B<display_menu(MSG,ITEMS)>
 
 Display a simple menu of options. The choices come from an array.  Returns the index of the choice.
@@ -199,53 +217,72 @@ C<ITEMS> a reference to an array of the choices to list
     display_menu( $msg, \@items );
 
 
-=head2 B<prompt>
+=head2 B<yes_no_prompt(ARGS_HASH)>
 
-Prompt user for input
+Prompt user for a yes or no response.  Takes a single character for input, must be C<[yYnN\n]>.
+A carriage return will return the default.  Returns 1 for yes, 0 for no.
 
-=head3 settings
+B<ARGS_HASH:>
+{ text => TEXT, default => DEFAULT_BOOL, prepend => PREPEND, append => APPEND }
 
-=over 4
+C<TEXT> The text of the prompt.
 
-=item msg
+C<DEFAULT_BOOL> Set the default response: 1 -> Yes ([Y]/N), 0 -> No (Y/[N]), undef -> none
 
-text to display
+C<PREPEND> Text to prepend to TEXT
 
-=item default
+C<APPEND> Text to append to TEXT
 
-default value, if any
+    my $action = yes_no_prompt(
+                           { text    => "Rename Files?",
+                             default => 1,
+                             prepend => '>' x 3,
+                             append  => ': '
+                           }
+                         );
 
-=back
+=head2 B<prompt(ARGS_HASH)>
 
-=head2 B<yes_no_prompt>
+Prompt user for input. 
 
-boolean prompt
+B<ARGS_HASH:>
+{ text => TEXT, default => DEFAULT, valid => VALID, prepend => PREPEND, append => APPEND, noecho => ECHO_BOOL }
 
-=head3 settings
+C<DEFAULT> Set the default response, optionally.
 
-=over 4
+C<VALID> Ensures the response is valid.  Can be a list or array reference, in which case 
+the values will be presented as a menu.  Alternately, it can be a code ref, where the 
+subroutine is run with C<$_> set to the response.  An invalid response will re-prompt 
+the user for input.
 
-=item msg
+C<ECHO_BOOL> Normally (the default 0) text will be echoed as it is typed.  If set to 1
+text will not be echoed back to the screen.
 
-text to display
+    my $interval = prompt(
+                           { text    => "Move Files Daily or Monthly",
+                             valid   => [ 'daily', 'monthly' ],
+                             default => 'daily',
+                             prepend => '> ' x 3,
+                             append  => ': ',
+                             noecho  => 0
+                           }
+                         );
+    my $dir = prompt(
+                      { text    => "Enter Destination Dir",
+                        valid   => \&dir_writable,
+                        prepend => '<' x 3,
+                        append  => ': '
+                      }
+                    );
+    my $color = prompt(
+                        { text    => "What is your favorite color",
+                          prepend => '.' x 3,
+                          append  => ': '
+                        }
+                      );
 
-=item default
-
-0 --> no, 1 --> yes, undef --> none
-
-=back
-
-Returns: 1 -- yes, 0 -- no
-
-
-=head2 B<banner>
-
-Print a banner message on the supplied file handle (defaults to C<STDOUT>)
-
-    banner( "Hello World", $outputFH );
-
-C<$outputFH> is a file handle where the banner will be output
-
+B<Note>: The API for this function is maintained to support the existing code base that uses it.
+It would probably be better to use C<IO::Prompter> for new code.
 
 =head1 AUTHOR
 

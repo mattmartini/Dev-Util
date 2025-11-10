@@ -482,6 +482,11 @@ Dev::Util::File - provides functions to assist working with files and dirs, menu
     my $file_date     = stat_date( $test_file, 0, 'daily' );    # 20240221
     my $file_date     = stat_date( $test_file, 1, 'monthly' );  # 2024/02
 
+    my $mtime =  status_for($file)->{mtime}
+
+    my $scalar_list = read_list(FILE);
+    my @array_list  = read_list(FILE);
+
 =head1 EXPORT_TAGS
 
 =over 4
@@ -739,9 +744,13 @@ Create a temporary file in the supplied dir. F</tmp> is the default if no dir gi
 
     my $tf = mk_temp_file($td);
 
-=head2 B<stat_date>
+=head2 B<stat_date(FILE, DIR_FORMAT, DATE_FORMAT)>
 
 Return the stat date of a file
+
+C<DIR_FORMAT> Style of date, include slashes? 0: YYYYMMDD, 1: YYYY/MM/DD 
+
+C<DATE_FORMAT> Granularity of date: daily: YYYYMMDD, monthly: YYYY/MM 
 
     my $file_date     = stat_date( $test_file, 0, 'daily' );    # 20240221
     my $file_date     = stat_date( $test_file, 1, 'monthly' );  # 2024/02
@@ -754,7 +763,8 @@ Return the stat date of a file
 
 Return hash_ref of file stat info.
 
-    print status_for($file)->{mtime}
+    my $stat_info_ref = status_for($file);
+    my $mtime = $stat_info_ref->{mtime};
 
 Available keys:
 
@@ -762,7 +772,13 @@ Available keys:
 
 =head2 B<read_list>
 
-Read a list from an input file rtn an array of lines
+Read a list from an input file return an array of lines if called in list context.
+If called by scalar context it will slurp the whole file and return it as a scalar.
+Comments (begins with #) and blank lines are skipped.
+
+    my $scalar_list = read_list(FILE);
+    my @array_list  = read_list(FILE);
+
 
 =head1 AUTHOR
 
