@@ -3,6 +3,8 @@ package Dev::Util::File;
 use lib 'lib';
 use Dev::Util::Syntax;
 use Exporter qw(import);
+use File::Temp;
+use IO::Handle;
 
 our $VERSION = version->declare("v2.15.4");
 
@@ -363,10 +365,11 @@ sub mk_temp_file {
     my $temp_file = File::Temp->new(
                                      DIR    => $temp_dir,
                                      SUFFIX => '.test',
-                                     UNLINK => 1
+                                     UNLINK => 0
                                    );
+    $temp_file->autoflush();
 
-    print $temp_file 'super blood wolf moon' . "\n";
+    # print { $temp_file } 'super blood wolf moon' . "\n";
 
     return ($temp_file);
 }
