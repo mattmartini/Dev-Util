@@ -4,8 +4,6 @@ use lib 'lib';
 use Dev::Util::Syntax;
 use Exporter qw(import);
 
-use Term::ReadKey;
-use Term::ANSIColor;
 use IO::Interactive qw(is_interactive);
 use IO::Prompt      qw();                 # don't import prompt
 
