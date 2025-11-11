@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [version/v2.17.17] - 2025-11-11
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* Update version to v2.17.17
 
 ### 🚜 Refactor
 
