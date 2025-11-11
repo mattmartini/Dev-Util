@@ -4,9 +4,42 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### 🚜 Refactor
+
+- *(use)* Clean up use statements
+- *(use)* Clean up use statements
+- *(use)* Remove un-needed modules
+- *(makefile)* Add METE_MERGE info. Update PREREQ_PM & TEST_REQUIRES
+
+### 🧪 Testing
+
+- *(spell)* Add to spelling whitelist
+- *(boilerplate)* Fix typo for README.md
+
+### 📚 Documentation
+
+- *(pod)* Add function descriptions
+- *(readme)* Convert README to Markdown
+- *(readme)* Customize README.md for this module and sub-modules
+- *(pod)* Updated and corrected pod documentation for modules
+
+### 🎨 Styling
+
+- *(typo)* Fix spelling mistake
+
+### 🚧 Build
+
+- *(makefile)* Update Prereq_pm with needed modules
+
+## [version/v2.17.4] - 2025-11-10
+
 ### 🚀 Features
 
 - *(mk_temp_file)* Autoflush temp file, don't unlink it
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* Update version to v2.17.4
 
 ### 🚜 Refactor
 

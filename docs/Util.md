@@ -4,7 +4,7 @@ Dev::Util - Base modules for Perl Development
 
 # VERSION
 
-Version v2.17.4
+Version v2.17.17
 
 # SYNOPSIS
 
@@ -19,15 +19,16 @@ This is equivalent to:
 
 # SUBROUTINES/METHODS
 
-Modules do specific functions.  Load as neccessary.
+Modules do specific functions.  Load as necessary.
 
 # SEE ALSO
 
-[Dev::Util::Disks](https://metacpan.org/pod/Dev%3A%3AUtil%3A%3ADisks),
-[Dev::Util::Syntax](https://metacpan.org/pod/Dev%3A%3AUtil%3A%3ASyntax),
-[Dev::Util::Utils](https://metacpan.org/pod/Dev%3A%3AUtil%3A%3AUtils),
+[Dev::Util::Backup](https://metacpan.org/pod/Dev%3A%3AUtil%3A%3ABackup),
+[Dev::Util::Const](https://metacpan.org/pod/Dev%3A%3AUtil%3A%3AConst),
+[Dev::Util::File](https://metacpan.org/pod/Dev%3A%3AUtil%3A%3AFile),
 [Dev::Util::OS](https://metacpan.org/pod/Dev%3A%3AUtil%3A%3AOS),
-[Dev::Util::Backup](https://metacpan.org/pod/Dev%3A%3AUtil%3A%3ABackup)
+[Dev::Util::Query](https://metacpan.org/pod/Dev%3A%3AUtil%3A%3AQuery)
+[Dev::Util::Syntax](https://metacpan.org/pod/Dev%3A%3AUtil%3A%3ASyntax),
 
 # AUTHOR
 

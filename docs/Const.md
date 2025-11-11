@@ -4,7 +4,7 @@ Dev::Util::Const - Defines named constants as Readonly.
 
 # VERSION
 
-Version v2.17.4
+Version v2.17.17
 
 # SYNOPSIS
 
@@ -91,7 +91,7 @@ You can also look for information at:
 
 # LICENSE AND COPYRIGHT
 
-This software is Copyright © 2019-2025 by Matt Martini.
+This software is Copyright © 2024-2025 by Matt Martini.
 
 This is free software, licensed under:
 

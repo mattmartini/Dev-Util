@@ -4,7 +4,7 @@ Dev::Util::Backup - backup functions
 
 # VERSION
 
-Version v2.17.4
+Version v2.17.17
 
 # SYNOPSIS
 
@@ -55,8 +55,8 @@ Matt Martini, `<matt at imaginarywave.com>`
 # BUGS
 
 Please report any bugs or feature requests to `bug-dev-util at rt.cpan.org`, or through
-the web interface at [https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util](https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util).  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
+the web interface at [https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util](https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util).  I will
+be notified, and then you'll automatically be notified of progress on your bug as I make changes.
 
 # SUPPORT
 
@@ -70,6 +70,10 @@ You can also look for information at:
 
     [https://rt.cpan.org/NoAuth/Bugs.html?Dist=Dev-Util](https://rt.cpan.org/NoAuth/Bugs.html?Dist=Dev-Util)
 
+- AnnoCPAN: Annotated CPAN documentation
+
+    [http://annocpan.org/dist/Dev-Util](http://annocpan.org/dist/Dev-Util)
+
 - CPAN Ratings
 
     [https://cpanratings.perl.org/d/Dev-Util](https://cpanratings.perl.org/d/Dev-Util)
@@ -78,9 +82,11 @@ You can also look for information at:
 
     [https://metacpan.org/release/Dev-Util](https://metacpan.org/release/Dev-Util)
 
+# ACKNOWLEDGMENTS
+
 # LICENSE AND COPYRIGHT
 
-This software is Copyright © 2024 by Matt Martini.
+This software is Copyright © 2001-2025 by Matt Martini.
 
 This is free software, licensed under:
 

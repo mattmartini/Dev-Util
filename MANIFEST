@@ -21,7 +21,7 @@ LICENSE
 make_docs.sh
 Makefile.PL
 MANIFEST			This list of files
-README
+README.md
 run_yath.sh
 SIGNATURE
 t/00-load.t

@@ -1,24 +1,32 @@
 # NAME
 
-Dev::Util::Query - General utility functions for programming
+Dev::Util::Query - Functions to prompt user for input, y/n, or menus.
 
 # VERSION
 
-Version v2.17.4
+Version v2.17.17
 
 # SYNOPSIS
 
-Dev::Util::Query - provides functions to assist working with files and dirs, menus and prompts, and running external programs.
+Dev::Util::Query - provides functions to ask the user for input.
 
     use Dev::Util::Query;
-
-
 
     banner( "Hello World", $outputFH );
 
     my $msg    = 'Pick a choice from the list:';
     my @items  = ( 'choice one', 'choice two', 'choice three', );
     my $choice = display_menu( $msg, \@items );
+
+
+    my $action = yes_no_prompt(
+                           { text    => "Rename Files?", default => 1, });
+
+    my $dir = prompt(
+                      { text    => "Enter Destination Dir",
+                        valid   => \&dir_writable,
+                      }
+                    );
 
 # EXPORT\_TAGS
 
@@ -29,6 +37,17 @@ Dev::Util::Query - provides functions to assist working with files and dirs, men
     - banner
 
 # SUBROUTINES
+
+## **banner(MESSAGE, FH)**
+
+Print a banner message on the supplied file handle (defaults to `STDOUT`)
+
+    banner( "Hello World" );
+    banner( "Hello World", $outputFH );
+
+`MESSAGE` The message to display in the banner
+
+`FH` is a file handle where the banner will be output, default: STDOUT
 
 ## **display\_menu(MSG,ITEMS)**
 
@@ -42,43 +61,72 @@ Display a simple menu of options. The choices come from an array.  Returns the i
     my @items = qw( hearts clubs spades diamonds );
     display_menu( $msg, \@items );
 
-## **prompt**
+## **yes\_no\_prompt(ARGS\_HASH)**
 
-Prompt user for input
+Prompt user for a yes or no response.  Takes a single character for input, must be `[yYnN\n]`.
+A carriage return will return the default.  Returns 1 for yes, 0 for no.
 
-### settings
+**ARGS\_HASH:**
+{ text => TEXT, default => DEFAULT\_BOOL, prepend => PREPEND, append => APPEND }
 
-- msg
+`TEXT` The text of the prompt.
 
-    text to display
+`DEFAULT_BOOL` Set the default response: 1 -> Yes (\[Y\]/N), 0 -> No (Y/\[N\]), undef -> none
 
-- default
+`PREPEND` Text to prepend to TEXT
 
-    default value, if any
+`APPEND` Text to append to TEXT
 
-## **yes\_no\_prompt**
+    my $action = yes_no_prompt(
+                           { text    => "Rename Files?",
+                             default => 1,
+                             prepend => '>' x 3,
+                             append  => ': '
+                           }
+                         );
 
-boolean prompt
+## **prompt(ARGS\_HASH)**
 
-### settings
+Prompt user for input. 
 
-- msg
+**ARGS\_HASH:**
+{ text => TEXT, default => DEFAULT, valid => VALID, prepend => PREPEND, append => APPEND, noecho => ECHO\_BOOL }
 
-    text to display
+`DEFAULT` Set the default response, optionally.
 
-- default
+`VALID` Ensures the response is valid.  Can be a list or array reference, in which case 
+the values will be presented as a menu.  Alternately, it can be a code ref, where the 
+subroutine is run with `$_` set to the response.  An invalid response will re-prompt 
+the user for input.
 
-    0 --> no, 1 --> yes, undef --> none
+`ECHO_BOOL` Normally (the default 0) text will be echoed as it is typed.  If set to 1
+text will not be echoed back to the screen.
 
-Returns: 1 -- yes, 0 -- no
+    my $interval = prompt(
+                           { text    => "Move Files Daily or Monthly",
+                             valid   => [ 'daily', 'monthly' ],
+                             default => 'daily',
+                             prepend => '> ' x 3,
+                             append  => ': ',
+                             noecho  => 0
+                           }
+                         );
+    my $dir = prompt(
+                      { text    => "Enter Destination Dir",
+                        valid   => \&dir_writable,
+                        prepend => '<' x 3,
+                        append  => ': '
+                      }
+                    );
+    my $color = prompt(
+                        { text    => "What is your favorite color",
+                          prepend => '.' x 3,
+                          append  => ': '
+                        }
+                      );
 
-## **banner**
-
-Print a banner message on the supplied file handle (defaults to `STDOUT`)
-
-    banner( "Hello World", $outputFH );
-
-`$outputFH` is a file handle where the banner will be output
+**Note**: The API for this function is maintained to support the existing code base that uses it.
+It would probably be better to use `IO::Prompter` for new code.
 
 # AUTHOR
 
@@ -87,8 +135,8 @@ Matt Martini, `<matt at imaginarywave.com>`
 # BUGS
 
 Please report any bugs or feature requests to `bug-dev-util at rt.cpan.org`, or through
-the web interface at [https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util](https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util).  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
+the web interface at [https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util](https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util).  I will
+be notified, and then you'll automatically be notified of progress on your bug as I make changes.
 
 # SUPPORT
 

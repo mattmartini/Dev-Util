@@ -1,14 +1,14 @@
 # NAME
 
-Dev::Util::File - General utility functions for programming
+Dev::Util::File - General utility functions for files and directories.
 
 # VERSION
 
-Version v2.17.4
+Version v2.17.17
 
 # SYNOPSIS
 
-Dev::Util::File - provides functions to assist working with files and dirs, menus and prompts, and running external programs.
+Dev::Util::File - provides functions to assist working with files and dirs, menus and prompts.
 
     use Dev::Util::File;
 
@@ -35,6 +35,11 @@ Dev::Util::File - provides functions to assist working with files and dirs, menu
 
     my $file_date     = stat_date( $test_file, 0, 'daily' );    # 20240221
     my $file_date     = stat_date( $test_file, 1, 'monthly' );  # 2024/02
+
+    my $mtime =  status_for($file)->{mtime}
+
+    my $scalar_list = read_list(FILE);
+    my @array_list  = read_list(FILE);
 
 # EXPORT\_TAGS
 
@@ -240,9 +245,13 @@ Create a temporary file in the supplied dir. `/tmp` is the default if no dir giv
 
     my $tf = mk_temp_file($td);
 
-## **stat\_date**
+## **stat\_date(FILE, DIR\_FORMAT, DATE\_FORMAT)**
 
 Return the stat date of a file
+
+`DIR_FORMAT` Style of date, include slashes? 0: YYYYMMDD, 1: YYYY/MM/DD 
+
+`DATE_FORMAT` Granularity of date: daily: YYYYMMDD, monthly: YYYY/MM 
 
     my $file_date     = stat_date( $test_file, 0, 'daily' );    # 20240221
     my $file_date     = stat_date( $test_file, 1, 'monthly' );  # 2024/02
@@ -255,7 +264,8 @@ Return the stat date of a file
 
 Return hash\_ref of file stat info.
 
-    print status_for($file)->{mtime}
+    my $stat_info_ref = status_for($file);
+    my $mtime = $stat_info_ref->{mtime};
 
 Available keys:
 
@@ -263,7 +273,15 @@ Available keys:
 
 ## **read\_list**
 
-Read a list from an input file rtn an array of lines
+Read a list from an input file return an array of lines if called in list context.
+If called by scalar context it will slurp the whole file and return it as a scalar.
+Comments (begins with #) and blank lines are skipped.
+
+    my $scalar_list = read_list(FILE);
+    my @array_list  = read_list(FILE);
+
+**Note**: The API for this function is maintained to support the existing code base that uses it.
+It would probably be better to use `Perl6::Slurp` for new code.
 
 # AUTHOR
 
@@ -272,8 +290,8 @@ Matt Martini, `<matt at imaginarywave.com>`
 # BUGS
 
 Please report any bugs or feature requests to `bug-dev-util at rt.cpan.org`, or through
-the web interface at [https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util](https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util).  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
+the web interface at [https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util](https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util).  I will
+be notified, and then you'll automatically be notified of progress on your bug as I make changes.
 
 # SUPPORT
 
