@@ -179,6 +179,7 @@ Return true if the current system is SunOS.
 =head2 B<ipc_run_e(ARGS_HASH)>
 
 Execute an external program and return the status of it's execution.
+
 B<ARGS_HASH:>
 { cmd => CMD, buf => BUFFER_REF, verbose => VERBOSE_BOOL, timeout => SECONDS, debug => DEBUG_BOOL }
 
@@ -197,6 +198,7 @@ C<DEBUG_BOOL: optional> Debug flag, default: 0
 =head2 B<ipc_run_c(ARGS_HASH)>
 
 Capture the output of an external program.  Return the output or return undef on failure.
+
 B<ARGS_HASH:>
 { cmd => CMD, buf => BUFFER_REF, verbose => VERBOSE_BOOL, timeout => SECONDS, debug => DEBUG_BOOL }
 
@@ -209,8 +211,8 @@ Matt Martini, C<< <matt at imaginarywave.com> >>
 =head1 BUGS
 
 Please report any bugs or feature requests to C<bug-dev-util at rt.cpan.org>, or through
-the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
+the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util>.  I will
+be notified, and then you'll automatically be notified of progress on your bug as I make changes.
 
 =head1 SUPPORT
 
@@ -226,6 +228,10 @@ You can also look for information at:
 
 L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=Dev-Util>
 
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/Dev-Util>
+
 =item * CPAN Ratings
 
 L<https://cpanratings.perl.org/d/Dev-Util>
@@ -240,13 +246,12 @@ L<https://metacpan.org/release/Dev-Util>
 
 =head1 LICENSE AND COPYRIGHT
 
-This software is Copyright © 2024-2025 by Matt Martini.
+This software is Copyright © 2019-2025 by Matt Martini.
 
 This is free software, licensed under:
 
-  The GNU General Public License, Version 3, June 2007
+    The GNU General Public License, Version 3, June 2007
 
 =cut
 
 __END__
-

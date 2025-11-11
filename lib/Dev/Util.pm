@@ -87,11 +87,12 @@ Modules do specific functions.  Load as necessary.
 
 =head1 SEE ALSO
 
-L<Dev::Util::Disks>,
-L<Dev::Util::Syntax>,
-L<Dev::Util::Utils>,
+L<Dev::Util::Backup>,
+L<Dev::Util::Const>,
+L<Dev::Util::File>,
 L<Dev::Util::OS>,
-L<Dev::Util::Backup>
+L<Dev::Util::Query>
+L<Dev::Util::Syntax>,
 
 
 =head1 AUTHOR

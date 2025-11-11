@@ -446,7 +446,7 @@ sub read_list {
 
 =head1 NAME
 
-Dev::Util::File - General utility functions for programming
+Dev::Util::File - General utility functions for files and directories.
 
 =head1 VERSION
 
@@ -454,7 +454,7 @@ Version v2.17.4
 
 =head1 SYNOPSIS
 
-Dev::Util::File - provides functions to assist working with files and dirs, menus and prompts, and running external programs.
+Dev::Util::File - provides functions to assist working with files and dirs, menus and prompts.
 
     use Dev::Util::File;
 
@@ -779,6 +779,8 @@ Comments (begins with #) and blank lines are skipped.
     my $scalar_list = read_list(FILE);
     my @array_list  = read_list(FILE);
 
+B<Note>: The API for this function is maintained to support the existing code base that uses it.
+It would probably be better to use C<Perl6::Slurp> for new code.
 
 =head1 AUTHOR
 
@@ -787,8 +789,8 @@ Matt Martini, C<< <matt at imaginarywave.com> >>
 =head1 BUGS
 
 Please report any bugs or feature requests to C<bug-dev-util at rt.cpan.org>, or through
-the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
+the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util>.  I will
+be notified, and then you'll automatically be notified of progress on your bug as I make changes.
 
 =head1 SUPPORT
 
