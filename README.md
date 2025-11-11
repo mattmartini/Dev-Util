@@ -1,56 +1,47 @@
 # NAME
-Dev::Util -
+Dev::Util - Utilities useful in the development of perl programs
 
 # VERSION
 Version v2.17.4
 
 # SYNOPSIS
 
-This module provides tools to access the S.M.A.R.T. features of a system's disks.
-It will allow the collection of information on the installed disks and *RAID* arrays.
-Queries via `smartctl` will gather the current attributes of the disks.  Internal 
-tests of the disks can be initiated.  
+This module provides a standard set of tools to use for oft needed functionality.  
+Consistent feature setup is achieved.
+Standard constants are defined. OS identification and external executables are accessible. 
+Quick backups can be made. File and directory attributes are discovered. 
 
 The sub-modules provide this and other utility functionality.
 
 # SUB-MODULES
 The sub-modules provide the functionality described below.  For more details see `perldoc <Sub-module_Name>`.
 
-## Disk::SmartTools
-`Disk::SmartTools` provides a loader for sub-modules where a leading `::` denotes a package to load.
+## Dev::Util
+`Dev::Util` provides a loader for sub-modules where a leading `::` denotes a package to load.
 
-    use Disk::SmartTools qw( ::Disks ::Utils );
+    use Dev::Util qw( ::File ::OS );
 
 This is equivalent to:
 
-    use Disk::SmartTools::Disks qw(:all);
-    use Disk::SmartTools::Utils qw(:all);
+    use Dev::Util::File qw(:all);
+    use Dev::Util::OS   qw(:all);
 
-## Disk::SmartTools::Disks
-This module provides the disk related functions.
-
-    use Disk::SmartTools::Disks;
-
-    my $smart_cmd = get_smart_cmd();
-    my @disks = os_disks();
-    my @smart_disks = get_smart_disks(@disks);
-    $smart_test_started = smart_test_for($disk);
-
-## Disk::SmartTools::Syntax
+## Dev::Util::Syntax
 Provide consistent feature setup. Put all of the "use" setup cmds in one
-place. Then import them into other modules.
+place. Then import them into other modules.  Changes are made in one place, yet apply
+to all of the programs that use `Dev::Util::Syntax`
 
 Use this in other modules:
 
-    package Disk::SmartTools::Example;
+    package My::Module::Example;
 
-    use Disk::SmartTools::Syntax;
+    use Dev::Util::Syntax;
 
     # Rest of Code...
 
 This is equivalent to:
 
-    package Disk::SmartTools::Example;
+    package My::Module::Example;
 
     use feature :5.18;
     use utf8;
@@ -65,57 +56,55 @@ This is equivalent to:
 
     # Rest of Code...
 
+## Dev::Util::Const
+Defines named constants as Readonly, based on best practices.
 
-## Disk::SmartTools::Utils
+    $EMPTY_STR = q{};
+    $SPACE = q{ };
+    $SINGLE_QUOTE = q{'};
+    $DOUBLE_QUOTE = q{"};
+    $COMMA = q{,};
 
+## Dev::Util::OS
+OS discovery and functions to execute and collect data from external programs.
 
-## Disk::SmartTools::OS
-OS discovery and functions
-
-    use Disk::SmartTools::OS;
+    use Dev::Util::OS;
 
     my $OS = get_os();
     my $hostname = get_hostname();
     my $system_is_linux = is_linux();
+    my @seq = ipc_run_c( { cmd => 'seq 1 10', } );
+
+## Dev::Util::File
+Provides functions to assist working with files and dirs, menus and prompts.
+
+    use Dev::Util::File;
+
+    my $fexists     = file_exists('/path/to/somefile');
+    my $canwritef   = file_writable('/path/to/somefile');
+    my $isplainfile = file_is_plain('/path/to/somefile');
+    my $issymlink   = file_is_symbolic_link('/path/to/somefile');
+    my $canreadd    = dir_readable('/path/to/somedir');
+    my $slash_added_dir = dir_suffix_slash('/dir/path/no/slash');
+    my $td = mk_temp_dir();
+
+## Dev::Util::Query
+Provides functions to ask the user for input.
+
+    banner( "Hello World", $outputFH );
+    display_menu( $msg, \@items );
+    my $action = yes_no_prompt( { text    => "Rename Files?", default => 1, });
+
+## Dev::Util::Backup
+The backup function will make a copy of a file or dir with the date of the file
+appended. Directories are backed up by tar and gz.
+
+    my $backup_file = backup('myfile');
+    my $backup_dir  = backup('mydir/');
 
 # EXAMPLES
-Two example programs demonstrate how the `Disk::SmartTools` modules can be used.
+Example programs demonstrate how the `Dev::Util` modules can be used are in the F<examples> dir.
 
-## smart_show.pl
-Display SMART information on disks.
-
-    $ smart_show.pl
-
-Asks for the type of SMART information to display then reports for each
-physical disk in the system.
-
-    Display SMART information
-    -------------------------
-    0 - All SMART Info
-    1 - Info
-    2 - Overall-Health
-    3 - SelfTest History
-    4 - Error Log
-    5 - Temperature Graph
-    6 - Power_On_Hours
-    7 - Power_Cycle_Count
-    8 - Temperature_Celsius
-    9 - Reallocated_Sector_Ct
-    a - Offline_Uncorrectable
-    b - Raw_Read_Error_Rate
-    c - Seek_Error_Rate
-
-## smart_run_tests.pl
-Runs a SMART test on all disks.  Typically run as a crontab.
- 
-    $ smart_run_tests.pl <args>
-
-    --test_type : Length of SMART test, short (default) or long
-    --dry_run : Don't actually perform SMART test
-    --debug : Turn debugging on
-    --verbose : Generate debugging info on stderr
-    --silent : Do not print report on stdout
-    --help : This helpful information.
 
 # INSTALLATION
 
@@ -131,24 +120,31 @@ To install this module, run the following commands:
 After installing, you can find documentation for this module with the
 perldoc command.
 
-    perldoc Disk::SmartTools
+    perldoc Dev::Util
 
 You can also look for information at:
 
-- [RT, CPAN's request tracker (report bugs here)](https://rt.cpan.org/NoAuth/Bugs.html?Dist=Disk-SmartTools)
+- [RT, CPAN's request tracker (report bugs here)](https://rt.cpan.org/NoAuth/Bugs.html?Dist=Dev-Util)
 
-- [CPAN Ratings](https://cpanratings.perl.org/d/Disk-SmartTools)
+- [AnnoCPAN: Annotated CPAN documentation](http://annocpan.org/dist/Dev-Util)
 
-- [Search CPAN](https://metacpan.org/release/Disk-SmartTools)
+- [CPAN Ratings](https://cpanratings.perl.org/d/Dev-Util)
+
+- [Search CPAN](https://metacpan.org/release/Dev-Util)
+
+# HISTORY
+This module was originally developed under the name `MERM::Base`.
 
 # TEMPLATE
 
     module-starter \
-        --module=Disk::SmartTools \
-        --module=Disk::SmartTools::Syntax \
-        --module=Disk::SmartTools::OS \
-        --module=Disk::SmartTools::Utils \
-        --module=Disk::SmartTools::Disks \
+        --module=Dev::Util \
+        --module=Dev::Util::Backup \
+        --module=Dev::Util::Const \
+        --module=Dev::Util::File \
+        --module=Dev::Util::OS \
+        --module=Dev::Util::Query \
+        --module=Dev::Util::Syntax \
         --builder=ExtUtils::MakeMaker \
         --author='Matt Martini' \
         --email=matt@imaginarywave.com \
@@ -160,7 +156,7 @@ You can also look for information at:
 
 # LICENSE AND COPYRIGHT
 
-This software is Copyright © 2024-2025 by Matt Martini.
+This software is Copyright © 2001-2025 by Matt Martini.
 
 This is free software, licensed under:
 
