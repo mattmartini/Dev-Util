@@ -102,6 +102,15 @@ appended. Directories are backed up by tar and gz.
     my $backup_file = backup('myfile');
     my $backup_dir  = backup('mydir/');
 
+## Dev::Util::Sem
+Module to do Semaphore locking
+
+    use Dev::Util::Sem;
+
+    my $sem = Sem->new('mylock.sem');
+    ...
+    $sem->unlock;
+
 # EXAMPLES
 Example programs demonstrate how the `Dev::Util` modules can be used are in the F<examples> dir.
 
