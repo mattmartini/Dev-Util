@@ -63,12 +63,16 @@ WriteMakefile(
     ## NOECHO => '', # make debug output if empty
 );
 
-# XT_TEST_REQUIRES => { 'Test2::Bundle::More'           => 0,
-#                       'Test2::Require::AuthorTesting' => 0,
-#                       'Test::Kwalitee'                => 0,
-#                       'Test2::Require::Module'        => 0,
-#                       'Test::Pod::Coverage'           => 0,
-#                       'Pod::Coverage'                 => 0,
-#                       'Test::Spelling'                => 0,
+# XT_TEST_REQUIRES => { 'Pod::Coverage'                 => 0,
 #                       'Pod::Wordlist'                 => 0,
+#                       'Test2::Bundle::More'           => 0,
+#                       'Test2::Require::AuthorTesting' => 0,
+#                       'Test2::Require::Module'        => 0,
+#                       'Test::Kwalitee'                => 0,
+#                       'Test::Mojibake'                => 0,
+#                       'Test::Perl::Critic'            => 0,
+#                       'Test::PerlTidy'                => 0,
+#                       'Test::Pod::Coverage'           => 0,
+#                       'Test::Portability::Files'      => 0,
+#                       'Test::Spelling'                => 0,
 #                     },
