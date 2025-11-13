@@ -119,10 +119,6 @@ You can also look for information at:
 
 L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=Dev-Util>
 
-=item * CPAN Ratings
-
-L<https://cpanratings.perl.org/d/Dev-Util>
-
 =item * Search CPAN
 
 L<https://metacpan.org/release/Dev-Util>
