@@ -10,12 +10,6 @@ use FileHandle;
 use Carp();
 use Fcntl 'LOCK_EX';
 
-# TODO: remove Dumper   - only for dev
-use Data::Dumper::Simple;
-use Data::Printer class =>
-    { expand => 'all', show_methods => 'none', parents => 0 };
-$Data::Dumper::Indent = 3;    # pretty print with array indices
-
 our $VERSION = version->declare("v2.17.17");
 
 our @EXPORT_OK = qw(
@@ -33,23 +27,22 @@ sub new {
     my $class    = shift(@_);
     my $filespec = shift(@_) || Carp::croak("What filespec?");
     my $timeout  = shift     || 60;
- 
+
     my $lock_dir_parent = _get_locks_dir($filespec);
-p $lock_dir_parent;
+
     local $SIG{ ALRM } = sub { die "Timeout aquiring the lock on $filespec\n" };
     alarm $timeout if ( $timeout > 0 );
 
     $filespec =~ s{^.*/}{};
     $filespec = $lock_dir_parent . $filespec;
-p $filespec;
+
     my $fh = FileHandle->new;
     $fh->open( '>' . $filespec )
         or Carp::croak("Can't open semaphore file $filespec: $!\n");
     chmod 0666, $filespec;    # assuming you want it a+rw
-p $fh;
+
     flock $fh, LOCK_EX;
-    my $la = "lock aquired";
-    p $la;
+
     alarm 0;
     return bless { file => $filespec, 'fh' => $fh }, ref($class) || $class;
 }
