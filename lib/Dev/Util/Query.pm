@@ -7,7 +7,7 @@ use Exporter qw(import);
 use IO::Interactive qw(is_interactive);
 use IO::Prompt      qw();                 # don't import prompt
 
-our $VERSION = version->declare("v2.18.19");
+our $VERSION = version->declare("v2.18.26");
 
 our %EXPORT_TAGS = (
                      misc => [ qw(
@@ -145,7 +145,7 @@ Dev::Util::Query - Functions to prompt user for input, y/n, or menus.
 
 =head1 VERSION
 
-Version v2.18.19
+Version v2.18.26
 
 =head1 SYNOPSIS
 

@@ -10,7 +10,7 @@ use FileHandle;
 use Carp();
 use Fcntl 'LOCK_EX';
 
-our $VERSION = version->declare("v2.18.19");
+our $VERSION = version->declare("v2.18.26");
 
 our @EXPORT_OK = qw(
     new
@@ -87,7 +87,7 @@ Dev::Util::Sem -  Module to do Semaphore locking
 
 =head1 VERSION
 
-Version v2.18.19
+Version v2.18.26
 
 =head1 SYNOPSIS
 

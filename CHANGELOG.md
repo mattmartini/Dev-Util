@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🧪 Testing
+
+- Remove Data::{Dumper,Printer}. Set plan
+
+### 📚 Documentation
+
+- *(pod)* Clarify documentation
+- Documentation improvements
+- *(readme)* Use Dev::Util::Syntax automatically adds use strict and use warnings
+
 ## [release/20251114] - 2025-11-14
 
 ### 📚 Documentation
