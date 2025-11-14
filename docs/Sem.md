@@ -1,6 +1,6 @@
 # NAME
 
-Dev::Util::Backup - backup functions
+Dev::Util::Sem -  Module to do Semaphore locking
 
 # VERSION
 
@@ -8,51 +8,53 @@ Version v2.18.19
 
 # SYNOPSIS
 
-The backup function will make a copy of a file or dir with the date of the file appended.
-It returns the name of the new file.  Directories are backed up by `tar` and `gz`.
+To ensure that only one instance of a program runs at a time, 
+create a semaphore lock file. A second instance will wait until
+the first lock is unlocked before it can proceed or it times out.
 
-    use Dev::Util::Backup qw(backup);
+    use Dev::Util::Sem;
 
-    my $backup_file = backup('myfile');
-    say $backup_file;
-
-    my $backup_dir = backup('mydir/');
-    say $backup_dir;
-
-Will produce:
-
-    myfile_20251025
-    mydir_20251025.tar.gz
-
-If the file has changed, calling `backup('myfile')` again will create `myfile_20251025_1`.
-Each time `backup` is called the appended counter will increase by 1 if `myfile` has
-changed since the last time it was called.
-
-If the file has not changed, no new backup will be created.
-
-## Examples
-
-The `bu` program in the examples dir will take a list of files and dirs as args and make
-backups of them using `backup`.
+    my $sem = Sem->new('mylock.sem');
+    ...
+    $sem->unlock;
 
 # EXPORT
 
-    backup
+    new
+    unlock
 
-# SUBROUTINES
+# METHODS
 
-## **backup(FILE|DIR)**
+## **new**
 
-Return the name of the backup file.
+Initialize semaphore.  You can specify the full path to the lock, 
+and if the directory you specify exists and is writable then the 
+lock file will be placed there.  If you don't specify a directory
+or the one you specified is not writable, then a list of alternate
+lock dirs will be tried.
 
-    my $backup_file = backup('myfile');
-    my $backup_dir = backup('mydir/');
+    my $sem1 = Sem->new('/wherever/locks/mylock1.sem');
+    my $sem2 = Sem->new('mylock2.sem', TIMEOUT);
+
+`TIMEOUT` number of seconds to wait while trying to acquire a lock
+
+Alternate lock dirs: 
+
+    qw(/var/lock /var/locks /run/lock /tmp);
+
+## **unlock**
+
+Unlock semaphore and delete lock file.
+
+    $sem->unlock;
 
 # AUTHOR
 
 Matt Martini, `<matt at imaginarywave.com>`
 
 # BUGS
+
+`flock` may not work over `nfs`.
 
 Please report any bugs or feature requests to `bug-dev-util at rt.cpan.org`, or through
 the web interface at [https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util](https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dev-Util).  I will
