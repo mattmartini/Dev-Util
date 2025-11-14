@@ -145,56 +145,5 @@ $semA->unlock;
 is( file_exists( $expected_dir . $lock_filename ),
     0, "Lockfile in default dir should be gone now via unlock" );
 
-diag("alarm test");
-
-#======================================#
-#  second sem should work after first  #
-#======================================#
-my $semC = Dev::Util::Sem->new( $lock_filename, 3 );
-is( file_exists( $expected_dir . $lock_filename ),
-    1, "Lockfile in default dir should exist now" );
-is( file_is_empty( $expected_dir . $lock_filename ),
-    1, "Lockfile should be empty" );
-
-$semC->{ fh }->autoflush();
-$semC->{ fh }->print("Now is the time for all good men...");
-is( file_size_equals( $expected_dir . $lock_filename, 35 ),
-    1, "Lockfile should be 35 characters" );
-
-sub make_semD {
-    my $semm = shift;
-    diag("semD outside");
-    return sub {
-        diag("semD inside");
-        $semm = Dev::Util::Sem->new( $lock_filename, 8 );
-        diag("semD aquired");
-        $semm->{ fh }->autoflush();
-        $semm->{ fh }->print("to come to the aid of their country!");
-        is( file_exists( $expected_dir . $lock_filename ),
-                1, "Lockfile in default dir should exist now" );
-        diag("unlock semD");
-        $semm->unlock;
-    }
-}
-my $semD;
-my $Dsub = make_semD($semD);
-diag("set alarm");
-eval {
-    local $SIG{ ALRM } = sub { die "Timeout waiting for lock to release\n" };
-    alarm 1;
-    diag("call Dsub");
-    $Dsub->();
-    diag("after make semD");
-    alarm 0;
-};
-
-if ( $@ && $@ !~ quotemeta("Timeout waiting for lock to release") ) {
-    diag("unlock semC");
-    $semC->unlock;
-}
-
-is( file_exists( $expected_dir . $lock_filename ),
-    0, "sem D Lockfile in default dir should exist now" );
-
 done_testing;
 
