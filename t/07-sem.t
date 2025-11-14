@@ -8,13 +8,7 @@ use Dev::Util::Sem  qw(:all);
 use Dev::Util::File qw(:all);
 use IO::Handle;
 
-# TODO: remove Dumper   - only for dev
-use Data::Dumper::Simple;
-use Data::Printer class =>
-    { expand => 'all', show_methods => 'none', parents => 0 };
-$Data::Dumper::Indent = 3;    # pretty print with array indices
-
-# plan tests => 1;
+plan tests => 16;
 
 #======================================#
 #     _get_locks_dir - setup dirs      #
