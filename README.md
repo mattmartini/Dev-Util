@@ -56,6 +56,8 @@ This is equivalent to:
 
     # Rest of Code...
 
+**Note: `use Dev::Util::Syntax` automatically adds `use strict` and `use warnings` to the program.**
+
 ## Dev::Util::Const
 Defines named constants as Readonly, based on best practices.
 
