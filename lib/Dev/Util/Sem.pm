@@ -119,7 +119,7 @@ lock dirs will be tried.
     my $sem1 = Sem->new('/wherever/locks/mylock1.sem');
     my $sem2 = Sem->new('mylock2.sem', TIMEOUT);
 
-C<TIMEOUT> number of seconds to wait while trying to acquire a lock
+C<TIMEOUT> number of seconds to wait while trying to acquire a lock. Default = 60 seconds
 
 Alternate lock dirs: 
 

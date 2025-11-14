@@ -63,12 +63,12 @@ Version v2.18.19
 
 Dev::Util provides a loader for sub-modules where a leading :: denotes a package to load.
 
-    use Dev::Util qw( ::OS ::Utils );
+    use Dev::Util qw( ::OS ::File );
 
 This is equivalent to:
 
     user Dev::Util::OS    qw(:all);
-    user Dev::Util::Utils qw(:all);
+    user Dev::Util::File  qw(:all);
 
 =head1 SUBROUTINES/METHODS
 
@@ -93,6 +93,7 @@ L<Dev::Util::File>,
 L<Dev::Util::OS>,
 L<Dev::Util::Query>
 L<Dev::Util::Syntax>,
+L<Dev::Util::Sem>,
 
 
 =head1 AUTHOR

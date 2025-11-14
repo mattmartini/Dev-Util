@@ -10,12 +10,12 @@ Version v2.18.19
 
 Dev::Util provides a loader for sub-modules where a leading :: denotes a package to load.
 
-    use Dev::Util qw( ::OS ::Utils );
+    use Dev::Util qw( ::OS ::File );
 
 This is equivalent to:
 
     user Dev::Util::OS    qw(:all);
-    user Dev::Util::Utils qw(:all);
+    user Dev::Util::File  qw(:all);
 
 # SUBROUTINES/METHODS
 
@@ -29,6 +29,7 @@ Modules do specific functions.  Load as necessary.
 [Dev::Util::OS](https://metacpan.org/pod/Dev%3A%3AUtil%3A%3AOS),
 [Dev::Util::Query](https://metacpan.org/pod/Dev%3A%3AUtil%3A%3AQuery)
 [Dev::Util::Syntax](https://metacpan.org/pod/Dev%3A%3AUtil%3A%3ASyntax),
+[Dev::Util::Sem](https://metacpan.org/pod/Dev%3A%3AUtil%3A%3ASem),
 
 # AUTHOR
 

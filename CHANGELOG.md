@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file.
 
+## [release/20251114] - 2025-11-14
+
+### 📚 Documentation
+
+- *(changelog)* Update changelog
+
+### 🚧 Build
+
+- *(manifest)* Update manifest and signature file
+
+### Other
+
+- *(other)* Merge branch 'sem' - Create Sem module
+
+* sem:
+  build(manifest): Update manifest and signature file
+  docs(changelog): Update changelog
+  chore(version): Update version minor level
+  docs(pod): Expand the pod documentation
+  chore(example): Create simple example of semaphore locking
+  fix(diagnostics): Remove diagnostics code used in development
+  test(remove): Delete block testing second semaphore wait
+  feat(semaphor): Create Sem file locking module and tests
+  build(critic): Add _get_locks_dir to ProtectPrivateSubs
+  docs(links): Remove links to defunct websites: AnnoCPAN and CPAN Ratings
+  docs(contibuting): Document coding style for contributions
+  docs(contributing): Create a policy for contibutions to this project
+  fix(links): Remove links to defunct websites: AnnoCPAN and CPAN Ratings
+  chore(security): Add security policy tool. Create security policy.
+  build(support): Create support dir for development tools
+  build(makefile): Add IO::Prompt, App::Yath to PREREQ_PM and TEST_REQUIRES respectively
+  build(makefile): Add new tests in XT_TEST_REQUIRES
+  docs(readme): Add pod description for Dev::Util::Sem
+  test: Add xt tests for utf-8 and file name portability
+  test(pod): Rename pod.t to pod-syntax.t
+
 ## [version/v2.18.19] - 2025-11-14
 
 ### 🚀 Features
