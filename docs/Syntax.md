@@ -68,14 +68,6 @@ You can also look for information at:
 
     [https://rt.cpan.org/NoAuth/Bugs.html?Dist=Dev-Util](https://rt.cpan.org/NoAuth/Bugs.html?Dist=Dev-Util)
 
-- AnnoCPAN: Annotated CPAN documentation
-
-    [http://annocpan.org/dist/Dev-Util](http://annocpan.org/dist/Dev-Util)
-
-- CPAN Ratings
-
-    [https://cpanratings.perl.org/d/Dev-Util](https://cpanratings.perl.org/d/Dev-Util)
-
 - Search CPAN
 
     [https://metacpan.org/release/Dev-Util](https://metacpan.org/release/Dev-Util)
