@@ -4,9 +4,13 @@ Dev::Util::Sem -  Module to do Semaphore locking
 
 # VERSION
 
-Version v2.17.17
+Version v2.18.19
 
 # SYNOPSIS
+
+To ensure that only one instance of a program runs at a time, 
+create a semaphore lock file. A second instance will wait until
+the first lock is unlocked before it can proceed or it times out.
 
     use Dev::Util::Sem;
 
@@ -23,13 +27,24 @@ Version v2.17.17
 
 ## **new**
 
-Initialize semaphore
+Initialize semaphore.  You can specify the full path to the lock, 
+and if the directory you specify exists and is writable then the 
+lock file will be placed there.  If you don't specify a directory
+or the one you specified is not writable, then a list of alternate
+lock dirs will be tried.
 
-    my $sem = Sem->new('/wherever/locks/mylock.sem');
+    my $sem1 = Sem->new('/wherever/locks/mylock1.sem');
+    my $sem2 = Sem->new('mylock2.sem', TIMEOUT);
+
+`TIMEOUT` number of seconds to wait while trying to acquire a lock
+
+Alternate lock dirs: 
+
+    qw(/var/lock /var/locks /run/lock /tmp);
 
 ## **unlock**
 
-Unlock semaphore
+Unlock semaphore and delete lock file.
 
     $sem->unlock;
 

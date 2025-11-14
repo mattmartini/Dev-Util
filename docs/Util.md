@@ -4,7 +4,7 @@ Dev::Util - Base modules for Perl Development
 
 # VERSION
 
-Version v2.17.17
+Version v2.18.19
 
 # SYNOPSIS
 
