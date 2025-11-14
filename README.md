@@ -112,7 +112,7 @@ Module to do Semaphore locking
     $sem->unlock;
 
 # EXAMPLES
-Example programs demonstrate how the `Dev::Util` modules can be used are in the F<examples> dir.
+Example programs demonstrate how the `Dev::Util` modules can be used are in the `examples` dir.
 
 
 # INSTALLATION

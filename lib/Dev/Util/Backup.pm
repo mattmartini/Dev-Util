@@ -218,7 +218,7 @@ sub _file_diff {
 
 =head1 NAME
 
-Dev::Util::Backup - backup functions
+Dev::Util::Backup - Simple backup functions for files and dirs
 
 =head1 VERSION
 
