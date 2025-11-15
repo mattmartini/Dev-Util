@@ -7,7 +7,7 @@ use Dev::Util qw(::OS ::Query ::File);
 
 use Socket;
 
-plan tests => 57;
+# plan tests => 57;  # plan not set because some tests are OS or user_id dependent
 
 #======================================#
 #           Make test files            #
