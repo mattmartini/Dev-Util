@@ -314,7 +314,7 @@ is( dir_suffix_slash($test_dir_wo),
 #======================================#
 #              stat_date               #
 #======================================#
-
+local $ENV{ TZ } = 'America/New_York';    # avoid timezone problems
 system("touch -t  202402201217.23 $tf");
 my $expected_date = '20240220';
 my $file_date     = stat_date($tf);
