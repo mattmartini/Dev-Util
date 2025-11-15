@@ -2,13 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [version/v2.18.35] - 2025-11-15
 
 ### 🐛 Bug Fixes
 
 - *(test)* Remove the plan because number of tests is variable.
 - *(mode)* Change file permissions to allow access to test file
 - *(timezone)* Set timezone so all testers use the same one
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* Bump version patch level
 
 ### 🚜 Refactor
 
