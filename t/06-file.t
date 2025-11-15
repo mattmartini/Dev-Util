@@ -128,7 +128,7 @@ SKIP: {
 
 is( file_is_setuid($tff), 0,
     'file_is_setuid - non-setuid file returns false' );
-$mode = oct(4400);
+$mode = oct(4444);
 chmod $mode, $tff;
 is( file_is_setuid($tff), 1, 'file_is_setuid - setuid file returns true' );
 
@@ -138,7 +138,7 @@ is( file_is_setuid($tff), 1, 'file_is_setuid - setuid file returns true' );
 
 is( file_is_setgid($tff), 0,
     'file_is_setgid - non-setgid file returns false' );
-$mode = oct(2400);
+$mode = oct(2444);
 chmod $mode, $tff;
 is( file_is_setgid($tff), 1, 'file_is_setgid - setgid file returns true' );
 
@@ -148,7 +148,7 @@ is( file_is_setgid($tff), 1, 'file_is_setgid - setgid file returns true' );
 
 is( file_is_sticky($tff), 0,
     'file_is_sticky - non-sticky file returns false' );
-$mode = oct(1400);
+$mode = oct(1444);
 chmod $mode, $tff;
 is( file_is_sticky($tff), 1, 'file_is_sticky - sticky file returns true' );
 
