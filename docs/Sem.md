@@ -4,7 +4,7 @@ Dev::Util::Sem -  Module to do Semaphore locking
 
 # VERSION
 
-Version v2.18.31
+Version v2.18.35
 
 # SYNOPSIS
 

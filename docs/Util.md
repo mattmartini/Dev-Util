@@ -4,7 +4,7 @@ Dev::Util - Base modules for Perl Development
 
 # VERSION
 
-Version v2.18.31
+Version v2.18.35
 
 # SYNOPSIS
 
@@ -33,7 +33,7 @@ Modules do specific functions.  Load as necessary.
 
 # AUTHOR
 
-Matt Martini,  `<matt at imaginarywave.com>`
+Matt Martini, `<matt.martini at imaginarywave.com>`
 
 # BUGS
 

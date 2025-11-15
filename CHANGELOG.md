@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🐛 Bug Fixes
+
+- *(test)* Remove the plan because number of tests is variable.
+- *(mode)* Change file permissions to allow access to test file
+- *(timezone)* Set timezone so all testers use the same one
+
+### 🚜 Refactor
+
+- *(use)* Standarize module loading, remove use lib 'lib'
+
+## [release/2025/11/15/0912] - 2025-11-15
+
+### 📚 Documentation
+
+- *(changelog)* Update changelog
+
 ## [version/v2.18.31] - 2025-11-15
 
 ### ⚙️ Miscellaneous Tasks
