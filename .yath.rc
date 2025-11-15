@@ -1,6 +1,9 @@
-;[test]
+[test]
 ;-L
 
 [start]
--PMERM::Base::Syntax
--PMERM::Base::Utils
+--blib
+-PTest2::V0
+-PDev::Util::Syntax
+--reload
+--job-count 8:2
