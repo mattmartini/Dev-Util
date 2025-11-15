@@ -1,11 +1,10 @@
 package Dev::Util;
 
-use lib 'lib';
 use 5.018;
 use strict;
 use warnings;
 use version;
-use Carp;
+use Carp qw(carp);
 
 our $VERSION = version->declare("v2.18.31");
 
@@ -98,7 +97,7 @@ L<Dev::Util::Sem>,
 
 =head1 AUTHOR
 
-Matt Martini,  C<< <matt at imaginarywave.com> >>
+Matt Martini, C<< <matt.martini at imaginarywave.com> >>
 
 =head1 BUGS
 
