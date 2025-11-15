@@ -3,6 +3,8 @@
 use Test2::V0;
 use Test2::Require::AuthorTesting;
 
+use Dev::Util::Syntax;
+
 use Test::Spelling 0.17;
 use Pod::Wordlist;
 

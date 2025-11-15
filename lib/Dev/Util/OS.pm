@@ -1,8 +1,8 @@
 package Dev::Util::OS;
 
-use lib 'lib';
 use Dev::Util::Syntax;
 use Exporter qw(import);
+
 use IPC::Cmd qw[can_run run];
 
 our $VERSION = version->declare("v2.18.26");

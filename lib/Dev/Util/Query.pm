@@ -1,6 +1,5 @@
 package Dev::Util::Query;
 
-use lib 'lib';
 use Dev::Util::Syntax;
 use Exporter qw(import);
 

@@ -1,7 +1,5 @@
 package Dev::Util::Sem;
 
-use lib 'lib';
-
 use Dev::Util::Syntax;
 use Dev::Util::File qw(mk_temp_dir dir_writable dir_suffix_slash);
 use Exporter        qw(import);

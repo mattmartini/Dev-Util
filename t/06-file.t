@@ -1,6 +1,5 @@
 #!/usr/bin/env perl
 
-use lib 'lib';
 use Test2::V0;
 
 use Dev::Util::Syntax;

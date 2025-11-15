@@ -1,11 +1,12 @@
 #!/usr/bin/env perl
 
-use lib 'lib';
 use Test2::V0;
 use Test2::Tools::Exception qw(dies lives);
+
 use Dev::Util::Syntax;
 use Dev::Util::Sem  qw(:all);
 use Dev::Util::File qw(:all);
+
 use IO::Handle;
 
 plan tests => 16;

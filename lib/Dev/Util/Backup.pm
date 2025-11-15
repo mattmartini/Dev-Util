@@ -1,7 +1,5 @@
 package Dev::Util::Backup;
 
-use lib 'lib';
-
 use Dev::Util::Syntax;
 use Exporter qw(import);
 

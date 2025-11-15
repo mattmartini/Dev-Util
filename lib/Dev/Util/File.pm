@@ -1,8 +1,8 @@
 package Dev::Util::File;
 
-use lib 'lib';
 use Dev::Util::Syntax;
 use Exporter qw(import);
+
 use File::Temp;
 use IO::Handle;
 
