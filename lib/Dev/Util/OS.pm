@@ -5,7 +5,7 @@ use Exporter qw(import);
 
 use IPC::Cmd qw[can_run run];
 
-our $VERSION = version->declare("v2.18.26");
+our $VERSION = version->declare("v2.18.31");
 
 our @EXPORT_OK = qw(
     get_os
@@ -119,7 +119,7 @@ Dev::Util::OS - OS discovery and functions
 
 =head1 VERSION
 
-Version v2.18.26
+Version v2.18.31
 
 =head1 SYNOPSIS
 

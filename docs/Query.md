@@ -4,7 +4,7 @@ Dev::Util::Query - Functions to prompt user for input, y/n, or menus.
 
 # VERSION
 
-Version v2.18.26
+Version v2.18.31
 
 # SYNOPSIS
 

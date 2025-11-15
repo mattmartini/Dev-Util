@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🚜 Refactor
+
+- *(use)* Standarize module loading, remove use lib 'lib'
+- *(yath)* Add option to not use concurrency (--single)
+
+### 🧪 Testing
+
+- *(yath)* Update test configuration and options
+
+### 🚧 Build
+
+- *(git)* Ignore yath temp file lastlog.jsonl
+
+## [release/2025/11/14/0931] - 2025-11-14
+
+### 📚 Documentation
+
+- *(changelog)* Update changelog
+
 ## [version/v2.18.26] - 2025-11-14
 
 ### ⚙️ Miscellaneous Tasks
@@ -18,7 +39,7 @@ All notable changes to this project will be documented in this file.
 - Documentation improvements
 - *(readme)* Use Dev::Util::Syntax automatically adds use strict and use warnings
 
-## [release/20251114] - 2025-11-14
+## [release/2025/11/14/0059] - 2025-11-14
 
 ### 📚 Documentation
 
@@ -93,7 +114,7 @@ All notable changes to this project will be documented in this file.
 - *(support)* Create support dir for development tools
 - *(critic)* Add _get_locks_dir to ProtectPrivateSubs
 
-## [release/20251111] - 2025-11-11
+## [release/2025/11/11/1829] - 2025-11-11
 
 ### 📚 Documentation
 
