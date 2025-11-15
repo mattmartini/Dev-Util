@@ -7,9 +7,9 @@
 .prove
 Build
 Build.bat
-MANIFEST.bak
 Dev-Util-*
 Dev-Util-*.tar.gz
+MANIFEST.bak
 META.*
 MYMETA.*
 Makefile
@@ -18,6 +18,7 @@ _build/
 blib/
 cover_db/
 inc/
+lastlog.jsonl
 nytprof.out
 pm_to_blib
 pod2htm*.tmp
