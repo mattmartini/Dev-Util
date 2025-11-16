@@ -5,7 +5,7 @@ use Test2::V0;
 use Dev::Util::Syntax;
 use Dev::Util qw(::OS);
 
-plan tests => 17;
+plan tests => 18;
 
 #======================================#
 #             get_hostname             #
@@ -49,6 +49,17 @@ if ( $expected_os eq "Darwin" ) {
 }
 else {
     is( is_mac, 0, "is_mac - false if not macOS" );
+}
+
+#======================================#
+#                is_freebsd            #
+#======================================#
+
+if ( $expected_os eq "FreeBSD" ) {
+    is( is_freebsd, 1, "is_freebsd - true if freeBSD" );
+}
+else {
+    is( is_freebsd, 0, "is_freebsd - false if not freeBSD" );
 }
 
 #======================================#

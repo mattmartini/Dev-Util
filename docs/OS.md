@@ -55,6 +55,12 @@ Return true if the current system is MacOS (Darwin).
 
     my $system_is_macOS = is_mac();
 
+## **is\_FreeBSD**
+
+Return true if the current system is FreeBSD.
+
+    my $system_is_FreeBSD = is_freebsd();
+
 ## **is\_sunos**
 
 Return true if the current system is SunOS.

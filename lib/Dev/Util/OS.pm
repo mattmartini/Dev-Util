@@ -12,6 +12,7 @@ our @EXPORT_OK = qw(
     get_hostname
     is_linux
     is_mac
+    is_freebsd
     is_sunos
     ipc_run_c
     ipc_run_e
@@ -44,6 +45,15 @@ sub is_linux {
 
 sub is_mac {
     if ( get_os() eq "Darwin" ) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+sub is_freebsd {
+    if ( get_os() eq "FreeBSD" ) {
         return 1;
     }
     else {
@@ -169,6 +179,12 @@ Return true if the current system is Linux.
 Return true if the current system is MacOS (Darwin).
 
     my $system_is_macOS = is_mac();
+
+=head2 B<is_FreeBSD>
+
+Return true if the current system is FreeBSD.
+
+    my $system_is_FreeBSD = is_freebsd();
 
 =head2 B<is_sunos>
 

@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - Check for existence of files before deleting
 
+### 🚜 Refactor
+
+- *(test)* Remove the dependence on yath
+
 ### 🧪 Testing
 
 - *(boilerplate)* Add Dev::Util::Sem
