@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🐛 Bug Fixes
+
+- Check for existence of files before deleting
+
+### 🧪 Testing
+
+- *(boilerplate)* Add Dev::Util::Sem
+
+## [release/2025/11/15/1336] - 2025-11-15
+
+### 📚 Documentation
+
+- *(changelog)* Update changelog
+
 ## [version/v2.18.35] - 2025-11-15
 
 ### 🐛 Bug Fixes
@@ -65,7 +81,7 @@ All notable changes to this project will be documented in this file.
 - Documentation improvements
 - *(readme)* Use Dev::Util::Syntax automatically adds use strict and use warnings
 
-## [release/2025/11/14/0059] - 2025-11-14
+## [release/20251114] - 2025-11-14
 
 ### 📚 Documentation
 
@@ -140,7 +156,7 @@ All notable changes to this project will be documented in this file.
 - *(support)* Create support dir for development tools
 - *(critic)* Add _get_locks_dir to ProtectPrivateSubs
 
-## [release/2025/11/11/1829] - 2025-11-11
+## [release/20251111] - 2025-11-11
 
 ### 📚 Documentation
 
@@ -243,7 +259,7 @@ All notable changes to this project will be documented in this file.
   test(query): Convert to Query from Utils
   refactor(utils)!: Move Utils to Query
 
-## [version/v2.12.4] - 2025-11-06
+## [version/v2.16.4] - 2025-11-06
 
 ### 🚀 Features
 
