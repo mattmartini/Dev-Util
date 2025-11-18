@@ -13,6 +13,7 @@ our @EXPORT_OK = qw(
     is_linux
     is_mac
     is_freebsd
+    is_openbsd
     is_sunos
     ipc_run_c
     ipc_run_e
@@ -290,6 +291,8 @@ OS discovery and functions
     get_hostname
     is_linux
     is_mac
+    is_freebsd
+    is_openbsd
     is_sunos
     ipc_run_e
     ipc_run_c
@@ -320,11 +323,17 @@ Return true if the current system is MacOS (Darwin).
 
     my $system_is_macOS = is_mac();
 
-=head2 B<is_FreeBSD>
+=head2 B<is_freebsd>
 
 Return true if the current system is FreeBSD.
 
     my $system_is_FreeBSD = is_freebsd();
+
+=head2 B<is_openbsd>
+
+Return true if the current system is OpenBSD.
+
+    my $system_is_OpenBSD = is_openbsd();
 
 =head2 B<is_sunos>
 

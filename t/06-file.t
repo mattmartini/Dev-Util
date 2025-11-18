@@ -233,7 +233,7 @@ SKIP: {
     is( file_is_block($block_file),
         1, 'file_is_block - block file returns true' );
 }
-}
+
 is( file_is_block($tf), 0, 'file_is_block - non-block file returns false' );
 
 #======================================#
@@ -248,7 +248,7 @@ SKIP: {
     is( file_is_character($character_file),
         1, 'file_is_character - character file returns true' );
 }
-}
+
 is( file_is_character($tf), 0,
     'file_is_character - non-character file returns false' );
 
