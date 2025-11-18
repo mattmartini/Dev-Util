@@ -4,13 +4,22 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### 🚀 Features
+
+- *(os)* Add fn is_freebsd, and associated tests
+- *(os)* Add distro version hashes, is_openbsd sub
+- *(os)* Add functions is_freebsd and is_openbsd, with tests, docs
+
 ### 🐛 Bug Fixes
 
 - Check for existence of files before deleting
+- *(file)* Skip tests if setting setuid/setgid/sticky on test file fails
+- *(file)* Skip test (not skip_all) if block/char files is not avail
 
 ### 🚜 Refactor
 
 - *(test)* Remove the dependence on yath
+- *(tests)* Utilize Test2::Require::Module to ensure test modules are available
 
 ### 🧪 Testing
 
