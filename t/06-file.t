@@ -128,9 +128,13 @@ SKIP: {
 
 is( file_is_setuid($tff), 0,
     'file_is_setuid - non-setuid file returns false' );
+
 $mode = oct(4444);
-chmod $mode, $tff;
-is( file_is_setuid($tff), 1, 'file_is_setuid - setuid file returns true' );
+my $chmod_result = chmod $mode, $tff;
+SKIP: {
+    skip "Could not set setuid bit on test file", 1 unless ($chmod_result);
+    is( file_is_setuid($tff), 1, 'file_is_setuid - setuid file returns true' );
+}
 
 #======================================#
 #            file_is_setgid            #
@@ -138,9 +142,13 @@ is( file_is_setuid($tff), 1, 'file_is_setuid - setuid file returns true' );
 
 is( file_is_setgid($tff), 0,
     'file_is_setgid - non-setgid file returns false' );
+
 $mode = oct(2444);
-chmod $mode, $tff;
-is( file_is_setgid($tff), 1, 'file_is_setgid - setgid file returns true' );
+$chmod_result = chmod $mode, $tff;
+SKIP: {
+    skip "Could not set setgid bit on test file", 1 unless ($chmod_result);
+    is( file_is_setgid($tff), 1, 'file_is_setgid - setgid file returns true' );
+}
 
 #======================================#
 #            file_is_sticky            #
@@ -148,9 +156,13 @@ is( file_is_setgid($tff), 1, 'file_is_setgid - setgid file returns true' );
 
 is( file_is_sticky($tff), 0,
     'file_is_sticky - non-sticky file returns false' );
+
 $mode = oct(1444);
-chmod $mode, $tff;
-is( file_is_sticky($tff), 1, 'file_is_sticky - sticky file returns true' );
+$chmod_result = chmod $mode, $tff;
+SKIP: {
+    skip "Could not set sticky bit on test file", 1 unless ($chmod_result);
+    is( file_is_sticky($tff), 1, 'file_is_sticky - sticky file returns true' );
+}
 
 #======================================#
 #            file_is_ascii             #
