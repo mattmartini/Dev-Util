@@ -224,15 +224,15 @@ elsif ( is_linux() ) {
     $block_file = '/dev/loop0';
 }
 else {
-    croak "Unsupported system\n";
+    $block_file = undef;
 }
-if ( file_exists($block_file) ) {
+
+SKIP: {
+    skip "Block file is required for file_is_block test.", 1
+        unless ( defined $block_file && file_exists($block_file) );
     is( file_is_block($block_file),
         1, 'file_is_block - block file returns true' );
 }
-else {
-    plan( skip_all =>
-           "Block file, $block_file, is required for file_is_block test." );
 }
 is( file_is_block($tf), 0, 'file_is_block - non-block file returns false' );
 
@@ -241,14 +241,13 @@ is( file_is_block($tf), 0, 'file_is_block - non-block file returns false' );
 #======================================#
 
 my $character_file = '/dev/zero';
-if ( file_exists($character_file) ) {
+
+SKIP: {
+    skip "Character file is required for file_is_character test.", 1
+        unless ( file_exists($character_file) );
     is( file_is_character($character_file),
         1, 'file_is_character - character file returns true' );
 }
-else {
-    plan( skip_all =>
-            'Character file, $character_file, is required for file_is_character test.'
-        );
 }
 is( file_is_character($tf), 0,
     'file_is_character - non-character file returns false' );
