@@ -5,6 +5,7 @@ use Test2::Require::AuthorTesting;
 
 use Dev::Util::Syntax;
 
+use Test2::Require::Module 'Test::Portability::Files';
 use Test::Portability::Files;
 
 run_tests();

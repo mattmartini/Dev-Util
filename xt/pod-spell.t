@@ -5,7 +5,10 @@ use Test2::Require::AuthorTesting;
 
 use Dev::Util::Syntax;
 
+use Test2::Require::Module 'Test::Spelling' => '0.17';
 use Test::Spelling 0.17;
+
+use Test2::Require::Module 'Pod::Wordlist';
 use Pod::Wordlist;
 
 add_stopwords(<DATA>);
