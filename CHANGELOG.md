@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [version/v2.19.6] - 2025-11-18
 
 ### 🚀 Features
 
@@ -15,6 +15,10 @@ All notable changes to this project will be documented in this file.
 - Check for existence of files before deleting
 - *(file)* Skip tests if setting setuid/setgid/sticky on test file fails
 - *(file)* Skip test (not skip_all) if block/char files is not avail
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* Bump version minor level
 
 ### 🚜 Refactor
 
