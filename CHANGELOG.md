@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🐛 Bug Fixes
+
+- *(makefile)* List::Util needs at least version 1.66 for uniq export
+
+## [release/2025/11/18/1744] - 2025-11-18
+
+### 📚 Documentation
+
+- *(changelog)* Update changelog
+
 ## [version/v2.19.6] - 2025-11-18
 
 ### 🚀 Features
