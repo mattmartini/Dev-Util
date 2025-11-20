@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🐛 Bug Fixes
+
+- *(query)* Make yes_no_prompt return 1 or 0 as the API specifies
+
+## [release/2025/11/20/1836] - 2025-11-20
+
+### 📚 Documentation
+
+- *(changelog)* Update changelog
+
 ## [version/v2.19.10] - 2025-11-20
 
 ### 🐛 Bug Fixes
