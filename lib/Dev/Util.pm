@@ -6,7 +6,7 @@ use warnings;
 use version;
 use Carp qw(carp);
 
-our $VERSION = version->declare("v2.19.9");
+our $VERSION = version->declare("v2.19.10");
 
 use Exporter   qw( );
 use List::Util qw( uniq );
@@ -55,7 +55,7 @@ Dev::Util - Utilities useful in the development of perl programs
 
 =head1 VERSION
 
-Version v2.19.9
+Version v2.19.10
 
 =head1 SYNOPSIS
 

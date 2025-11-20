@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🐛 Bug Fixes
+
+- *(query)* Return value of response, not IO::Prompt::ReturnVal
+- *(banner)* Explicitly specify Term::ReadKey::GetTerminalSize()
+
+### 🎨 Styling
+
+- *(spelling)* Fix typo, add to dictionary
+
+## [release/2025/11/20/1406] - 2025-11-20
+
+### 📚 Documentation
+
+- *(changelog)* Update changelog
+
 ## [version/v2.19.8] - 2025-11-20
 
 ### ⚙️ Miscellaneous Tasks

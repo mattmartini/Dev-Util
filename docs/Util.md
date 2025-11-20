@@ -4,26 +4,28 @@ Dev::Util - Utilities useful in the development of perl programs
 
 # VERSION
 
-Version v2.19.8
+Version v2.19.10
 
 # SYNOPSIS
 
 This module provides a standard set of tools to use for oft needed functionality.
 
 Consistent feature setup is achieved.
-Standard constants are defined. OS identification and external executables are accessible. 
-Quick backups can be made. File and directory attributes are discovered. Lockfiles
-are created.
+Standard constants are defined. OS identification and external executables are
+accessible. Quick backups can be made. File and directory attributes are discovered.
+Lock files are created.
 
 The sub-modules provide this and other utility functionality.
 
 # SUB-MODULES
 
-The sub-modules provide the functionality described below.  For more details see `perldoc <Sub-module_Name>`.
+The sub-modules provide the functionality described below.  For more details
+see `perldoc <Sub-module_Name>`.
 
 ## Dev::Util
 
-`Dev::Util` provides a loader for sub-modules where a leading `::` denotes a package to load.
+`Dev::Util` provides a loader for sub-modules where a leading `::` denotes
+a package to load.
 
     use Dev::Util qw( ::File ::OS );
 
@@ -41,15 +43,15 @@ to all of the programs that use `Dev::Util::Syntax`
 Use this in other modules:
 
     package My::Module::Example;
-    
+
     use Dev::Util::Syntax;
-    
+
     # Rest of Code...
 
 This is equivalent to:
 
     package My::Module::Example;
-    
+
     use feature :5.18;
     use utf8;
     use strict;
@@ -60,7 +62,7 @@ This is equivalent to:
     use Readonly;
     use Carp;
     use English qw( -no_match_vars );
-    
+
     # Rest of Code...
 
 **Note: `use Dev::Util::Syntax` automatically adds `use strict` and `use warnings` to the program.**
@@ -80,7 +82,7 @@ Defines named constants as Readonly, based on best practices.
 OS discovery and functions to execute and collect data from external programs.
 
     use Dev::Util::OS;
-    
+
     my $OS = get_os();
     my $hostname = get_hostname();
     my $system_is_linux = is_linux();
@@ -91,7 +93,7 @@ OS discovery and functions to execute and collect data from external programs.
 Provides functions to assist working with files and dirs, menus and prompts.
 
     use Dev::Util::File;
-    
+
     my $fexists     = file_exists('/path/to/somefile');
     my $canwritef   = file_writable('/path/to/somefile');
     my $isplainfile = file_is_plain('/path/to/somefile');
@@ -121,7 +123,7 @@ appended. Directories are backed up by tar and gz.
 Module to do Semaphore locking
 
     use Dev::Util::Sem;
-    
+
     my $sem = Sem->new('mylock.sem');
     ...
     $sem->unlock;
