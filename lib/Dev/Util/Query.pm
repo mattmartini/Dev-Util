@@ -5,8 +5,9 @@ use Exporter qw(import);
 
 use IO::Interactive qw(is_interactive);
 use IO::Prompt      qw();                 # don't import prompt
+use Term::ReadKey;
 
-our $VERSION = version->declare("v2.19.8");
+our $VERSION = version->declare("v2.19.9");
 
 our %EXPORT_TAGS = (
                      misc => [ qw(
@@ -32,7 +33,7 @@ sub banner {
 
     my $width;
     if ( is_interactive() ) {
-        ($width) = GetTerminalSize();
+        ($width) = Term::ReadKey::GetTerminalSize();
     }
     else {
         $width = 80;
@@ -145,7 +146,7 @@ Dev::Util::Query - Functions to prompt user for input, y/n, or menus.
 
 =head1 VERSION
 
-Version v2.19.8
+Version v2.19.9
 
 =head1 SYNOPSIS
 
