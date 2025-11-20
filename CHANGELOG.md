@@ -2,12 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [version/v2.19.10] - 2025-11-20
 
 ### 🐛 Bug Fixes
 
 - *(query)* Return value of response, not IO::Prompt::ReturnVal
 - *(banner)* Explicitly specify Term::ReadKey::GetTerminalSize()
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* Bump version patch level
 
 ### 🎨 Styling
 
