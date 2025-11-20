@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🚜 Refactor
+
+- *(manifest)* Cleanup manifest skip file
+
+### 📚 Documentation
+
+- *(pod)* Improve sub-module descritions in Util.pm for CPAN
+
+## [release/2025/11/19/0732] - 2025-11-19
+
+### 📚 Documentation
+
+- *(changelog)* Update changelog
+
 ## [version/v2.19.7] - 2025-11-19
 
 ### 🐛 Bug Fixes
