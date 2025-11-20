@@ -94,7 +94,7 @@ sub yes_no_prompt {
                               -yes_no,
                               -require => { "Please choose${ynd}: " => qr/[YN]/i }
                             );
-    return $response->{ value };
+    return ( $response->{ value } =~ m/[yY]/ ) ? 1 : 0;
 }
 
 sub prompt {
