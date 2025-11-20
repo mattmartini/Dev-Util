@@ -85,14 +85,15 @@ sub yes_no_prompt {
     $msg .= $ynd;
     $msg .= $settings->{ append };
 
-    return
-        IO::Prompt::prompt(
-                            -prompt => $msg,
-                            -onechar,
-                            -default => ( $settings->{ default } ) ? 'Y' : 'N',
-                            -yes_no,
-                            -require => { "Please choose${ynd}: " => qr/[YN]/i }
-                          );
+    my $response
+        = IO::Prompt::prompt(
+                              -prompt => $msg,
+                              -onechar,
+                              -default => ( $settings->{ default } ) ? 'Y' : 'N',
+                              -yes_no,
+                              -require => { "Please choose${ynd}: " => qr/[YN]/i }
+                            );
+    return $response->{ value };
 }
 
 sub prompt {
@@ -240,16 +241,16 @@ C<APPEND> Text to append to TEXT
 
 =head2 B<prompt(ARGS_HASH)>
 
-Prompt user for input. 
+Prompt user for input.
 
 B<ARGS_HASH:>
 { text => TEXT, default => DEFAULT, valid => VALID, prepend => PREPEND, append => APPEND, noecho => ECHO_BOOL }
 
 C<DEFAULT> Set the default response, optionally.
 
-C<VALID> Ensures the response is valid.  Can be a list or array reference, in which case 
-the values will be presented as a menu.  Alternately, it can be a code ref, where the 
-subroutine is run with C<$_> set to the response.  An invalid response will re-prompt 
+C<VALID> Ensures the response is valid.  Can be a list or array reference, in which case
+the values will be presented as a menu.  Alternately, it can be a code ref, where the
+subroutine is run with C<$_> set to the response.  An invalid response will re-prompt
 the user for input.
 
 C<ECHO_BOOL> Normally (the default 0) text will be echoed as it is typed.  If set to 1
