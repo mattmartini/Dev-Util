@@ -347,8 +347,8 @@ is( $file_date, $expected_date, "stat_date - dir_format monthly case" );
 #              status_for              #
 #======================================#
 
-my $file_mtime = status_for($tf)->{ mtime };
-is( $file_mtime, '1708449443', 'status_for - mtime of file' );
+my $file_size = status_for($tf)->{ size };
+is( $file_size, '0', 'status_for - size of file' );
 
 #======================================#
 #              read_list               #
