@@ -239,6 +239,12 @@ if ( is_mac() ) {
 elsif ( is_linux() ) {
     $block_file = '/dev/loop0';
 }
+elsif ( is_freebsd() ) {
+    $block_file = undef;
+}
+elsif ( is_openbsd() ) {
+    $block_file = undef;
+}
 else {
     $block_file = undef;
 }
