@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🚧 Build
+
+- *(makefile)* Update required module versions
+
 ## [version/v2.19.28] - 2025-12-12
 
 ### ⚙️ Miscellaneous Tasks
