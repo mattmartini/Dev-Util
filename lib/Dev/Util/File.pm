@@ -780,7 +780,7 @@ Comments (begins with #) and blank lines are skipped.
     my @array_list  = read_list(FILE);
 
 B<Note>: The API for this function is maintained to support the existing code base that uses it.
-It would probably be better to use C<Perl6::Slurp> for new code.
+It would probably be better to use C<Perl6::Slurp> or C<File::Slurper> for new code.
 
 =head1 AUTHOR
 
