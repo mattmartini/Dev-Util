@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [version/v2.19.28] - 2025-12-12
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
   test(critic): Stop using FindBin to specify rc file
   test(yath): Watch examples dir for changes
   test(yath): Remove HARNESS-NO-PRELOAD
+- *(version)* Bump version patch level
 
 ### 🚜 Refactor
 
