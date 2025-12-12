@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🚜 Refactor
+
+- *(spell)* Augment the spell tests
+
+### 🧪 Testing
+
+- *(file)* Check return values on file ops, skip tests on fail
+- *(file)* Add checks for freebsd and openbsd
+- *(yath)* Remove HARNESS-NO-PRELOAD
+- *(yath)* Watch examples dir for changes
+- *(critic)* Stop using FindBin to specify rc file
+- *(yath)* Run xt/ tests on --author
+- *(eol)* Ensure proper unix line-endings in all files
+- *(critic)* More detailed perlcritic tests for dist
+- *(versions)* Ensure that proper versions
+- *(yath)* Preload frequently used test modules
+- *(tabs)* Ensure the use of spaces instead of tabs for indenting
+- *(strict)* Ensure the use of strict and warnings, or equivalents
+
+### 📚 Documentation
+
+- *(pod)* Amend note on alternates
+- *(file)* Update documentation
+
+### 🎨 Styling
+
+- *(eol)* Remove cruft
+
+## [release/2025/11/25/1032] - 2025-11-25
+
+### 📚 Documentation
+
+- *(changelog)* Update changelog
+
 ## [version/v2.19.12] - 2025-11-25
 
 ### ⚙️ Miscellaneous Tasks
