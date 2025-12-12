@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### ⚙️ Miscellaneous Tasks
+
+- Merge branch 'morext'
+
+* morext:
+  build(manifest): Update manifest and signature file
+  docs(file): Update documentation
+  test(strict): Ensure the use of strict and warnings, or equivalents
+  test(tabs): Ensure the use of spaces instead of tabs for indenting
+  test(yath): Preload frequently used test modules
+  test(versions): Ensure that proper versions
+  test(critic): More detailed perlcritic tests for dist
+  style(eol): Remove cruft
+  test(eol): Ensure proper unix line-endings in all files
+  refactor(spell): Augment the spell tests
+  test(yath): Run xt/ tests on --author
+  docs(pod): Amend note on alternates
+  test(critic): Stop using FindBin to specify rc file
+  test(yath): Watch examples dir for changes
+  test(yath): Remove HARNESS-NO-PRELOAD
+
 ### 🚜 Refactor
 
 - *(spell)* Augment the spell tests
@@ -31,6 +52,10 @@ All notable changes to this project will be documented in this file.
 ### 🎨 Styling
 
 - *(eol)* Remove cruft
+
+### 🚧 Build
+
+- *(manifest)* Update manifest and signature file
 
 ## [release/2025/11/25/1032] - 2025-11-25
 
