@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [version/v2.19.29] - 2025-12-12
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* Bump version patch level
 
 ### 🚧 Build
 
