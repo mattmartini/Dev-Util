@@ -43,7 +43,7 @@ WriteMakefile(
     TEST_REQUIRES => {     'ExtUtils::Manifest'            => 0,
                            'File::Compare'                 => 1.1008,
                            'File::Path'                    => 2.18,
-                           'FindBin'                       => 1.54,
+                           'Path::Tiny'                    => 0.148,
                            'Socket'                        => 2.040,
                            'Test2::Require::AuthorTesting' => 1.302219,
                            'Test2::Require::Module'        => 1.302219,

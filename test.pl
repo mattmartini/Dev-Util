@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 use lib 'lib';
-use FindBin qw($Bin);
+use Path::Tiny qw(cwd);
 
 if (
       eval {
@@ -47,7 +47,7 @@ elsif (
       )
 {
     # tests performed with prove
-    my $prove_file = "$Bin/.prove";
+    my $prove_file = Path::Tiny->cwd . '/.prove';
     if ( -e $prove_file ) {
         system('prove');
     }
