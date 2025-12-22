@@ -41,7 +41,7 @@ WriteMakefile(
                        'warnings'        => 0,
                  },
     TEST_REQUIRES => {     'ExtUtils::Manifest'            => 0,
-                           'File::Compare'                 => 1.1008,
+                           'File::Compare'                 => 1.1006,
                            'File::Path'                    => 2.18,
                            'Path::Tiny'                    => 0.148,
                            'Socket'                        => 2.040,
