@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🐛 Bug Fixes
+
+- *(version)* Reduce required version
+- *(yath)* Export AUTHOR_TESTING
+
+### 🚜 Refactor
+
+- *(modules)* Convert to Path::Tiny from depreciated FindBin
+- *(strict)* Relax StrictWarnings
+
+## [release/2025/12/12/1611] - 2025-12-12
+
+### 📚 Documentation
+
+- *(changelog)* Update changelog
+
 ## [version/v2.19.29] - 2025-12-12
 
 ### ⚙️ Miscellaneous Tasks
