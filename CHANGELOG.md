@@ -2,12 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [version/v2.19.33] - 2025-12-27
 
 ### 🐛 Bug Fixes
 
 - *(version)* Reduce required version
 - *(yath)* Export AUTHOR_TESTING
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* Bump version patch level
 
 ### 🚜 Refactor
 
