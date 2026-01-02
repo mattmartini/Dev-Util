@@ -152,7 +152,8 @@ is( file_is_setgid($tff), 0,
 $mode = oct(2444);
 my $chmod_guid_result = chmod $mode, $tff;
 SKIP: {
-    skip "setgid not supported on Darwin in /tmp unless in wheel group", 1 if ( is_mac() );
+    skip "setgid not supported on Darwin in /tmp unless in wheel group", 1
+        if ( is_mac() );
     skip "Could not set setgid bit on test file", 1 unless ($chmod_guid_result);
     is( file_is_setgid($tff), 1, 'file_is_setgid - setgid file returns true' );
 }
