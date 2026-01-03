@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🧪 Testing
+
+- *(os)* Skip tests that fail under specific OS types
+
+### 🎨 Styling
+
+- *(tidy)* Tidy code
+
+## [release/2025/12/27/1155] - 2025-12-27
+
+### 📚 Documentation
+
+- *(changelog)* Update changelog
+
 ## [version/v2.19.33] - 2025-12-27
 
 ### 🐛 Bug Fixes
