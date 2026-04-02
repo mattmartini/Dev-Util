@@ -165,7 +165,7 @@ L<https://metacpan.org/release/Dev-Util>
 
 =head1 LICENSE AND COPYRIGHT
 
-This software is Copyright © 2001-2025 by Matt Martini.
+This software is Copyright © 2001-2026 by Matt Martini.
 
 This is free software, licensed under:
 

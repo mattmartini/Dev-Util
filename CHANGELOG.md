@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [release/2026/01/02/2045] - 2026-01-03
+
+### 📚 Documentation
+
+- *(changelog)* Update changelog
+
 ## [version/v2.19.35] - 2026-01-03
 
 ### ⚙️ Miscellaneous Tasks

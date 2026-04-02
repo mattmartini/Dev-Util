@@ -291,7 +291,7 @@ This module was originally developed under the name C<MERM::Base>.
 
 =head1 LICENSE AND COPYRIGHT
 
-This software is Copyright © 2024-2025 by Matt Martini.
+This software is Copyright © 2024-2026 by Matt Martini.
 
 This is free software, licensed under:
 
