@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [version/v2.19.37] - 2026-05-13
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* Bump version patch level
 
 ### 🧪 Testing
 
