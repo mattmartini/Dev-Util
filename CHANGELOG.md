@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🧪 Testing
+
+- *(xt)* Insure Meta.yml meets specification
+
+### 📚 Documentation
+
+- *(copyright)* Update the copywrite year
+
+### 🚧 Build
+
+- *(make)* Require boolean for future inclusion in Dev::Util::Syntax
+
 ## [release/2026/01/02/2045] - 2026-01-03
 
 ### 📚 Documentation
