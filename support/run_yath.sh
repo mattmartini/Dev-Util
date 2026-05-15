@@ -8,6 +8,19 @@ cleanup() {
   yath stop
 }
 
+source ${BASH_FUNCTION_DIR}/iterm_fns.sh
+source ${BASH_FUNCTION_DIR}/colorscheme_fns.sh
+
+if is_iTerm; then
+  if is_Dark; then
+    iterm_profile_set MERM-Selenized-HC-Dark
+  else
+    iterm_profile_set MERM-Selenized-HC-Light
+  fi
+fi
+
+
+
 yath_args=''
 yath_start_args=''
 yath_dirs='t '
