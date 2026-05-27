@@ -2,16 +2,20 @@
 
 set -Eeuo pipefail
 trap cleanup SIGINT SIGTERM ERR EXIT
-
-cleanup() {
-  trap - SIGINT SIGTERM ERR EXIT
-  yath stop
-}
-
 source ${BASH_FUNCTION_DIR}/iterm_fns.sh
 source ${BASH_FUNCTION_DIR}/colorscheme_fns.sh
 
+cleanup() {
+  trap - SIGINT SIGTERM ERR EXIT
+  if is_iTerm; then
+    iterm_profile_set $colors
+  fi
+  yath stop
+}
+
+
 if is_iTerm; then
+  colors=$(iterm_get_profile_name)
   if is_Dark; then
     iterm_profile_set MERM-Selenized-HC-Dark
   else
