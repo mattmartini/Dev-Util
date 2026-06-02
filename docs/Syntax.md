@@ -4,7 +4,7 @@ Dev::Util::Syntax - Provide consistent feature setup.
 
 # VERSION
 
-Version v2.19.37
+Version v2.19.42
 
 # SYNOPSIS
 
@@ -33,6 +33,8 @@ This is equivalent to:
     use Readonly;
     use Carp;
     use English qw( -no_match_vars );
+    use if $] >= 5.036, builtin => qw(true false);
+    use if $] < 5.036,  boolean => qw(true false);
 
     # Rest of Code...
 

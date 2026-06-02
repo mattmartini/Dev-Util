@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🚀 Features
+
+- *(yath)* Set terminal color before running
+- *(syntax)* Add builtin/boolean to use list
+
+### 🐛 Bug Fixes
+
+- *(yath)* Fix syntax
+
+### 🧪 Testing
+
+- *(syntax)* Add tests to ensure each module is loaded
+- *(syntax)* Fix test for false
+
+### 📚 Documentation
+
+- *(changelog)* Update changelog
+
+### Other
+
+- *(other)* Merge branch 'truefalse'
+
+* truefalse:
+  test(syntax): Add tests to ensure each module is loaded
+  feat(syntax): Add builtin/boolean to use list
+
 ## [version/v2.19.37] - 2026-05-13
 
 ### ⚙️ Miscellaneous Tasks
