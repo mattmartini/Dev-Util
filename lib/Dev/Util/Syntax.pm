@@ -17,13 +17,21 @@ our $VERSION = version->declare("v2.19.37");
 
 sub importables {
     my ($class) = @_;
-    return (
-             [ 'feature', ':5.18' ], 'utf8',
-             'strict',               'warnings',
-             'autodie',              [ 'open', ':std', ':utf8' ],
-             'version',              'Readonly',
-             'Carp',                 [ 'English', '-no_match_vars' ]
-           );
+    my @modules = (
+                    [ 'feature', ':5.18' ], 'utf8',
+                    'strict',               'warnings',
+                    'autodie',              [ 'open', ':std', ':utf8' ],
+                    'version',              'Readonly',
+                    'Carp',                 [ 'English', '-no_match_vars' ]
+                  );
+
+    if ( $] >= 5.036 ) {
+        push @modules => [ 'builtin', 'true', 'false' ];
+    }
+    else {
+        push @modules => [ 'boolean', 'true', 'false' ];
+    }
+    return @modules;
 }
 
 sub import {
@@ -37,6 +45,7 @@ sub import {
             = ( ref($import_proto) || '' ) eq 'ARRAY'
             ? @$import_proto
             : ( $import_proto, () );
+
         Module::Runtime::use_module($module)->import::into( $caller, @args );
     }
     return;
@@ -83,6 +92,8 @@ This is equivalent to:
     use Readonly;
     use Carp;
     use English qw( -no_match_vars );
+    use if $] >= 5.036, builtin => qw(true false);
+    use if $] < 5.036,  boolean => qw(true false);
 
     # Rest of Code...
 
