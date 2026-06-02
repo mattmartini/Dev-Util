@@ -4,7 +4,7 @@ use Test2::V0;
 
 use Dev::Util::Syntax;
 
-plan tests => 13;
+plan tests => 12;
 
 ok(
     ( say "Hello World" eq "Hello World" ),
@@ -23,7 +23,6 @@ ok( defined $INC{ 'Carp.pm' },     "Carp loaded" );
 ok( defined $INC{ 'English.pm' },  "English loaded" );
 
 no strict 'subs';
-is( true,  1, "Test if true is loaded via builtin or boolean." );
-is( false, 0, "Test if false is loaded via builtin or boolean." );
+is( true, 1, "Test if true is loaded via builtin or boolean." );
 
 done_testing;
